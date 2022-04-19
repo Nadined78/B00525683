@@ -1,0 +1,22 @@
+<button class="btn btn-primary mb-2" onclick="load()">Load</button>
+<input class="form-control" id="tid" type="number" placeholder="Enter ticket id.."/>
+<div class="mt=3" id="app"></div>
+
+<script>
+  function load() {
+    const id = document.getElementById("tid").value
+    const node = document.getElementById("app");
+    fetch(`/api/ticket/${id}`)
+	    .then(response => {
+            if (response.ok) {
+                return response.json();
+            }
+            throw new Error('No such ticket');
+        })
+	    .then(ticket => node.innerHTML = 
+            `<h3>${ticket.issue}</h3>       	            		 	 
+             <p>-- ${ticket.student}</p>`
+        )
+        .catch( e => node.innerHTML = `<h3>${e.Error}</h3>`);
+   }
+</script>

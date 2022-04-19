@@ -1,0 +1,17 @@
+run = ["dotnet", "run", "--project", "SMS.Web"]
+entrypoint = "SMS.Web/Program.cs" 
+
+hidden = ["**/bin", "**/obj"]
+
+[nix]
+channel = "unstable"
+
+[env]
+DOTNET_NOLOGO = "1"
+DOTNET_CLI_TELEMETRY_OPTOUT = "1"
+
+[languages.csharp]
+pattern = "**/*.cs"
+
+[languages.csharp.languageServer]
+start = ["omnisharp", "--languageserver"]

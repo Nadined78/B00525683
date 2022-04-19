@@ -1,0 +1,68 @@
+@model Student
+<partial name="_BreadCrumbs" model=@(new [] {
+    ("/","Home"),
+    ("/student","Students"),
+    ($"/student/details/{Model.Id}",$"{Model.Id}"),
+    ("","Details")
+}) />
+<h3 class="mt-4 mb-4">Student Details</h3>
+<div class="row">
+    <!-- Details -->
+    <div class="col-8 card rounded shadow p-3">
+        <dl class="row">
+            <dt class="col-5">Name</dt>
+            <dd class="col-7">@Model.Name</dd>
+
+            <dt class="col-5">Course</dt>
+            <dd class="col-7">@Model.Course</dd>
+
+            <dt class="col-5">Age</dt>
+            <dd class="col-7">@Model.Age</dd>
+
+            <dt class="col-5">Email</dt>
+            <dd class="col-7">@Model.Email</dd>
+
+            <dt class="col-5">Classification</dt>
+            <dd class="col-7">@Model.Classification</dd>
+        </dl>
+
+        <!-- use flex box to separate two divs containing primary actions on left and danger action on right -->
+        <div class="mt-4 d-flex flex-row justify-content-between">
+            <div>
+              
+                <!-- navigation link to CreateTicket action, passing correct route parameter -->
+                <a asp-action="TicketCreate" asp-route-id="@Model.Id" class="btn btn-sm btn-primary"><i
+                        class="bi bi-bag-plus"></i> Add Ticket</a>          
+
+                <!-- navigation link to Details action, passing the correct route id parameter -->
+                <a asp-condition=@(User.IsInRole("admin") || User.IsInRole("manager")) asp-controller="Student" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-secondary"><i
+                        class="bi bi-pen"></i> Edit</a>
+
+                <!-- navigation link to redirect to Index action -->
+                <a asp-controller="Student" asp-action="Index" class="btn btn-sm btn-link"><i class="bi bi-list"></i>
+                    Students</a>
+
+            </div>
+
+            <div>
+                <!-- toggle display of Delete Modal -->
+                <button asp-condition=@(User.IsInRole("admin")) type="button" class="btn btn-sm btn-danger" 
+                        data-bs-toggle="modal" data-bs-target="#deleteStudentModal">
+                    <i class="bi bi-trash"></i> Delete
+                </button>
+            </div>
+        </div>
+    </div>
+    <!-- Photo -->
+    <div class="col-4">
+        <img src="@Model.PhotoUrl" class="img-fluid">
+    </div>
+</div>
+
+<!-- Tickets -->
+<div class="row pt-3">
+    <partial name="_Tickets" />
+</div>
+
+<!-- Delete Modal -->
+<partial name="_DeleteModal" />

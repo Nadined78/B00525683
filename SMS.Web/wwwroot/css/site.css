@@ -1,0 +1,56 @@
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 60px;
+}
+
+/* Custom CSS */
+.callout {
+  padding: 1.25rem;
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+  border: 1px solid lightgray;
+  border-left-color: silver;
+  border-left-width: .75rem;
+  border-radius: .25rem;
+}
+
+.callout-primary {
+  border-left-color: cornflowerblue;
+}
+
+.callout-info {
+  border-left-color: deepskyblue;
+}
+
+.callout-warning {
+  border-left-color: orange;
+}
+
+.callout-danger {
+  border-left-color: red;
+}
+
+.callout-secondary {
+  border-left-color: silver;
+}
+
+.truncate {
+  max-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

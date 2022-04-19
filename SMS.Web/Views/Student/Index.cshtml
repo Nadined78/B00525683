@@ -1,0 +1,42 @@
+@model IList<Student>
+
+<partial name="_BreadCrumbs" model=@(new [] {
+    ("/","Home"),
+    ("","Students")
+}) />
+
+<h3 class="mb-3">Student List</h3>
+
+<a asp-condition=@(User.IsInRole("admin") || User.IsInRole("manager")) class="btn btn-sm btn-primary my-3" asp-action="Create" >
+    <i class="bi bi-plus"></i> Create
+</a>     
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Course</th>
+            <th>Age</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var s in Model) {
+            <tr>
+                <td>@s.Id</td>
+                <td>@s.Name</td>
+                <td>@s.Course</td>
+                <td>@s.Age</td>
+                <td>
+                    <!-- Add View link -->
+                    <a data-bs-toggle="tooltip" data-bs-placement="top" title="view student details" asp-controller="Student" asp-action="Details" asp-route-id=@s.Id><i class="bi bi-display"></i></a>  
+                    <!-- Add edit link  -->
+                    <a asp-condition=@(User.IsInRole("admin") || User.IsInRole("manager")) asp-action="Edit" asp-route-id=@s.Id><i class="bi bi-pen"></i></a>
+                    <!-- Add delete link -->
+                    <a asp-condition=@User.IsInRole("admin") asp-action="Delete" asp-route-id=@s.Id><i class="bi bi-trash"></i></a>
+                </td>
+            </tr>
+        }        
+    </tbody>
+</table>

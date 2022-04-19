@@ -1,0 +1,71 @@
+@model Student
+
+<partial name="_BreadCrumbs" model=@(new [] {
+    ("/","Home"),
+    ("/student","Students"),
+    ($"/student/details/{Model.Id}",$"{Model.Id}"),
+    ("","Edit")
+}) />
+
+<h3 class="my-4">Edit Student</h3>
+
+<div class="card rounded shadow p-3">
+    
+    <form asp-action="Edit">
+        
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        
+        <!-- we hide the id as its not user editable but needs to be in the -->
+        <!-- form to ensure the student passed to the controller is complete -->    
+        <input type="hidden" asp-for="Id" class="form-control"/>
+      
+        <div class="mt-3">
+            <label asp-for="Name" class="form-label"></label>
+            <input asp-for="Name" class="form-control"/>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    
+        <div class="mt-3">
+            <label asp-for="Course" class="form-label"></label>
+            <input asp-for="Course" class="form-control"/>
+            <span asp-validation-for="Course" class="text-danger"></span>
+        </div>
+
+        <div class="row mt-3">
+            <div class="col">
+                <label asp-for="Age" class="form-label"></label>
+                <input asp-for="Age" class="form-control"/>
+                <span asp-validation-for="Age" class="text-danger"></span>
+            </div>
+
+            <div class="col">
+                <label asp-for="Grade" class="form-label"></label>
+                <input asp-for="Grade" class="form-control"/>
+                <span asp-validation-for="Grade" class="text-danger"></span>
+            </div>
+        </div>
+
+        <div class="mt-3">
+            <label asp-for="Email" class="form-label"></label>
+            <input asp-for="Email" class="form-control"/>
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="mt-3">
+            <label asp-for="PhotoUrl" class="form-label"></label>
+            <input type="url" asp-for="PhotoUrl" class="form-control"/>
+            <span asp-validation-for="PhotoUrl" class="text-danger"></span>
+        </div>
+   
+        <!-- submit button and cancel link which navigates to Index action -->
+        <div class="mt-3">
+            <input type="submit" value="Save" class="btn btn-primary"/>
+            <a class="btn btn-secondary" asp-action="Index">Cancel</a>
+        </div>
+
+    </form>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

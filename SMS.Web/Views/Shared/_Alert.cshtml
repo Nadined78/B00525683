@@ -1,0 +1,12 @@
+@{
+    string message = (string)TempData["Alert.Message"];
+    string type    = (string)TempData["Alert.Type"];
+}
+
+@if (message != null && type != null)
+{
+    <div class="alert alert-@type alert-dismissible fade show" role="alert" aria-label="@type">            
+        @message
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>    
+}

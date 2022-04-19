@@ -1,0 +1,37 @@
+@model UserLoginViewModel
+
+
+<h3 class="mt-4 mb-4">Login</h3>
+
+<div class="card shadow rounded p-3">
+    <form asp-action="Login" method="post">
+
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="mt-2">
+            <label asp-for="Email" class="form-label"></label>
+            <input asp-for="Email" class="form-control" />
+            <span asp-validation-for="Email" class="text-danger"></span>
+        </div>
+
+        <div class="mt-2">
+            <label asp-for="Password" class="form-label"></label>
+            <input type="password" asp-for="Password" class="form-control" />
+            <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+
+        <div class="mt-2">
+            <input type="submit" value="Login" class="btn btn-primary" />
+            <a class="btn btn-secondary" asp-controller="Home" asp-action="Index">Cancel</a>
+        </div>
+
+    </form>
+</div>
+
+<div class="mt-4">
+    Need an Account? <a asp-controller="User" asp-action="Register">Register here</a>
+</div>
+
+@section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,41 @@
+@model Ticket
+
+<partial name="_BreadCrumbs" model=@(new [] {
+    ("/","Home"),
+    ("/student","Students"),
+    ($"/student/details/{Model.Id}",$"{Model.Id}"),
+    ("","Delete Ticket")
+}) /> 
+
+<h3 class="mt-4 mb-4">Delete Ticket</h3>
+
+<h4 class="mb-4">Are you sure you want to delete this Ticket?</h4>
+
+<div>
+    <div class="col card rounded shadow p-3">
+        <dl class="row">       
+            <dt class="col-5">Student</dt>
+            <dd class="col-7">@Model.Student.Name</dd>
+
+            <dt class="col-5">Issue</dt>
+            <dd class="col-7">@Model.Issue</dd>
+            
+            <dt class="col-5">Created</dt>
+            <dd class="col-7">@Model.CreatedOn.ToShortDateString()</dd>
+            
+            <dt class="col-5">Active</dt>
+            <dd class="col-7">@Model.Active</dd>           
+        </dl>
+    </div>
+
+    <div class="mt-4">
+        <form asp-action="TicketDeleteConfirm" type="post">
+            <input type="hidden" asp-for="Id"/>
+            <input type="hidden" asp-for="StudentId"/>
+            
+            <input type="submit" value="Confirm" class="btn btn-danger" />
+            <a class="btn btn-secondary" asp-controller="Student" asp-action="Details" asp-route-id="@Model.Student.Id" >Cancel</a>
+        </form>
+    </div>
+    
+</div>
