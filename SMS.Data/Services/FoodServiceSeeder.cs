@@ -14,7 +14,7 @@ namespace SMS.Data.Services
             svc.Initialise();
 
             // register members 
-            var u1 = svc.Register("Pasta", "pasta@mail.com", "pasta123", Role.member, DateTime.Now, "" );
+            var u1 = svc.Register("Pasta", "pasta@mail.com", "pasta123", Role.member, DateTime.Now, "https://tse3.mm.bing.net/th?id=OIP.lNjTdRJA77NJQpYorytm2gHaLH&pid=Api&P=0&w=106&h=159" );
             var u2 = svc.Register("Pizza", "pizza@mail.com", "pizza123", Role.member, DateTime.Now,"");
             var u3 = svc.Register("Curry", "curry@mail.com", "curry123", Role.member, DateTime.Now, "" );
             var u4 = svc.Register("Bread", "bread@mail.com", "bread123", Role.member, DateTime.Now, "" );

@@ -2,9 +2,9 @@
     @ViewBag.Message <b>@ViewBag.LongTime</b>
 </div>
 
-<div asp-condition=@(User.IsInRole("admin") || User.IsInRole("manager")) class="callout callout-warning text-center">
+@* <div asp-condition=@(User.IsInRole("admin") || User.IsInRole("manager")) class="callout callout-warning text-center">
     Only visible when logged in
-</div>
+</div> *@
 
 
 @model AboutViewModel

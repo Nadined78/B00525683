@@ -25,6 +25,14 @@ namespace SMS.Web.Controllers
             return View(rm);  
         }
 
+        // GET /recipe/index - 
+        public IActionResult RecipeIndex(RecipeSearchViewModel rm)
+        {
+            rm.Recipes = svc.SearchRecipes(rm.Range, rm.Query);
+            return View(rm);  
+        }
+
+
                
         // GET/recipe/{id}
         public IActionResult Details(int id)

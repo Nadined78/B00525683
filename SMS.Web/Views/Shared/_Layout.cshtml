@@ -45,7 +45,7 @@
 
                         <!-- All Recipes on Web Application from all members -->
                         <li class="nav-item">
-                            <a asp-condition =@(User.IsInRole("admin")) || User.IsInRole("member")) class="nav-link text-light" asp-controller="Recipes" asp-action="Recipes">All Recipes</a>
+                            <a asp-condition=@(User.HasOneOfRoles("admin,member")) class="nav-link text-light" asp-controller="Recipe" asp-action="RecipeIndex">All Recipes</a>
                         </li> 
                         
                         <!-- company dropdown -->
