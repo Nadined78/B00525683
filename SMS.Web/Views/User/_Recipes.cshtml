@@ -1,0 +1,38 @@
+@model User
+
+@if (Model.Recipes.Count == 0)
+{
+    <h5>No Recipes yet....</h5>
+}
+else
+{
+    <div class="card rounded shadow">
+        <table class="table table-sm">
+            <thead>
+                <tr>           
+                    <th>Name</th>
+                    <th>Diet</th>  
+                    <th>Cuisine</th>
+                    <th>Calories</th>
+                    <th>Servings</th>       
+                    <th></th>  
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var r in Model.Recipes) {
+                    <tr>              
+                        <td>@r.Name</td>
+                        <td>@r.Diet</td>  
+                        <td>@r.Cuisine</td>  
+                        <td>@r.Calories</td>  
+                        <td>@r.Servings</td>  
+                                                
+                        <td>
+                            <a asp-action="RecipeDelete" asp-route-id="@r.RecipeId" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
+                        </td>             
+                    </tr>   
+                }
+            </tbody>
+        </table>
+    </div>
+}

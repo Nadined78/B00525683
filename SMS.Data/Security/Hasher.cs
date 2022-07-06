@@ -1,14 +1,30 @@
 using System;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 using System.Security.Cryptography;
+using System.Text.RegularExpressions;
 
 // https://www.devtrends.co.uk/blog/hashing-encryption-and-random-in-asp.net-core
 // Simple class to generate and verify a Hash
 
 namespace SMS.Data.Security
 {
-    static class Hasher
+    public static class Hasher
     {    
+
+        // AMC - verify if a string is already hashed
+        public static bool IsHashed(string base64)
+        {
+            if (base64.Contains(':'))
+            {
+                base64 = base64.Trim();
+                var parts = base64.Split(':');
+                var isSaltBase64  = (parts[0].Length % 4 == 0) && Regex.IsMatch(parts[0], @"^[a-zA-Z0-9\+/]*={0,3}$", RegexOptions.None);
+                var isHashBaseH64 = (parts[1].Length % 4 == 0) && Regex.IsMatch(parts[1], @"^[a-zA-Z0-9\+/]*={0,3}$", RegexOptions.None);
+                return isSaltBase64 && isHashBaseH64;
+            }
+            return false;           
+        }
+
         // Generated Salt and Hash returned
         public static string CalculateHash(string input)
         {

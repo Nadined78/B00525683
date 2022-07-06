@@ -1,0 +1,52 @@
+﻿@model RecipeSearchViewModel
+
+<partial name="_Breadcrumbs" model=@(new [] { ("/", "Home"), ("/recipe", "Recipes"), ("","Search") })>
+<h3>Search by Recipe</h3>
+
+@* <div class="my-4 d-flex flex-row justify-content-between align-items-center">  
+   <a asp-action="Create" class="btn btn-primary btn-sm">Create Recipe</a>   
+   <partial name="_Search" />
+</div> *@
+
+<table class="table">
+    <thead>
+      <tr>
+         <th>RecipeId</th>
+         <th>Name</th>        
+         <th>Diet</th> 
+         <th>MealType</th> 
+         <th>Method</th>
+         <th>PrepTime</th>
+         <th>CookTime</th>
+         <th>Cuisine</th>
+         <th>Region</th>
+         <th>Calories</th>
+         <th>Servings</th>
+         <th>PhotoUrl</th>
+            
+         <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach(var r in Model.Recipes) {
+          <tr>
+            <td>@r.RecipeId</td>
+            <td>@r.User.Name</td> 
+            <td>@r.Diet</td>
+            <td>@r.MealType</td>
+            <td>@r.Method</td>
+            <td>@r.PrepTime</td>
+            <td>@r.CookTime</td>
+            <td>@r.Cuisine</td>
+            <td>@r.Region</td>
+            <td>@r.Calories</td>
+            <td>@r.Servings</td>
+            <td>@r.PhotoUrl</td>
+            
+            <td>
+               <a asp-action="Details" asp-route-id="@r.RecipeId"><i class="bi bi-lightbulb"></i> Details</a>   //do i need to change this to another id?                                       
+            </td>
+         </tr>
+      }
+    </tbody>
+</table>

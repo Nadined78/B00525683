@@ -1,6 +1,17 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy";
-}
-<h1>@ViewData["Title"]</h1>
+﻿@model PrivacyViewModel
 
-<p>Use this page to detail your site's privacy policy.</p>
+<partial name= "_LayoutsHome" />  
+
+<div class="card text-center">
+    <div class="card-header custom-body">
+        <h2>@Model.Title</h2>
+    </div>
+    <div class="card-body">
+        <h5 class="card-title"><i>@Model.Aim</i></h5>
+    </div>
+    <div class="card-footer text-muted">
+        <div><i>Formed on @Model.FormedString</i></div>
+    </div>
+</div>
+
+

@@ -8,10 +8,11 @@ namespace SMS.Data.Repository
 
     public class DataContext : DbContext
     {
-        public DbSet<Student> Students { get; set; }
-        public DbSet<Ticket> Tickets { get; set; }
-        public DbSet<Module> Modules { get; set; }
-        public DbSet<StudentModule> StudentModules { get; set; }
+        public DbSet<Recipe> Recipes { get; set; }
+        
+        // public DbSet<Ingredient> Ingredients { get; set; }
+
+        // public DbSet<RecipeIngredient> RecipeIngredients { get; set; }
         
         public DbSet<User> Users { get; set; }
       

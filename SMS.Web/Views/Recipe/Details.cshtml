@@ -1,0 +1,48 @@
+@model Recipe
+
+<!-- Breadcrumbs using partial view -->
+<partial name="_Breadcrumbs" model=@(new [] { ("/", "Home"), ("/recipe", "Recipes") })>
+    
+<div class="col card rounded shadow-lg p-4">
+
+    <h3 class="mb-4">Recipe</h3>
+
+    <dl class="row">       
+        <dt class="col-4">Id</dt>
+        <dd class="col-8">@Model.RecipeId</dd>
+
+        <dt class="col-4">Name</dt>
+        <dd class="col-8">@Model.Name</dd>
+
+        <dt class="col-4">Diet</dt>
+        <dd class="col-8">@Model.Diet</dd>
+
+        <dt class="col-4">MealType</dt>
+        <dd class="col-8">@Model.MealType</dd>
+
+        <dt class="col-4">Method</dt>
+        <dd class="col-8">@Model.Method</dd>
+
+        <dt class="col-4">PrepTime</dt>
+        <dd class="col-8">@Model.PrepTime</dd>
+
+        <dt class="col-4">CookTime</dt>
+        <dd class="col-8">@Model.CookTime</dd>
+
+        <dt class="col-4">Cuisine</dt>
+        <dd class="col-8">@Model.Cuisine</dd>
+
+        <dt class="col-4">Region</dt>
+        <dd class="col-8">@Model.Region</dd>
+
+        <dt class="col-4">Calories</dt>
+        <dd class="col-8">@Model.Calories</dd>
+
+        <dt class="col-4">Servings</dt>
+        <dd class="col-8">@Model.Servings</dd>
+
+        <dt class="col-4">Photo</dt>
+        <dd class="col-8">@Model.PhotoUrl</dd>  
+    </dl>
+</div> 
+
