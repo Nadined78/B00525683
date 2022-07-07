@@ -26,6 +26,10 @@ namespace SMS.Web.ViewModels
         public MealType MealType {get; set; }
 
         [Required]
+        [StringLength(200, MinimumLength = 10)]
+        public string RecipeIngredients {get; set;} 
+
+        [Required]
         [StringLength(2000, MinimumLength = 25)]
         public string Method { get; set; }
 

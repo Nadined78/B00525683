@@ -344,7 +344,7 @@ namespace SMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {                
-                var recipe = _svc.CreateRecipe(r.UserId, r.Name, r.Diet, r.MealType, r.Method, r.PrepTime, r.CookTime, r.Cuisine, r.Region, r.Translator, r.Calories, r.Servings, r.PhotoUrl);
+                var recipe = _svc.CreateRecipe(r.UserId, r.Name, r.Diet, r.MealType, r.RecipeIngredients, r.Method, r.PrepTime, r.CookTime, r.Cuisine, r.Region, r.Translator, r.Calories, r.Servings, r.PhotoUrl);
                 Alert($"Recipe created successfully for user {r.UserId}", AlertType.info);
                 return RedirectToAction(nameof(Details), new { Id = recipe.UserId });
             }
@@ -379,6 +379,11 @@ namespace SMS.Web.Controllers
             
             // redirect to the user index view
             return RedirectToAction(nameof(Details), new { Id = userId });
+        }
+
+        public IActionResult UserProfile(int userId)
+        {
+            
         }
 
         // -------------------------- Helper Methods ------------------------------

@@ -1,5 +1,7 @@
 @model RecipeSearchViewModel
 
+<partial name = "_ViewLayouts">
+
 <partial name="_BreadCrumbs" model=@(new [] {
     ("/","Home"),
     ("","Recipes")
@@ -17,11 +19,10 @@
 <table class="table table-hover">
     <thead>
       <tr>
-         <th>RecipeId</th>
+         @* <th>RecipeId</th> *@
          <th>Name</th>        
          <th>Diet</th> 
          <th>MealType</th> 
-         <th>Method</th>
          <th>PrepTime</th>
          <th>CookTime</th>
          <th>Cuisine</th>
@@ -36,19 +37,17 @@
     <tbody>
       @foreach(var r in Model.Recipes) {
           <tr>
-            <td>@r.RecipeId</td>
-            <td>@r.User.Name</td> 
+            @* <td>@r.RecipeId</td> *@
+            <td>@r.Name</td> 
             <td>@r.Diet</td>
             <td>@r.MealType</td>
-            <td>@r.Method</td>
             <td>@r.PrepTime</td>
             <td>@r.CookTime</td>
             <td>@r.Cuisine</td>
             <td>@r.Region</td>
             <td>@r.Calories</td>
             <td>@r.Servings</td>
-            <td>@r.PhotoUrl</td>
-            
+            <td><img src="@r.PhotoUrl" class="img-fluid" width="100" height="75"></td>           
             <td>
                <a asp-action="Details" asp-route-id="@r.RecipeId"><i class="bi bi-lightbulb"></i> Details</a>                                          
             </td>

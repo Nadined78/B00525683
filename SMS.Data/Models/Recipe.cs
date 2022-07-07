@@ -1,4 +1,3 @@
-using System;
 using System.ComponentModel.DataAnnotations;
 using SMS.Data.Validators; // allows access to UrlResource
 
@@ -26,8 +25,8 @@ namespace SMS.Data.Models
         [Required]
         public MealType MealType {get; set; }
 
-        // [Required]
-        // public string RecipeIngredients {get; set;}  //public List<Ingredient> Ingredient { get; set; } = new();
+        [Required]
+        public string RecipeIngredients {get; set;}
 
         [Required]
         public string Method { get; set; }
@@ -58,11 +57,18 @@ namespace SMS.Data.Models
         public int UserId {get; set; } //foregin key
 
         public User User {get; set; } //navigational property
-        
-        // // // Relationship 1:M Ingredient - Recipes
-        // public IList<RecipeIngredient> Ingredients {get; set;} = new List<RecipeIngredient>();
+      
+      // ReadOnly Property - Calculates Rating % based on average of all reviews
+        public int Rating
+        {
+            get
+            {
+                var count = Reviews.Count > 0 ? Reviews.Count : 1;
+                return Reviews.AsEnumerable().Sum(r => r.Rating) / count * 10;
+            }
+        }
 
-
-
+        // EF Relationship - a recipe can have many reviews 
+        public IList<Review> Reviews { get; set; } = new List<Review>();
     }
 }

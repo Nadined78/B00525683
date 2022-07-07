@@ -28,13 +28,9 @@ namespace SMS.Data.Models {
 
         public DateTime CreatedOn { get; set; }
 
-        // public DateTime UpdatedOn { get; set; } //do i need 
-
-        // public string RecipesOwned {get; set; } //do i need this?
-
         public string PhotoUrl { get; set; }
 
-        //relationship m-n 
+        //relationship 1-M - 
         
         public IList<Recipe> Recipes {get; set; } = new List<Recipe>();
         

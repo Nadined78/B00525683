@@ -38,6 +38,11 @@
                             <a asp-condition =@(User.IsInRole("admin")) class="nav-link text-light" asp-controller="User" asp-action="Index">Users</a>
                         </li> 
 
+                        <!-- Members Own Profile in Nav bar -->
+                        <li class="nav-item">
+                            <a asp-condition =@(User.IsInRole("member")) class="nav-link text-light" asp-controller="User" asp-action="UserProfile">My Profile</a>
+                        </li> 
+
                         <!-- Members Own Recipes in Nav bar -->
                         <li class="nav-item">
                             <a asp-condition =@(User.IsInRole("member")) class="nav-link text-light" asp-controller="Recipe" asp-action="Index">My Recipes</a>

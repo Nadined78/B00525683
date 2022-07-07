@@ -1,11 +1,9 @@
 ﻿@model RecipeSearchViewModel
 
+<partial name = "_ViewLayouts">
+
 <partial name="_Breadcrumbs" model=@(new [] { ("/", "Home"), ("","Recipes"), ("", "My Recipes"), ("","Search") })/>
 <h3>Recipes</h3>
-
-@* <a asp-condition=@(User.IsInRole("member")) class="btn btn-sm btn-primary my-3" asp-action="Create" >
-    <i class="bi bi-plus"></i> Create
-</a>      *@
 
 <div class="my-4 d-flex flex-row justify-content-between align-items-center">  
    <a asp-condition=@(User.IsInRole("member")) class="btn btn-sm btn-primary my-3" asp-action="Create" >
@@ -21,7 +19,6 @@
          <th>Name</th>        
          <th>Diet</th> 
          <th>MealType</th> 
-         <th>Method</th>
          <th>PrepTime</th>
          <th>CookTime</th>
          <th>Cuisine</th>
@@ -40,7 +37,6 @@
             <td>@r.User.Name</td> 
             <td>@r.Diet</td>
             <td>@r.MealType</td>
-            <td>@r.Method</td>
             <td>@r.PrepTime</td>
             <td>@r.CookTime</td>
             <td>@r.Cuisine</td>

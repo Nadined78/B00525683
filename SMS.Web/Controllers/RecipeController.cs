@@ -28,11 +28,10 @@ namespace SMS.Web.Controllers
         // GET /recipe/index - 
         public IActionResult RecipeIndex(RecipeSearchViewModel rm)
         {
+            
             rm.Recipes = svc.SearchRecipes(rm.Range, rm.Query);
             return View(rm);  
         }
-
-
                
         // GET/recipe/{id}
         public IActionResult Details(int id)
@@ -69,7 +68,7 @@ namespace SMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                svc.CreateRecipe(rvm.UserId, rvm.Name, rvm.Diet, rvm.MealType, rvm.Method, rvm.PrepTime, rvm.CookTime, rvm.Cuisine, rvm.Region, rvm.Translator, rvm.Calories, rvm.Servings, rvm.PhotoUrl);// fix
+                svc.CreateRecipe(rvm.UserId, rvm.Name, rvm.Diet, rvm.MealType, rvm.RecipeIngredients, rvm.Method, rvm.PrepTime, rvm.CookTime, rvm.Cuisine, rvm.Region, rvm.Translator, rvm.Calories, rvm.Servings, rvm.PhotoUrl);// fix
      
                 Alert($"Recipe Created", AlertType.info);  
                 return RedirectToAction(nameof(Index));

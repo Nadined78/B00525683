@@ -1,5 +1,7 @@
 @model Recipe
 
+<partial name = "_ViewLayouts">
+
 <!-- Breadcrumbs using partial view -->
 <partial name="_Breadcrumbs" model=@(new [] { ("/", "Home"), ("/recipe", "Recipes") })>
     
@@ -8,8 +10,8 @@
     <h3 class="mb-4">Recipe</h3>
 
     <dl class="row">       
-        <dt class="col-4">Id</dt>
-        <dd class="col-8">@Model.RecipeId</dd>
+        @* <dt class="col-4">Id</dt>
+        <dd class="col-8">@Model.RecipeId</dd> *@
 
         <dt class="col-4">Name</dt>
         <dd class="col-8">@Model.Name</dd>
@@ -40,9 +42,14 @@
 
         <dt class="col-4">Servings</dt>
         <dd class="col-8">@Model.Servings</dd>
-
-        <dt class="col-4">Photo</dt>
-        <dd class="col-8">@Model.PhotoUrl</dd>  
     </dl>
-</div> 
+
+    <div class="col-4">
+        <img src="@Model.PhotoUrl" class="img-fluid" width="100" height="75">
+    </div>
+</div>
+
+
+
+
 

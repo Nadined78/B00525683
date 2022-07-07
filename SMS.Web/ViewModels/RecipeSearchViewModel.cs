@@ -7,6 +7,8 @@ namespace SMS.Web.ViewModels
         // result set
         public IList<Recipe> Recipes { get; set;} = new List<Recipe>();
 
+        public string PhotoUrl {get; set;}
+
         // search options        
         public string Query { get; set; } = "";
         
