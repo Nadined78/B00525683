@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
 using SMS.Data.Services;
 using SMS.Web.ViewModels;
+using SMS.Data.Models;
 
 
 namespace SMS.Web.Controllers
@@ -26,7 +27,7 @@ namespace SMS.Web.Controllers
         }
 
         // GET /recipe/index - 
-        public IActionResult RecipeIndex(RecipeSearchViewModel rm)
+        public IActionResult RecipeIndex(RecipeSearchViewModel rm) //needs change to get one particular users recipes.
         {
             
             rm.Recipes = svc.SearchRecipes(rm.Range, rm.Query);
@@ -36,7 +37,7 @@ namespace SMS.Web.Controllers
         // GET/recipe/{id}
         public IActionResult Details(int id)
         {
-            var recipe = svc.GetRecipe(id);
+            var recipe = svc.GetRecipeById(id);
             if (recipe == null)
             {
                 Alert("Recipe Not Found", AlertType.warning);  
@@ -77,6 +78,74 @@ namespace SMS.Web.Controllers
             // redisplay the form for editing
             return View(rvm);
         }
+
+        // GET
+        public IActionResult AddReview(int id)
+        {
+            var r = svc.GetRecipeById(id);  
+            if (r == null)                  
+            {
+                Alert($"Recipe not found", AlertType.warning);  
+                return RedirectToAction(nameof(Index));
+            }
+
+            //Otherwise, a new review is created 
+            var re = new ReviewViewModel 
+            {      
+
+                RecipeId = id,
+                Name = r.Name,
+                
+            }; //do i need more here
+            //render form
+            return View("AddReview", r);  
+
+        }
+
+        // POST 
+        [HttpPost]
+        public IActionResult AddReview(Review r)
+        {         
+            var re = svc.GetRecipeById(r.RecipeId);        
+
+            if (re == null)                             
+            {   
+                Alert($"Recipe not found", AlertType.warning);  
+                return RedirectToAction(nameof(Index));
+            }
+
+            svc.AddReview(r);      
+               
+            Alert("Review added successfully", AlertType.success); 
+            return RedirectToAction("Details", new { Id = r.RecipeId });
+                     
+        }//AddReview
+       
+        // GET 
+        public IActionResult DeleteReview(int id)
+        {
+            var r = svc.GetReviewById(id);      
+
+            if (r == null)     
+            {  
+               Alert($"Review not found", AlertType.warning);   
+               return RedirectToAction(nameof(Index));
+            }     
+
+            return View(r);     
+        }
+
+        //POST 
+        [HttpPost]
+        public IActionResult DeleteConfirmReview(int id)   
+        {
+            svc.DeleteReview(id);                          
+         
+            Alert($"Review deleted successfully", AlertType.warning); 
+  
+            return RedirectToAction("Index");
+        }
+
 
     }
 }

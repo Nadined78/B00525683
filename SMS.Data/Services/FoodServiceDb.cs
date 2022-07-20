@@ -193,7 +193,7 @@ namespace SMS.Data.Services
         }
         
 
-        public Recipe GetRecipe(int id)
+        public Recipe GetRecipeById(int id)
         {
             // return recipe and related user or null if not found
             return db.Recipes
@@ -205,7 +205,7 @@ namespace SMS.Data.Services
         public bool DeleteRecipe(int id)
         {
             // find recipe
-            var recipe = GetRecipe(id);
+            var recipe = GetRecipeById(id);
             if (recipe == null) return false;
             
             // remove recipe 
@@ -226,7 +226,7 @@ namespace SMS.Data.Services
         public Recipe UpdateRecipe(Recipe updated)
         {
             // verify the recipe exists
-            var recipe = GetRecipe(updated.RecipeId);
+            var recipe = GetRecipeById(updated.RecipeId);
             if (recipe == null)
             {
                 return null;
@@ -284,7 +284,7 @@ namespace SMS.Data.Services
         // Add a new Review to a movie 
         public Review AddReview(Review r)
         {
-            var recipe = GetRecipe(r.RecipeId);        //first we need to check if the recipe we want to add a review to exists
+            var recipe = GetRecipeById(r.RecipeId);        //first we need to check if the recipe we want to add a review to exists
             if (recipe == null)                          //if recipe == null that means it doesnt exist and we cannot assign a recipe to it, so we return null.
             {
                 return null;

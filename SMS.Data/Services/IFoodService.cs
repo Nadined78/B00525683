@@ -28,7 +28,7 @@ namespace SMS.Data.Services
 
         IList<Recipe> GetAllRecipes();   
       
-        Recipe GetRecipe(int id);
+        Recipe GetRecipeById(int id);
 
         // Recipe GetRecipeByIngredient(string ingredient);
 

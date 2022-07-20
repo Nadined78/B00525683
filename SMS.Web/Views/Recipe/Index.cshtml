@@ -26,6 +26,7 @@
          <th>Calories</th>
          <th>Servings</th>
          <th>PhotoUrl</th>
+         <th>Rating</th>
             
          <th>Actions</th>
       </tr>
@@ -44,6 +45,7 @@
             <td>@r.Calories</td>
             <td>@r.Servings</td>
             <td>@r.PhotoUrl</td>
+            <td>@r.Rating</td>
             
             <td>
                <a asp-action="Details" asp-route-id="@r.RecipeId"><i class="bi bi-lightbulb"></i> Details</a>                                          
@@ -52,3 +54,5 @@
       }
     </tbody>
 </table>
+
+

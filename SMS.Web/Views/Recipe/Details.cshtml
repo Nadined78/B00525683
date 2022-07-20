@@ -5,49 +5,83 @@
 <!-- Breadcrumbs using partial view -->
 <partial name="_Breadcrumbs" model=@(new [] { ("/", "Home"), ("/recipe", "Recipes") })>
     
-<div class="col card rounded shadow-lg p-4">
+<h3 class="mt-4 mb-4">Recipe</h3>
+<div class="row">   
+    <div class="col-8 card rounded shadow p-3">
+        <dl class="row">  
+        
+        <dt class="col-5">Name</dt>
+        <dd class="col-7">@Model.Name</dd>
 
-    <h3 class="mb-4">Recipe</h3>
+        <dt class="col-5">Diet</dt>
+        <dd class="col-7">@Model.Diet</dd>
 
-    <dl class="row">       
-        @* <dt class="col-4">Id</dt>
-        <dd class="col-8">@Model.RecipeId</dd> *@
+        <dt class="col-5">Meal Type</dt>
+        <dd class="col-7">@Model.MealType</dd>
 
-        <dt class="col-4">Name</dt>
-        <dd class="col-8">@Model.Name</dd>
+        <dt class="col-5">Method</dt>
+        <dd class="col-7">@Model.Method</dd>
 
-        <dt class="col-4">Diet</dt>
-        <dd class="col-8">@Model.Diet</dd>
+        <dt class="col-5">Prep Time</dt>
+        <dd class="col-7">@Model.PrepTime</dd>
 
-        <dt class="col-4">MealType</dt>
-        <dd class="col-8">@Model.MealType</dd>
+        <dt class="col-5">Cook Time</dt>
+        <dd class="col-7">@Model.CookTime</dd>
 
-        <dt class="col-4">Method</dt>
-        <dd class="col-8">@Model.Method</dd>
+        <dt class="col-5">Cuisine</dt>
+        <dd class="col-7">@Model.Cuisine</dd>
 
-        <dt class="col-4">PrepTime</dt>
-        <dd class="col-8">@Model.PrepTime</dd>
+        <dt class="col-5">Region</dt>
+        <dd class="col-7">@Model.Region</dd>
 
-        <dt class="col-4">CookTime</dt>
-        <dd class="col-8">@Model.CookTime</dd>
+        <dt class="col-5">Calories</dt>
+        <dd class="col-7">@Model.Calories</dd>
 
-        <dt class="col-4">Cuisine</dt>
-        <dd class="col-8">@Model.Cuisine</dd>
+        <dt class="col-5">Servings</dt>
+        <dd class="col-7">@Model.Servings</dd>
 
-        <dt class="col-4">Region</dt>
-        <dd class="col-8">@Model.Region</dd>
+        <dt class="col-5">Rating</dt>
+        <dd class="col-7">@Model.Rating</dd>
 
-        <dt class="col-4">Calories</dt>
-        <dd class="col-8">@Model.Calories</dd>
 
-        <dt class="col-4">Servings</dt>
-        <dd class="col-8">@Model.Servings</dd>
     </dl>
+
+    <!-- use flex box to separate two divs containing primary actions on left and danger action on right -->
+        <div class="mt-4 d-flex flex-row justify-content-between">
+            <div>
+    
+                <!-- navigation link to Details action, passing the correct route id parameter -->
+                <a asp-condition=@(User.IsInRole("admin")) asp-controller="Recipe" asp-action="Edit" asp-route-id="@Model.RecipeId" class="btn btn-sm btn-secondary"><i
+                        class="bi bi-pen"></i> Edit</a>
+
+                <!-- navigation link to redirect to Index action -->
+                <a asp-controller="Recipe" asp-action="Index" class="btn btn-sm btn-link"><i class="bi bi-list"></i>
+                    Recipes</a>
+
+            </div>
+
+            <div>
+                <!-- toggle display of Delete Modal -->
+                <button asp-condition=@(User.IsInRole("admin")) type="button" class="btn btn-sm btn-danger" 
+                        data-bs-toggle="modal" data-bs-target="#deleteRecipeModal">
+                    <i class="bi bi-trash"></i> Delete
+                </button>
+            </div>
+        </div>
+    </div>
 
     <div class="col-4">
         <img src="@Model.PhotoUrl" class="img-fluid" width="100" height="75">
     </div>
 </div>
+
+    <!-- Partial to display review details -->
+<div class="row pt-3">
+    <partial name="_Review" />
+</div>
+
+<!-- Delete Modal -->
+<partial name="_DeleteRecipeModal" />
 
 
 

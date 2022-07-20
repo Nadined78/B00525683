@@ -30,14 +30,9 @@ namespace SMS.Data.Models {
 
         public string PhotoUrl { get; set; }
 
-        //relationship 1-M - 
+        //relationship 1-M - A user can have mutiple recipes 
         
         public IList<Recipe> Recipes {get; set; } = new List<Recipe>();
-        
-        // public IList<Ingredient> Ingredients {get; set; } = new List<Ingredient>();
-
-        // public IList<RecipeIngredient> RecipeIngredients {get; set;} = new List<RecipeIngredient>();
-
 
     }
 }

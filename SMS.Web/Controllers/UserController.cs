@@ -356,7 +356,7 @@ namespace SMS.Web.Controllers
         public IActionResult RecipeDelete(int id)
         {
             // load the recipe using the service
-            var recipe = _svc.GetRecipe(id);
+            var recipe = _svc.GetRecipeById(id);
             // check the returned recipeis not null and if so return NotFound()
             if (recipe == null)
             {
@@ -381,10 +381,6 @@ namespace SMS.Web.Controllers
             return RedirectToAction(nameof(Details), new { Id = userId });
         }
 
-        public IActionResult UserProfile(int userId)
-        {
-            
-        }
 
         // -------------------------- Helper Methods ------------------------------
 
