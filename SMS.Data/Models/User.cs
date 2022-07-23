@@ -5,10 +5,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SMS.Data.Models {
      
-    public enum Role { admin, member } //removed manager?
+    public enum Role { admin, member } 
 
     public class User {
-        public int UserId { get; set; }
+        public int Id { get; set; }
 
         [StringLength(50)]
         [Required(ErrorMessage = "Name Required")]
@@ -27,6 +27,8 @@ namespace SMS.Data.Models {
         public Role Role { get; set; }
 
         public DateTime CreatedOn { get; set; }
+
+        public string Nationality {get; set; }
 
         public string PhotoUrl { get; set; }
 

@@ -5,7 +5,7 @@ namespace SMS.Web.ViewModels
     public class ReviewViewModel
     {
 
-        public int recipeId { get; set; }      
+        public int Id { get; set; }      
 
         public string Name { get; set; }
 

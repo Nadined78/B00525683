@@ -33,7 +33,7 @@ namespace SMS.Data.Services
             return (user != null && Hasher.ValidateHash(user.Password, password)) ? user : null;
         }
 
-        public User Register(string name, string email, string password, Role role, DateTime createdOn, string photoUrl)
+        public User Register(string name, string email, string password, Role role, DateTime createdOn, string nationality, string photoUrl)
         {
             // check that the user does not already exist (unique user name)
             var exists = GetUserByEmailAddress(email);
@@ -50,6 +50,7 @@ namespace SMS.Data.Services
                 Password = Hasher.CalculateHash(password),
                 Role = role,
                 CreatedOn = createdOn,
+                Nationality = nationality,
                 PhotoUrl = photoUrl 
             };
    
@@ -71,13 +72,13 @@ namespace SMS.Data.Services
         {
             return db.Users
                      .Include(r => r.Recipes)
-                     .FirstOrDefault(r => r.UserId == id);
+                     .FirstOrDefault(r => r.Id == id);
         }
 
         
         //Admin can add a new user - checking email is unique
 
-        public User AddUser(string name, string email, string password, Role role, DateTime createdOn, string photoUrl)
+        public User AddUser(string name, string email, string password, Role role, DateTime createdOn, string nationality, string photoUrl)
         {
             // check if user with email exists            
             var exists = GetUserByEmailAddress(email);
@@ -94,6 +95,7 @@ namespace SMS.Data.Services
                 Password = password,
                 Role = role,
                 CreatedOn = createdOn,
+                Nationality = nationality,
                 PhotoUrl = photoUrl
             };
 
@@ -120,13 +122,13 @@ namespace SMS.Data.Services
         public User UpdateUser(User updated)
         {
             // verify the user exists
-            var User = GetUser(updated.UserId);
+            var User = GetUser(updated.Id);
             if (User == null)
             {
                 return null;
             }
 
-            if (!IsDuplicateUserEmail(updated.Email, updated.UserId))
+            if (!IsDuplicateUserEmail(updated.Email, updated.Id))
             {
                 return null;
             }
@@ -136,7 +138,9 @@ namespace SMS.Data.Services
             User.Email = updated.Email;
             User.Password = updated.Password;
             User.Role = updated.Role;
+            User.Nationality = updated.Nationality;
             User.PhotoUrl = updated.PhotoUrl;
+
 
             db.SaveChanges();
             return User;
@@ -152,7 +156,7 @@ namespace SMS.Data.Services
             var existing = GetUserByEmailAddress(email);
             // if a user with email exists and the Id does not match
             // the userId (if provided), then they cannot use the email
-            return existing != null && userId != existing.UserId;           
+            return existing != null && userId != existing.Id;           
         }
 
 
@@ -197,8 +201,8 @@ namespace SMS.Data.Services
         {
             // return recipe and related user or null if not found
             return db.Recipes
-                     .Include(u => u.User)
-                     .FirstOrDefault(u => u.RecipeId == id);
+                     .Include(u => u.Reviews)
+                     .FirstOrDefault(u => u.Id == id);
                      
         }
 
@@ -220,13 +224,14 @@ namespace SMS.Data.Services
         {
             return db.Recipes
                      .Include(u => u.User)
+                     .Include(u => u.Reviews)
                      .ToList();
         }
 
         public Recipe UpdateRecipe(Recipe updated)
         {
             // verify the recipe exists
-            var recipe = GetRecipeById(updated.RecipeId);
+            var recipe = GetRecipeById(updated.Id);
             if (recipe == null)
             {
                 return null;
@@ -253,24 +258,42 @@ namespace SMS.Data.Services
 
 
         // // // perform a search of the recipes based on a query and
-        // // // an active range 'ALL', 'Chicken', 'Beef', 'Fish' - possibly change this to vegan vegetarian etc
-        public IList<Recipe> SearchRecipes(recipeSearch range, string query) 
+        // // // a range 'ALL', 'Omnivorous', 'Vegetarian', 'Vegan'
+        public IList<Recipe> SearchMyRecipes(AllRecipes range, int userId, string query) 
         {
             // ensure query is not null    
             query = query == null ? "" : query.ToLower();
 
-            // search recipe, active status and users name
+            // search recipe by multiple queries, by range and by users id
             var results = db.Recipes
                             .Include(t => t.User)
-                            .Where(t => (t.RecipeIngredients.ToLower().Contains(query) || t.Cuisine.ToLower().Contains(query) || t.Translator.ToLower().Contains(query)
-                                        ) &&
-                                        (range == recipeSearch.ALL ||
-                                         range == recipeSearch.Omnivorous ||
-                                         range == recipeSearch.Vegetarian ||
-                                         range == recipeSearch.Vegan
-                                        ) 
-                            ).ToList();
-            return  results;  
+                            .Where(t => (t.UserId == userId) &&                           
+                            (t.Name.ToLower().Contains(query) || t.RecipeIngredients.ToLower().Contains(query) || 
+                            t.Cuisine.ToLower().Contains(query) || t.Region.ToLower().Contains(query) 
+                            || t.Translator.ToLower().Contains(query)) &&
+                            (range == AllRecipes.ALL || range == AllRecipes.Vegetarian || range == AllRecipes.Vegan || range ==AllRecipes.Omnivorous
+                            )).ToList(); 
+                        
+                            
+            return  (results);  
+        }
+
+        public IList<Recipe> SearchAllRecipes(AllRecipes range, string query) 
+        {
+            // ensure query is not null    
+            query = query == null ? "" : query.ToLower();
+
+            // search recipe, active status and users name // change
+        var results =  db.Recipes
+                            .Include(t => t.User)
+                            .Where(t => (t.Name.ToLower().Contains(query) || t.RecipeIngredients.ToLower().Contains(query) || 
+                            t.Cuisine.ToLower().Contains(query) || t.Region.ToLower().Contains(query) 
+                            || t.Translator.ToLower().Contains(query)) && 
+                            (range == AllRecipes.ALL || range == AllRecipes.Vegetarian || range == AllRecipes.Vegan || range ==AllRecipes.Omnivorous
+                            )).ToList();
+
+                            return (results);
+          
         }
 
         //Get a review by Id
@@ -284,7 +307,7 @@ namespace SMS.Data.Services
         // Add a new Review to a movie 
         public Review AddReview(Review r)
         {
-            var recipe = GetRecipeById(r.RecipeId);        //first we need to check if the recipe we want to add a review to exists
+            var recipe = GetRecipeById(r.RecipeId);        
             if (recipe == null)                          //if recipe == null that means it doesnt exist and we cannot assign a recipe to it, so we return null.
             {
                 return null;
@@ -293,7 +316,7 @@ namespace SMS.Data.Services
             var review = new Review                     //create the new review and assign the properties
             {
                 Name = r.Name,
-                RecipeId = r.RecipeId,
+                RecipeId = r.Id,
                 ReviewedOn = DateTime.Now,
                 Rating = r.Rating,
                 Comment = r.Comment,
@@ -303,6 +326,8 @@ namespace SMS.Data.Services
             db.SaveChanges();           
             return review;              
         }
+
+        
    
         //Delete a Review given its id
         public bool DeleteReview(int id)

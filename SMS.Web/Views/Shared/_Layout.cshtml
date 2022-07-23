@@ -6,19 +6,53 @@
     <title>@ViewData["Title"] - SMS.Web</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.0/font/bootstrap-icons.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="css/site.css" >
     <style>
         .navbar-custom
         {
             background-color: #2C8C7E;
         }
+
+        .navbar
+        {
+            background-color: #ffffff
+
+        }
+
+        .navbar-title
+        {
+            font-family: Segoe Script;
+            color: #ff4500
+        }
+
+        .navbar-contents
+        {
+
+        }
+
+        .box-shadow {
+  box-shadow: 0.50rem .100rem rgba(0, 0, 0, .10);
+
+  }
+
+.btn-outline,
+.btn-outline:hover {
+  border-color: currentcolor;
+}
+
+.btn-outline {
+  border-radius: var(--border-radius);
+}
+
+
     </style>
 </head>
 <body>
     <header>
-      <nav class="navbar navbar-expand-md navbar-toggleable-sm navbar navbar-dark bg-secondary mb-3 ">
+      <nav class="navbar box-shadow navbar-expand-md navbar-toggleable-sm mb-3 ">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">The Good Food Atlas</a>
+                <a class="navbar-brand navbar-title bi bi-globe2" asp-area="" asp-controller="Home" asp-action="Index"><b> The Good Food Atlas</b></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -30,32 +64,32 @@
 
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-light" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
 
                         <!-- Users in nav bar -->                       
                        <li class="nav-item">
-                            <a asp-condition =@(User.IsInRole("admin")) class="nav-link text-light" asp-controller="User" asp-action="Index">Users</a>
+                            <a asp-condition =@(User.IsInRole("admin")) class="nav-link text-dark" asp-controller="User" asp-action="Index">Users</a>
                         </li> 
 
                         <!-- Members Own Profile in Nav bar -->
                         <li class="nav-item">
-                            <a asp-condition =@(User.IsInRole("member")) class="nav-link text-light" asp-controller="User" asp-action="UserProfile">My Profile</a>
+                            <a asp-condition =@(User.IsInRole("member")) class="nav-link text-dark" asp-controller="User" asp-action="UserProfile">My Profile</a>
                         </li> 
 
                         <!-- Members Own Recipes in Nav bar -->
                         <li class="nav-item">
-                            <a asp-condition =@(User.IsInRole("member")) class="nav-link text-light" asp-controller="Recipe" asp-action="Index">My Recipes</a>
+                            <a asp-condition =@(User.IsInRole("member")) class="nav-link text-dark" asp-controller="Recipe" asp-action="Index">My Recipes</a>
                         </li> 
 
                         <!-- All Recipes on Web Application from all members -->
                         <li class="nav-item">
-                            <a asp-condition=@(User.HasOneOfRoles("admin,member")) class="nav-link text-light" asp-controller="Recipe" asp-action="RecipeIndex">All Recipes</a>
+                            <a asp-condition=@(User.HasOneOfRoles("admin,member")) class="nav-link text-dark" asp-controller="Recipe" asp-action="RecipeIndex">All Recipes</a>
                         </li> 
                         
                         <!-- company dropdown -->
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" 
+                            <a class="nav-link text-dark dropdown-toggle" data-bs-toggle="dropdown" href="#" 
                                role="button" aria-expanded="false">Company</a>
                             <ul class="dropdown-menu">
                                 <li> <a class="dropdown-item" asp-controller="Home" asp-action="About">About</a></li>

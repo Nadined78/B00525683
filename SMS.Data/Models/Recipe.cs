@@ -9,12 +9,12 @@ namespace SMS.Data.Models
     public enum Diet { Omnivorous, Vegetarian, Vegan }
 
     // used in ingredient search feature
-    public enum recipeSearch { Omnivorous, Vegetarian, Vegan, ALL }
+    public enum AllRecipes { ALL, Vegetarian, Vegan, Omnivorous}
 
     public class Recipe
     {
 
-        public int RecipeId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         public string Name { get; set; }
@@ -40,7 +40,6 @@ namespace SMS.Data.Models
         public int CookTime{ get; set; } 
 
         [Required]
-        [Range(0,100)]
         public string Cuisine { get; set; }
 
         public string Region {get; set; }
@@ -54,9 +53,6 @@ namespace SMS.Data.Models
         [UrlResource]
         public string PhotoUrl { get; set; }    
 
-        public int UserId {get; set; } //foregin key
-
-        public User User {get; set; } //navigational property
       
       // ReadOnly Property - Calculates Rating % based on average of all reviews
         public int Rating
@@ -70,5 +66,8 @@ namespace SMS.Data.Models
 
         // EF Relationship - a recipe can have many reviews 
         public IList<Review> Reviews { get; set; } = new List<Review>();
+        public int UserId {get; set; } //foregin key - possibly change this to id in the model
+
+        public User User {get; set; } //navigational property
     }
 }

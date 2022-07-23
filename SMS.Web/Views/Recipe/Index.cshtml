@@ -1,58 +1,65 @@
 ﻿@model RecipeSearchViewModel
 
-<partial name = "_ViewLayouts">
+<partial name = "_ViewLayouts"> 
+<partial name= "_RecipeLayout">  
 
 <partial name="_Breadcrumbs" model=@(new [] { ("/", "Home"), ("","Recipes"), ("", "My Recipes"), ("","Search") })/>
-<h3>Recipes</h3>
+<h3><b class= "navbar-title mb-3"> My Recipes</b></h3>
 
-<div class="my-4 d-flex flex-row justify-content-between align-items-center">  
+ <div class="my-4 d-flex flex-row justify-content-between align-items-center">  
    <a asp-condition=@(User.IsInRole("member")) class="btn btn-sm btn-primary my-3" asp-action="Create" >
       <i class="bi bi-plus"></i> Create Recipe
-   </a>   
-   <partial name="_Search" />
-</div>
+   </a>    
+   <partial name="_MySearch" />
+</div> 
 
-<table class="table">
-    <thead>
-      <tr>
-         <th>RecipeId</th>
-         <th>Name</th>        
-         <th>Diet</th> 
-         <th>MealType</th> 
-         <th>PrepTime</th>
-         <th>CookTime</th>
-         <th>Cuisine</th>
-         <th>Region</th>
-         <th>Calories</th>
-         <th>Servings</th>
-         <th>PhotoUrl</th>
-         <th>Rating</th>
+      <div class="card-deck">
+         @foreach (var r in Model.Recipes) 
+         {
+            <div class="row row-cols-1 row-cols-md-3">
+               <div class= "card text-center mb-3 bg-light shadow-lg" style="width:18rem;">
+                <img class="recipeimage card-img-top img-responsive" src="@r.PhotoUrl" alt= "">
+                  <div class="card-body">
+                  <h4 class="card-title">
+                     @r.Name
+                  </h4>
+
+                  <p class = "card-text">
+                     @r.Translator
+                  </p>
+            </div>
+
+            <div class="card-footer text-muted">
+               <a asp-controller="Recipe" asp-action="Edit" asp-route-id=@r.Id><i class="bi bi-pen"></i>Edit</a>
+               <a asp-action="Details" asp-route-id=@r.Id><i class="bi bi-info-circle"></i> Details</a>
+               <a asp-controller="User" asp-action="RecipeDelete" asp-route-id=@r.Id><i class="bi bi-trash"></i> Delete</a>
+            </div
+      </div>
+   </div>
+}
             
-         <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      @foreach(var r in Model.Recipes) {
-          <tr>
-            <td>@r.RecipeId</td>
-            <td>@r.User.Name</td> 
+            
+            
+            
+            
+            
+            @* <td class="recipename">@r.Name</td>
             <td>@r.Diet</td>
-            <td>@r.MealType</td>
-            <td>@r.PrepTime</td>
-            <td>@r.CookTime</td>
-            <td>@r.Cuisine</td>
-            <td>@r.Region</td>
-            <td>@r.Calories</td>
-            <td>@r.Servings</td>
-            <td>@r.PhotoUrl</td>
-            <td>@r.Rating</td>
+            @* <td>@r.MealType</td>
+            <td>@r.PrepTime Mins </td>
+            <td>@r.CookTime Mins</td>
+            <td>@r.Cuisine</td> *@
+            @* <td>@r.Calories</td>
+            <td>@r.Servings</td> *@
+            @* <td>@r.Rating</td> *@
+            @* <td class="recipeimage"><img src="@r.PhotoUrl" class="img-fluid" width="100" height="75"></td> *@
             
-            <td>
-               <a asp-action="Details" asp-route-id="@r.RecipeId"><i class="bi bi-lightbulb"></i> Details</a>                                          
+            @* <td> *@
+               @* <a asp-action="Details" asp-route-id="@r.Id"><i class="bi bi-lightbulb"></i> Details</a>                                          
             </td>
          </tr>
       }
     </tbody>
-</table>
+</table> *@
 
 

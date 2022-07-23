@@ -19,5 +19,12 @@ namespace SMS.Web.ViewModels
         [Required]
         public Role Role { get; set; }
 
+        [Required]
+        public DateTime CreatedOn {get; set; }
+
+        [Required]
+        public string PhotoUrl {get; set;}
+
+
     }
 }

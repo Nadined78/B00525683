@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using SMS.Data.Services;
 using SMS.Web.ViewModels;
 using SMS.Data.Models;
-
+using SMS.Data.Security;
 
 namespace SMS.Web.Controllers
 {
@@ -20,20 +21,34 @@ namespace SMS.Web.Controllers
 
 
         // GET /recipe/index - 
-        public IActionResult Index(RecipeSearchViewModel rm)
+        public IActionResult Index(RecipeSearchViewModel rm) //this needs to be specific for user 
         {
-            rm.Recipes = svc.SearchRecipes(rm.Range, rm.Query);
-            return View(rm);  
+            var userId = User.GetSignedInUserId();
+            rm.Recipes = svc.SearchMyRecipes(rm.Range, userId, rm.Query);
+            return View(rm);
         }
 
-        // GET /recipe/index - 
-        public IActionResult RecipeIndex(RecipeSearchViewModel rm) //needs change to get one particular users recipes.
+        // // GET /recipe/index - 
+        
+        public IActionResult RecipeIndex(RecipeSearchViewModel rm) //recipe list - recipeindex - all recipes 
         {
             
-            rm.Recipes = svc.SearchRecipes(rm.Range, rm.Query);
+            rm.Recipes = svc.SearchAllRecipes(rm.Range, rm.Query);
             return View(rm);  
+    
         }
                
+
+        // [HttpGet("search")]
+        // public IActionResult Search(string query = "", recipeSearch range = recipeSearch.ALL)
+        // {                             
+        //     var recipes = svc.SearchAllRecipes(range, query);
+        //     var results = recipes.Select( r => ConvertToCustomRecipeObject(r) ).ToList();
+            
+        //     // return custom results list
+        //     return Ok(results);
+        // }        
+
         // GET/recipe/{id}
         public IActionResult Details(int id)
         {
@@ -49,7 +64,7 @@ namespace SMS.Web.Controllers
         }
       
         // GET /recipe/create
-        [Authorize(Roles="admin")]
+        [Authorize(Roles="admin, member")]
         public IActionResult Create()
         {
             var users = svc.GetUsers();
@@ -64,7 +79,7 @@ namespace SMS.Web.Controllers
        
         // POST /recipe/create
         [HttpPost]
-        [Authorize(Roles="admin")]
+        [Authorize(Roles="admin, member")]
         public IActionResult Create(RecipeCreateViewModel rvm)
         {
             if (ModelState.IsValid)
@@ -77,6 +92,82 @@ namespace SMS.Web.Controllers
             
             // redisplay the form for editing
             return View(rvm);
+        }
+
+        public IActionResult Edit(int id)
+        {        
+            // load the recipe using the service
+            var r = svc.GetRecipeById(id);
+
+            // check if r is null and if so alert
+            if (r == null)
+            {
+                Alert($"Recipe {id} not found", AlertType.warning);
+                return RedirectToAction(nameof(Index));
+            }   
+
+            // pass recipe to view for editing
+            return View(r);
+        }
+
+        // POST /recipe/edit/{id}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles="admin, member")]
+        public IActionResult Edit(Recipe r)
+        {
+            var recipe = svc.GetRecipeById(r.Id);
+
+             //  // validate and complete POST action to save recipe changes
+            // if (ModelState.IsValid)
+            // {
+            //     // pass data to service to update
+            //     svc.UpdateRecipe(r);      
+            //     Alert("Recipe updated successfully", AlertType.info);
+            //     return RedirectToAction(nameof(Index));
+            // }
+            
+            // check if form is invalid and redisplay
+            if (!ModelState.IsValid || recipe == null)
+            {
+                return View(r);
+            } 
+
+            // update user details and call service
+            recipe.Name = r.Name;
+            recipe.Diet = r.Diet;
+            recipe.MealType = r.MealType;
+            recipe.RecipeIngredients = r.RecipeIngredients;
+            recipe.Method = r.Method;
+            recipe.PrepTime = r.PrepTime;
+            recipe.CookTime = r.CookTime;
+            recipe.Cuisine = r.Cuisine;
+            recipe.Region = r.Region;
+            recipe.Translator = r.Translator;
+            recipe.Calories = r.Calories;
+            recipe.Servings = r.Servings;
+            recipe.PhotoUrl = r.PhotoUrl;
+       
+            var updated = svc.UpdateRecipe(recipe);
+
+            // check if error updating service
+            if (updated == null) {
+                Alert("There was a problem Updating. Please try again", AlertType.warning);
+                return View(r);
+            }
+
+            
+            Alert("Successfully Updated Recipe Details", AlertType.info);
+            
+            if (User.IsInRole("admin"))
+                {
+                    return RedirectToAction("RecipeIndex");
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+            
         }
 
         // GET

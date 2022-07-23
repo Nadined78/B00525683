@@ -67,11 +67,18 @@ namespace SMS.Web.Controllers
             }
 
             // register user
-            var user = _svc.Register(m.Name, m.Email, m.Password, m.Role, m.CreatedOn, m.PhotoUrl);               
+            var user = _svc.Register(m.Name, m.Email, m.Password, m.Role, m.CreatedOn, m.Nationality, m.PhotoUrl);               
            
             // registration successful now redirect to login page
             Alert("Registration Successful - Now Login", AlertType.info);          
             return RedirectToAction(nameof(Login));
+        }
+
+        [Authorize]
+        public IActionResult UserProfile()
+        {
+            var user = _svc.GetUser(User.GetSignedInUserId());
+            return View(user);
         }
 
         [Authorize]
@@ -80,7 +87,7 @@ namespace SMS.Web.Controllers
            // use BaseClass helper method to retrieve Id of signed in user 
             var user = _svc.GetUser(User.GetSignedInUserId());
             var userViewModel = new UserProfileViewModel { 
-                Id = user.UserId, 
+                Id = user.Id, 
                 Name = user.Name, 
                 Email = user.Email,                 
                 Role = user.Role
@@ -127,7 +134,7 @@ namespace SMS.Web.Controllers
             // use BaseClass helper method to retrieve Id of signed in user 
             var user = _svc.GetUser(User.GetSignedInUserId());
             var passwordViewModel = new UserPasswordViewModel { 
-                Id = user.UserId, 
+                Id = user.Id, 
                 Password = user.Password, 
                 PasswordConfirm = user.Password, 
             };
@@ -216,10 +223,10 @@ namespace SMS.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles="admin")]
-        public IActionResult Create([Bind("Name, Email, Password, PhotoUrl")]  User u) //if admin only wants to add an admin/member
+        public IActionResult Create([Bind("Name, Email, Password, Nationality, PhotoUrl")]  User u) //if admin only wants to add an admin/member
         {
             // check email is unique for this user
-            if (_svc.IsDuplicateUserEmail(u.Email, u.UserId))
+            if (_svc.IsDuplicateUserEmail(u.Email, u.Id))
             {
                 // add manual validation error
                 ModelState.AddModelError(nameof(u.Email),"The email address is already in use");
@@ -229,10 +236,10 @@ namespace SMS.Web.Controllers
             if (ModelState.IsValid)
             {
                 // pass data to service to store 
-                u = _svc.Register(u.Name, u.Email, u.Password, u.Role, u.CreatedOn, u.PhotoUrl);
+                u = _svc.Register(u.Name, u.Email, u.Password, u.Role, u.CreatedOn, u.Nationality, u.PhotoUrl);
                 Alert($"User created successfully", AlertType.success);
 
-                return RedirectToAction(nameof(Details), new { Id = u.UserId});
+                return RedirectToAction(nameof(Details), new { Id = u.Id});
             }
             
             // redisplay the form for editing as there are validation errors
@@ -261,10 +268,10 @@ namespace SMS.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles="admin")]
-        public IActionResult Edit(int id, [Bind("Name, Email, Password, PhotoUrl")] User u)
+        public IActionResult Edit(int id, [Bind("Name, Email, Password, Nationality, PhotoUrl")] User u)
         {
             // check email is unique for this user  
-            if (_svc.IsDuplicateUserEmail(u.Email,u.UserId)) 
+            if (_svc.IsDuplicateUserEmail(u.Email,u.Id)) 
             {
                 // add manual validation error
                 ModelState.AddModelError("Email", "This email is already registered");
@@ -277,7 +284,7 @@ namespace SMS.Web.Controllers
                 _svc.UpdateUser(u);      
                 Alert("User updated successfully", AlertType.info);
 
-                return RedirectToAction(nameof(Details), new { Id = u.UserId });
+                return RedirectToAction(nameof(Details), new { Id = u.Id });
             }
 
             // redisplay the form for editing as validation errors
@@ -375,9 +382,9 @@ namespace SMS.Web.Controllers
         {
             // delete recipe via service
             _svc.DeleteRecipe(id);
-            Alert($"Recipe deleted successfully for user {userId}", AlertType.info);
+            Alert($"Recipe deleted successfully", AlertType.info);
             
-            // redirect to the user index view
+            // redirect to the recipe index view
             return RedirectToAction(nameof(Details), new { Id = userId });
         }
 

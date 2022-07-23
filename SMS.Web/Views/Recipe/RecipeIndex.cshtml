@@ -1,64 +1,57 @@
 @model RecipeSearchViewModel
 
 <partial name = "_ViewLayouts">
+<partial name= "_RecipeLayout">  
 
 <partial name="_BreadCrumbs" model=@(new [] {
     ("/","Home"),
     ("","Recipes")
 }) />
 
-<h3 class="mb-3">Recipe List</h3>
+<h3><b class="navbar-title mb-3">Recipe List</b></h3>
 
 <div class="my-4 d-flex flex-row justify-content-between align-items-center">  
    <a asp-condition=@(User.IsInRole("member")) class="btn btn-sm btn-primary my-3" asp-action="Create" >
       <i class="bi bi-plus"></i> Create Recipe
    </a>   
-   <partial name="_Search" />
+   <partial name="_AllSearch" />
 </div>
 
-<table class="table table-hover">
-    <thead>
-      <tr>
-         @* <th>RecipeId</th> *@
-         <th>Name</th>        
-         <th>Diet</th> 
-         <th>MealType</th> 
-         <th>PrepTime</th>
-         <th>CookTime</th>
-         <th>Cuisine</th>
-         <th>Region</th>
-         <th>Calories</th>
-         <th>Servings</th>
-         <th>Rating</th>
-         <th>PhotoUrl</th>
-            
-         <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      @foreach(var r in Model.Recipes) {
-          <tr>
-            @* <td>@r.RecipeId</td> *@
-            <td>@r.Name</td> 
-            <td>@r.Diet</td>
-            <td>@r.MealType</td>
-            <td>@r.PrepTime</td>
-            <td>@r.CookTime</td>
-            <td>@r.Cuisine</td>
-            <td>@r.Region</td>
-            <td>@r.Calories</td>
-            <td>@r.Servings</td>
-            <td>@r.Rating</td>       
-            <td><img src="@r.PhotoUrl" class="img-fluid" width="100" height="75"></td>           
-            <td>
-               <a asp-action="Details" asp-route-id="@r.RecipeId"><i class="bi bi-lightbulb"></i> Details</a>                                          
-            </td>
-         </tr>
-      }
-    </tbody>
-</table>
+   @foreach (var r in Model.Recipes) 
+   {
+      <div class="card-deck">
+      <div class="row row-cols-1 row-cols-md-3 g-4 ">
+          <div class="col">
+            <div class="h-100 d-inline-block">
+            <div class= "card text-center mb-3 bg-light shadow-lg" style="width:20rem;">
+               <img class="recipeimage card-img-top img-responsive" src="@r.PhotoUrl" alt= "">
+                  <div class="card-body">
+                  <h4 class="card-title">
+                     @r.Name
+                  </h4>
 
-<!-- Partial to display review details -->
-<div class="row pt-3">
-    <partial name="_Review" />
+                  <h5 class="card=text">
+                     @r.Cuisine Cuisine
+                  </h5>
+
+                  <p class = "card-text">
+                     @r.Translator
+                  </p>
+
+                  <p class = "card-text">
+                     @r.Rating
+                  </p>
+                  </div>
+
+            <div class="card-footer text-muted">
+               <a asp-action="Edit" asp-route-id="@r.Id"><i class="bi bi-pen"></i></a>
+               <a asp-action="Details" asp-route-id="@r.Id"><i class="bi bi-info-circle"></i></a>
+               <a asp-action="Delete" asp-route-id="@r.Id"><i class="bi bi-trash"></i></a>
+            </div
+            </div>
+         </div>    
+      </div>
+      </div>
 </div>
+   }
+

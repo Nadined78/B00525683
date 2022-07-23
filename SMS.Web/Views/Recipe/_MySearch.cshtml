@@ -1,25 +1,26 @@
 @model RecipeSearchViewModel
 
+
 <!-- search form -->
 <form asp-controller="Recipe" asp-action="Index" class="d-flex flex-row align-items-center">
     <div class="form-check me-3">
-        <input class="form-check-input" type="radio" asp-for="Range" value="@recipeSearch.ALL">
+        <input class="form-check-input" type="radio" asp-for="Range" value="@AllRecipes.ALL">
         <label class="form-check-label" for="Range">All</label>
     </div>
     <div class="form-check me-3">
-        <input class="form-check-input" type="radio" asp-for="Range" value="@recipeSearch.Omnivorous">
+        <input class="form-check-input" type="radio" asp-for="Range" value="@AllRecipes.Omnivorous">
         <label class="form-check-label" for="Range">Omnivorous</label>
     </div>
     <div class="form-check me-3">
-        <input class="form-check-input" type="radio" asp-for="Range" value="@recipeSearch.Vegetarian" >
+        <input class="form-check-input" type="radio" asp-for="Range" value="@AllRecipes.Vegetarian" >
         <label class="form-check-label" for="Range">Vegetarian</label>
     </div>
     <div class="form-check me-3">
-        <input class="form-check-input" type="radio" asp-for="Range" value="@recipeSearch.Vegan" >
+        <input class="form-check-input" type="radio" asp-for="Range" value="@AllRecipes.Vegan" >
         <label class="form-check-label" for="Range">Vegan</label>
     </div>
 
     <input class="form-control me-2" asp-for="Query" placeholder="Search..">
    
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    <button type="button" class="btn btn-outline-danger" type="submit">Search</button>
 </form>

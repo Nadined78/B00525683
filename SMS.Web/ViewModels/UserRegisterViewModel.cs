@@ -27,6 +27,9 @@ namespace SMS.Web.ViewModels
         [Required]
         public DateTime CreatedOn {get; set;}
 
+        [Required] 
+        public string Nationality {get; set; }
+
 
         [Required]
         public string PhotoUrl {get; set;}

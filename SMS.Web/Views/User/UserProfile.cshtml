@@ -1,11 +1,12 @@
 @model User
 
-@* <partial name="_BreadCrumbs" model=@(new [] {
+<partial name = "_ViewLayouts">
+
+<partial name="_BreadCrumbs" model=@(new [] {
     ("/","Home"),
-    ("/user","Users"),
-    ($"/user/details/{Model.UserId}",$"{Model.UserId}"),
+    ($"/user/details/{Model.Id}",$"{Model.Id}"),
     ("","Details")
-}) /> *@
+}) /> 
 
 <h3 class="mt-4 mb-4">My Details</h3>
 <div class="row">
@@ -24,6 +25,9 @@
             <dt class="col-5">Created On</dt>
             <dd class="col-7">@Model.CreatedOn</dd>
 
+            <dt class="col-5">Nationality</dt>
+            <dd class="col-7">@Model.Nationality</dd>
+
 
         </dl>
 
@@ -32,12 +36,16 @@
             <div>
               
                 <!-- navigation link to CreateRecipe action, passing correct route parameter -->
-                <a asp-action="RecipeCreate" asp-route-id="@Model.UserId" class="btn btn-sm btn-primary"><i
+                <a asp-action="RecipeCreate" asp-route-id="@Model.Id" class="btn btn-sm btn-primary"><i
                         class="bi bi-bag-plus"></i> Add Recipe</a>          
 
                 <!-- navigation link to Details action, passing the correct route id parameter -->
-                <a asp-condition=@(User.IsInRole("admin") || User.IsInRole("member")) asp-controller="User" asp-action="Edit" asp-route-id="@Model.UserId" class="btn btn-sm btn-primary"><i
+                <a asp-condition=@(User.IsInRole("admin") || User.IsInRole("member")) asp-controller="User" asp-action="UpdateProfile" asp-route-id="@Model.Id" class="btn btn-sm btn-primary"><i
                         class="bi bi-pen"></i> Edit</a>
+
+                        <!-- navigation link to Details action, passing the correct route id parameter -->
+                <a asp-condition=@(User.IsInRole("admin") || User.IsInRole("member")) asp-controller="User" asp-action="UpdatePassword" asp-route-id="@Model.Id" class="btn btn-sm btn-primary"><i
+                        class="bi bi-pen"></i> Change Password</a>
 
                 <!-- navigation link to redirect to Home action -->
                 <a asp-controller="Home" asp-action="Index" class="btn btn-sm btn-link"><i class="bi bi-list"></i>

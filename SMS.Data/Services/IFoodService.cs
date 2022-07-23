@@ -17,9 +17,9 @@ namespace SMS.Data.Services
         User GetUser(int id);
         User GetUserByEmailAddress(string email);
         User Authenticate(string email, string password);
-        User Register(string name, string email, string password, Role role, DateTime createdOn, string PhotoUrl);
+        User Register(string name, string email, string password, Role role, DateTime createdOn, string nationality, string PhotoUrl);
 
-        User AddUser(string name, string email, string password, Role role, DateTime createdOn, string photoUrl);
+        User AddUser(string name, string email, string password, Role role, DateTime createdOn, string nationality, string photoUrl);
         User UpdateUser (User updated);
         bool DeleteUser(int id);
         bool IsDuplicateUserEmail(string email, int userId);
@@ -30,7 +30,7 @@ namespace SMS.Data.Services
       
         Recipe GetRecipeById(int id);
 
-        // Recipe GetRecipeByIngredient(string ingredient);
+        
 
         Recipe CreateRecipe(int userId, string name, Diet diet, MealType mealType, string recipeIngredients, string method, int prepTime, int cookTime, string cuisine, string region, string translator, int calories, int servings, string photoUrl);
         Recipe UpdateRecipe(Recipe updated);  
@@ -38,7 +38,9 @@ namespace SMS.Data.Services
 
         // ---------------- Search Feature --------------
 
-        IList<Recipe> SearchRecipes(recipeSearch range, string query);  
+        IList<Recipe> SearchAllRecipes(AllRecipes range, string query);  
+        IList<Recipe> SearchMyRecipes(AllRecipes range, int userId, string query);  
+
 
         // ---------------- Review of Recipe --------------
 

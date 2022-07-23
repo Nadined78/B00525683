@@ -3,9 +3,9 @@
 <partial name = "_ViewLayouts">
 
 <!-- Breadcrumbs using partial view -->
-<partial name="_Breadcrumbs" model=@(new [] { ("/", "Home"), ("/recipe", "Recipes") })>
+<partial name="_Breadcrumbs" model=@(new [] { ("/", "Home"), ("/recipe", "Recipes"), ("","Details") })>
     
-<h3 class="mt-4 mb-4">Recipe</h3>
+<h3 class="mt-4 mb-4">Recipe: @Model.Name</h3>
 <div class="row">   
     <div class="col-8 card rounded shadow p-3">
         <dl class="row">  
@@ -18,6 +18,9 @@
 
         <dt class="col-5">Meal Type</dt>
         <dd class="col-7">@Model.MealType</dd>
+
+        <dt class="col-5">Recipe Ingredients</dt>
+        <dd class="col-7">@Model.RecipeIngredients</dd>
 
         <dt class="col-5">Method</dt>
         <dd class="col-7">@Model.Method</dd>
@@ -40,9 +43,8 @@
         <dt class="col-5">Servings</dt>
         <dd class="col-7">@Model.Servings</dd>
 
-        <dt class="col-5">Rating</dt>
+        <dt class="col-5">Rating %</dt>
         <dd class="col-7">@Model.Rating</dd>
-
 
     </dl>
 
@@ -51,18 +53,22 @@
             <div>
     
                 <!-- navigation link to Details action, passing the correct route id parameter -->
-                <a asp-condition=@(User.IsInRole("admin")) asp-controller="Recipe" asp-action="Edit" asp-route-id="@Model.RecipeId" class="btn btn-sm btn-secondary"><i
+                <a asp-condition=@(User.IsInRole("admin") || User.IsInRole("Member")) asp-controller="Recipe" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-secondary"><i
                         class="bi bi-pen"></i> Edit</a>
 
                 <!-- navigation link to redirect to Index action -->
                 <a asp-controller="Recipe" asp-action="Index" class="btn btn-sm btn-link"><i class="bi bi-list"></i>
-                    Recipes</a>
+                    Back to All Recipes</a>
+
+                    <!-- navigation link to redirect to Members Profile (Owner of the Recipe) action -->
+                <a asp-controller="User" asp-action="UserProfile" asp-route-id="@Model.Id" class="btn btn-sm btn-link"><i class="bi bi-list"></i>
+                    Check Out This Member's Profile</a>
 
             </div>
 
             <div>
                 <!-- toggle display of Delete Modal -->
-                <button asp-condition=@(User.IsInRole("admin")) type="button" class="btn btn-sm btn-danger" 
+                <button asp-condition=@(User.IsInRole("admin")) || (User.IsInRole("Member"))  type="button" class="btn btn-sm btn-danger" 
                         data-bs-toggle="modal" data-bs-target="#deleteRecipeModal">
                     <i class="bi bi-trash"></i> Delete
                 </button>
@@ -71,7 +77,7 @@
     </div>
 
     <div class="col-4">
-        <img src="@Model.PhotoUrl" class="img-fluid" width="100" height="75">
+        <img src="@Model.PhotoUrl" class="img-fluid" width="200" height="150">
     </div>
 </div>
 
