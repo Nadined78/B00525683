@@ -2,13 +2,13 @@
 
 <partial name = "_ViewLayouts">
 
-<partial name="_BreadCrumbs" model=@(new [] {
+@* <partial name="_BreadCrumbs" model=@(new [] {
     ("/","Home"),
     ($"/user/details/{Model.Id}",$"{Model.Id}"),
     ("","Details")
-}) /> 
+}) />  *@
 
-<h3 class="mt-4 mb-4">My Details</h3>
+<h3 class="mt-4 mb-4 navbar-title">My Details</h3>
 <div class="row">
     <!-- Details -->
     <div class="col-8 card rounded shadow p-3">
@@ -25,8 +25,8 @@
             <dt class="col-5">Nationality</dt>
             <dd class="col-7">@Model.Nationality</dd>
 
-            @* <dt class="col-5">Photo</dt>
-            <dd class="col-7">@Model.PhotoUrl</dd>  *@
+             <dt class="col-5">Photo</dt>
+            <dd class="col-7">@Model.PhotoUrl</dd>
         </dl>
 
         <!-- use flex box to separate two divs containing primary actions on left and danger action on right -->
@@ -34,7 +34,7 @@
             <div>
               
                 <!-- navigation link to CreateRecipe action, passing correct route parameter -->
-                <a asp-action="RecipeCreate" asp-route-id="@Model.Id" class="btn btn-sm btn-primary"><i
+                <a asp-controller= "Recipe" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-sm btn-primary"><i
                         class="bi bi-bag-plus"></i> Add Recipe</a>          
 
                 <!-- navigation link to Details action, passing the correct route id parameter -->
@@ -60,10 +60,10 @@
             </div>
         </div>
     </div>
-    @* <!-- Photo -->
+    <!-- Photo -->
     <div class="col-4">
-        <img src="@Model.PhotoUrl" class="img-fluid" width="100" height="75">
-    </div> *@
+        <img src="@Model.PhotoUrl" class="img-fluid" width="160" height="140">
+    </div>
 </div>
 
 <!-- Delete Modal -->

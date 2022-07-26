@@ -47,7 +47,7 @@ namespace SMS.Web.ViewModels
 
         [Required]
         [StringLength(50, MinimumLength = 3)]
-        public string Region {get; set; }
+        public Region Region {get; set; }
 
         [Required]
         [StringLength(500, MinimumLength = 5)]

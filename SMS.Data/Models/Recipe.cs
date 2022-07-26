@@ -8,6 +8,8 @@ namespace SMS.Data.Models
 
     public enum Diet { Omnivorous, Vegetarian, Vegan }
 
+    public enum Region { Africa, Asia, CentralAmerica, Europe, MiddleEast, NorthAmerica, Oceania, SouthAmerica, Caribbean }
+
     // used in ingredient search feature
     public enum AllRecipes { ALL, Vegetarian, Vegan, Omnivorous}
 
@@ -42,7 +44,8 @@ namespace SMS.Data.Models
         [Required]
         public string Cuisine { get; set; }
 
-        public string Region {get; set; }
+        [Required]
+        public Region Region {get; set; }
 
         public string Translator {get; set; }
 

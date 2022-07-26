@@ -32,7 +32,7 @@ namespace SMS.Data.Services
 
         
 
-        Recipe CreateRecipe(int userId, string name, Diet diet, MealType mealType, string recipeIngredients, string method, int prepTime, int cookTime, string cuisine, string region, string translator, int calories, int servings, string photoUrl);
+        Recipe CreateRecipe(int userId, string name, Diet diet, MealType mealType, string recipeIngredients, string method, int prepTime, int cookTime, string cuisine, Region region, string translator, int calories, int servings, string photoUrl);
         Recipe UpdateRecipe(Recipe updated);  
         bool    DeleteRecipe(int id);
 

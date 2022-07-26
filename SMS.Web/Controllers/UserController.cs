@@ -42,7 +42,7 @@ namespace SMS.Web.Controllers
              // Login Successful, so sign user in using cookie authentication
             await SignInCookie(user);
 
-            Alert("Successfully Logged in", AlertType.info);
+            Alert("Successfully Logged in", AlertType.success);
 
             return Redirect("/");
         }
@@ -69,32 +69,48 @@ namespace SMS.Web.Controllers
                 return View(m);
             }
 
-            Alert("Successfully Registered. Now login", AlertType.info);
+            Alert("Successfully Registered. Now login", AlertType.success);
 
             return RedirectToAction(nameof(Login));
         }
-        
+
+
+        public IActionResult UserProfile()
+        {
+            // retrieve the user with specifed id from the service
+            var u = _svc.GetUser(User.GetSignedInUserId());
+
+            // Alert and redirection
+            if (u == null)
+            {
+                Alert($"User not found", AlertType.warning);
+                return RedirectToAction(nameof(Index));
+            }
+
+            // pass user as parameter to the view
+            return View(u);
+        }
+
         // [HttpPost]
         // [ValidateAntiForgeryToken]
-        // public IActionResult Register([Bind("Name,Email,Password,PasswordConfirm,Role")] UserRegisterViewModel m)       
+        // public IActionResult UserProfile(int id)
         // {
-        //     if (!ModelState.IsValid)
+        //     // retrieve the user with specifed id from the service
+        //     var u = _svc.GetUser(User.GetSignedInUserId());
+
+        //     // Alert and redirection
+        //     if (u == null)
         //     {
-        //         return View(m);
-        //     }
-            
-        //     // add user via service
-        //     var user = _svc.AddUser(m.Name, m.Email, m.Password, m.Role, m.Nationality, m.PhotoUrl);
-        //     // check if error adding user and display warning
-        //     if (user == null) {
-        //         Alert("There was a problem Registering. Please try again", AlertType.warning);
-        //         return View(m);
+        //         Alert($"User profile {id} not found", AlertType.warning);
+        //         return RedirectToAction(nameof(Index));
         //     }
 
-        //     Alert("Successfully Registered. Now login", AlertType.info);
-
-        //     return RedirectToAction(nameof(Login));
+        //     // pass user as parameter to the view
+        //     return View(u);
         // }
+        
+
+
         
         public IActionResult UpdateProfile()
         {
@@ -104,7 +120,9 @@ namespace SMS.Web.Controllers
                 Id = user.Id, 
                 Name = user.Name, 
                 Email = user.Email,                 
-                Role = user.Role
+                Role = user.Role,
+                Nationality = user.Nationality,
+                PhotoUrl = user.PhotoUrl
             };
             return View(userViewModel);
         }
@@ -133,7 +151,7 @@ namespace SMS.Web.Controllers
                 return View(m);
             }
 
-            Alert("Successfully Updated Account Details", AlertType.info);
+            Alert("Successfully Updated Account Details", AlertType.success);
             
             // sign the user in with updated details)
             await SignInCookie(user);
@@ -174,7 +192,7 @@ namespace SMS.Web.Controllers
                 return View(m);
             }
 
-            Alert("Successfully Updated Password", AlertType.info);
+            Alert("Successfully Updated Password", AlertType.success);
             // sign the user in with updated details
             await SignInCookie(user);
 
@@ -299,7 +317,7 @@ namespace SMS.Web.Controllers
             {
                 // pass data to service to update
                 _svc.UpdateUser(u);      
-                Alert("User updated successfully", AlertType.info);
+                Alert("User updated successfully", AlertType.success);
 
                 return RedirectToAction(nameof(Details), new { Id = u.Id });
             }
@@ -336,7 +354,7 @@ namespace SMS.Web.Controllers
             //delete user via service
             _svc.DeleteUser(id);
 
-            Alert("User deleted successfully", AlertType.info);
+            Alert("User deleted successfully", AlertType.success);
             // redirect to the index view
             return RedirectToAction(nameof(Index));
         }
@@ -364,12 +382,12 @@ namespace SMS.Web.Controllers
         // POST /user/create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult RecipeCreate([Bind("UserId, Name, RecipeIngredients, PhotoUrl")] Recipe r)
+        public IActionResult RecipeCreate([Bind("UserId, Name, RecipeIngredients, PhotoUrl, Region")] Recipe r)
         {
             if (ModelState.IsValid)
             {                
                 var recipe = _svc.CreateRecipe(r.UserId, r.Name, r.Diet, r.MealType, r.RecipeIngredients, r.Method, r.PrepTime, r.CookTime, r.Cuisine, r.Region, r.Translator, r.Calories, r.Servings, r.PhotoUrl);
-                Alert($"Recipe created successfully for user {r.UserId}", AlertType.info);
+                Alert($"Recipe created successfully for user {r.UserId}", AlertType.success);
                 return RedirectToAction(nameof(Details), new { Id = recipe.UserId });
             }
             // redisplay the form for editing
@@ -399,7 +417,7 @@ namespace SMS.Web.Controllers
         {
             // delete recipe via service
             _svc.DeleteRecipe(id);
-            Alert($"Recipe deleted successfully", AlertType.info);
+            Alert($"Recipe deleted successfully", AlertType.success);
             
             // redirect to the recipe index view
             return RedirectToAction(nameof(Details), new { Id = userId });
@@ -442,27 +460,7 @@ namespace SMS.Web.Controllers
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 AuthBuilder.BuildClaimsPrincipal(user)
             );
-        }
-
-         // ==================================== Build Claims Principle =================================
-        // https://docs.microsoft.com/en-us/aspnet/core/security/authorization/roles?view=aspnetcore-5.0
-        // https://andrewlock.net/introduction-to-authentication-with-asp-net-core/
-        
-        // // return claims principal based on authenticated user
-        // private  ClaimsPrincipal BuildClaimsPrincipal(User user)
-        // { 
-        //     // define user claims - you can add as many as required
-        //     var claims = new ClaimsIdentity(new[]
-        //     {
-        //         new Claim(ClaimTypes.Email, user.Email),
-        //         new Claim(ClaimTypes.Name, user.Name),
-        //         new Claim(ClaimTypes.Role, user.Role.ToString())                              
-        //     }, CookieAuthenticationDefaults.AuthenticationScheme);
-
-        //     // build principal using claims
-        //     return  new ClaimsPrincipal(claims);
-        // }
-
+       }
     }
 }
 

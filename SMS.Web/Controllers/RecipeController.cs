@@ -39,7 +39,7 @@ namespace SMS.Web.Controllers
         }
                
 
-        // [HttpGet("search")]
+        // [HttpGet("search")] API THING - no???
         // public IActionResult Search(string query = "", recipeSearch range = recipeSearch.ALL)
         // {                             
         //     var recipes = svc.SearchAllRecipes(range, query);

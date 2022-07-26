@@ -2,125 +2,103 @@
 
 <partial name = "_ViewLayouts">
 
-<partial name="_Breadcrumbs" model=@(new [] { ("/", "Home"), ("/recipe", "Recipes"), ("","Create") })>
+<partial name="_Breadcrumbs" model=@(new [] { ("/", "Home"), ("/recipe", "My Recipes"), ("","Create") })>
 
-<h3 class="mt-4 mb-4">Create Recipe</h3>
+<h3 class="mt-4 navbar-title mb-4">Create Recipe</h3>
 
-<div class="card rounded shadow p-3">
+<div class="card rounded shadow-lg p-3">
     <form asp-action="Create">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-    @* <div class="mt-3">
-        <label asp-for="UserId" class="form-label"></label>      
-        <select asp-for="UserId" class="form-control" 
-                asp-items="@Model.Users"))">
-            <option>Select User</option>
-        </select>
-        <span asp-validation-for="UserId" class="text-danger"></span>
-    </div> *@
+        <div class="form-group">
+            <label asp-for="Name" class="form-label"></label>      
+            <input asp-for="Name" class="form-control"/>
+            <span asp-validation-for="Name" class="text-danger"></span>       
+        </div>
 
-    <div class="mt-3">
-        <label asp-for="Name" class="form-label"></label>      
-        <input asp-for="Name" class="form-control"/>
-        <span asp-validation-for="Name" class="text-danger"></span>       
-    </div>
-
-    <div class="row mt-3">
-        <div class="col">
-        <label asp-for="Diet" class="form-label"></label>      
-        <input asp-for="Diet" class="form-control"/>
-            <span asp-validation-for="Diet" class="text-danger"></span>
-    </div>
-
-    @* <div class="row mt-3">
-        <div class="col">
-            <label asp-for="Diet" class="form-label"></label>
-            <!-- Html.GetEnumSelectList<T>() is used to create a select list from the enum type (T) passed as a type parameter -->
-            <select asp-for="Diet" asp-items="Html.GetEnumSelectList<Diet>()" class="form-control">                
-                <option enabled selected>Select Diet</option>
-            </select>
-            <span asp-validation-for="Diet" class="text-danger"></span>
-        </div> *@
+        <div class="row">
+            <div class="col form-group mt-3">
+                <label asp-for="Diet" class="form-label"></label>
+                <!-- Html.GetEnumSelectList<T>() is used to create a select list from the enum type (T) passed as a type parameter -->
+                <select asp-for="Diet" asp-items="Html.GetEnumSelectList<Diet>()" class="form-control">                
+                    <option disabled selected>Select Diet Type</option>
+                </select>
+                <span asp-validation-for="Diet" class="text-danger"></span>
+            </div> 
     
+            <div class="col form-group mt-3">
+                <label asp-for="MealType" class="form-label"></label>
+                <!-- Html.GetEnumSelectList<T>() is used to create a select list from the enum type (T) passed as a type parameter -->
+                <select asp-for="MealType" asp-items="Html.GetEnumSelectList<MealType>()" class="form-control">                
+                    <option disabled selected>Select Meal Type</option>
+                </select>
+                <span asp-validation-for="MealType" class="text-danger"></span>
+            </div>
 
-        
-        <div class="col">
-            <label asp-for="MealType" class="form-label"></label>
-            <!-- Html.GetEnumSelectList<T>() is used to create a select list from the enum type (T) passed as a type parameter -->
-            <select asp-for="MealType" asp-items="Html.GetEnumSelectList<MealType>()" class="form-control">                
-                <option enabled selected>Select Meal Type</option>
-            </select>
-            <span asp-validation-for="MealType" class="text-danger"></span>
+        <div class="form-group mt-3">
+            <label asp-for="Method" class="form-label"></label>      
+            <textarea rows="10" asp-for="Method" class="form-control"></textarea>       
         </div>
 
-    @* <div class="col">
-        <label asp-for="MealType" class="form-label"></label>      
-        <input asp-for="MealType" class="form-control"/>
-        <span asp-validation-for="MealType" class="text-danger"></span>
-    </div> *@
+        <div class="row">
+            <div class="col form-group mt-3">
+                <label asp-for="PrepTime" class="form-label"></label>      
+                <input asp-for="PrepTime" class="form-control"/>
+                <span asp-validation-for="PrepTime" class="text-danger"></span>       
+            </div>
 
-    <div class="mt-3">
-        <label asp-for="Method" class="form-label"></label>      
-        <textarea rows="10" asp-for="Method" class="form-control"></textarea>       
-    </div>
+            <div class="col form-group mt-3">
+                <label asp-for="CookTime" class="form-label"></label>      
+                <input asp-for="CookTime" class="form-control"/>
+                <span asp-validation-for="CookTime" class="text-danger"></span>       
+            </div>
 
-    <div class="row mt-3">
-        <div class= "col">
-        <label asp-for="PrepTime" class="form-label"></label>      
-        <input asp-for="PrepTime" class="form-control"/>
-        <span asp-validation-for="PrepTime" class="text-danger"></span>       
-    </div>
-
-    <div class="col">
-        <label asp-for="CookTime" class="form-label"></label>      
-        <input asp-for="CookTime" class="form-control"/>
-        <span asp-validation-for="CookTime" class="text-danger"></span>       
-    </div>
-
-    <div class="row mt-3">
-        <div class="col">
-        <label asp-for="Cuisine" class="form-label"></label>      
-        <input asp-for="Cuisine" class="form-control"/>
-        <span asp-validation-for="Cuisine" class="text-danger"></span>       
-    </div>
-
-    <div class="col">
-        <label asp-for="Region" class="form-label"></label>      
-        <input asp-for="Region" class="form-control"/>
-        <span asp-validation-for="Region" class="text-danger"></span>       
-    </div>
-
-    <div class="mt-3">
-        <label asp-for="Translator" class="form-label"></label>      
-        <input asp-for="Translator" class="form-control"/>
-        <span asp-validation-for="Translator" class="text-danger"></span>       
-    </div>
-
-    <div class="row mt-3">
-        <div class="col">
-        <label asp-for="Calories" class="form-label"></label>      
-        <input asp-for="Calories" class="form-control"/>
-        <span asp-validation-for="Calories" class="text-danger"></span>       
-    </div>
-
-    <div class="col">
-        <label asp-for="Servings" class="form-label"></label>      
-        <input asp-for="Servings" class="form-control"/>
-        <span asp-validation-for="Servings" class="text-danger"></span>       
-    </div>
-
-    <div class="mt-3">
-            <label asp-for="PhotoUrl" class="form-label"></label>
-            <input type="url" asp-for="PhotoUrl" class="form-control"/>
-            <span asp-validation-for="PhotoUrl" class="text-danger"></span>
+        <div class="row">
+            <div class="col form-group mt-3">
+            <label asp-for="Cuisine" class="form-label"></label>      
+            <input asp-for="Cuisine" class="form-control"/>
+            <span asp-validation-for="Cuisine" class="text-danger"></span>       
         </div>
 
-    <div class="mt-3">
-        <input type="submit" value="Create" class="btn btn-primary"/>
-        <a class="btn btn-secondary" asp-action="Index">Cancel</a>
-    </div>
+        <div class="col form-group mt-3">
+            <label asp-for="Region" class="form-label"></label>
+                <!-- Html.GetEnumSelectList<T>() is used to create a select list from the enum type (T) passed as a type parameter -->
+                <select asp-for="Region" asp-items="Html.GetEnumSelectList<Region>()" class="form-control">                
+                    <option disabled selected>Select Region</option>
+                </select>
+                <span asp-validation-for="Region" class="text-danger"></span>
+        </div> 
 
-</form>
+        <div class="form-group mt-3">
+            <label asp-for="Translator" class="form-label"></label>      
+            <input asp-for="Translator" class="form-control"/>
+            <span asp-validation-for="Translator" class="text-danger"></span>       
+        </div>
+
+        <div class="row">
+           <div class="col form-group mt-3">
+            <label asp-for="Calories" class="form-label"></label>      
+            <input asp-for="Calories" class="form-control"/>
+            <span asp-validation-for="Calories" class="text-danger"></span>       
+        </div>
+
+        <div class="col form-group mt-3">
+            <label asp-for="Servings" class="form-label"></label>      
+            <input asp-for="Servings" class="form-control"/>
+            <span asp-validation-for="Servings" class="text-danger"></span>       
+        </div>
+
+        <div class="form-group mt-3">
+                <label asp-for="PhotoUrl" class="form-label"></label>
+                <input type="url" asp-for="PhotoUrl" class="form-control"/>
+                <span asp-validation-for="PhotoUrl" class="text-danger"></span>
+            </div>
+
+        <div class="form-group mt-3">
+            <input type="submit" value="Create" class="btn btn-danger"/>
+            <a class="btn btn-secondary" asp-action="Index">Cancel</a>
+        </div>
+    </form>
 </div>
 
 

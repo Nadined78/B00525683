@@ -176,7 +176,7 @@ namespace SMS.Data.Services
             return db.Recipes.ToList();
         }     
 
-        public Recipe CreateRecipe(int userId, string name, Diet diet, MealType mealType, string recipeIngredients, string method, int prepTime, int cookTime, string cuisine, string region, string translator, int calories, int servings, string photoUrl)
+        public Recipe CreateRecipe(int userId, string name, Diet diet, MealType mealType, string recipeIngredients, string method, int prepTime, int cookTime, string cuisine, Region region, string translator, int calories, int servings, string photoUrl)
         {
             var user = GetUser(userId);
             if (user == null) return null;
@@ -278,8 +278,7 @@ namespace SMS.Data.Services
                             .Include(t => t.User)
                             .Where(t => (t.UserId == userId) &&                           
                             (t.Name.ToLower().Contains(query) || t.RecipeIngredients.ToLower().Contains(query) || 
-                            t.Cuisine.ToLower().Contains(query) || t.Region.ToLower().Contains(query) 
-                            || t.Translator.ToLower().Contains(query)) &&
+                            t.Cuisine.ToLower().Contains(query) || t.Translator.ToLower().Contains(query)) &&
                             (range == AllRecipes.ALL || range == AllRecipes.Vegetarian || range == AllRecipes.Vegan || range ==AllRecipes.Omnivorous
                             )).ToList(); 
             return  (results);  
@@ -294,8 +293,7 @@ namespace SMS.Data.Services
         var results =  db.Recipes
                             .Include(t => t.User)
                             .Where(t => (t.Name.ToLower().Contains(query) || t.RecipeIngredients.ToLower().Contains(query) || 
-                            t.Cuisine.ToLower().Contains(query) || t.Region.ToLower().Contains(query) 
-                            || t.Translator.ToLower().Contains(query)) && 
+                            t.Cuisine.ToLower().Contains(query) || t.Translator.ToLower().Contains(query)) && 
                             (range == AllRecipes.ALL || range == AllRecipes.Vegetarian || range == AllRecipes.Vegan || range ==AllRecipes.Omnivorous
                             )).ToList();
 
