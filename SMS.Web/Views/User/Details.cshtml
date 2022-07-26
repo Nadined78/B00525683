@@ -5,7 +5,7 @@
     ($"/user/details/{Model.Id}",$"{Model.Id}"),
     ("","Details")
 }) />
-<h3 class="mt-4 mb-4">User Details</h3>
+<h3 class="mt-4 navbar-title mb-4">User Details</h3>
 <div class="row">
     <!-- Details -->
     <div class="col-8 card rounded shadow p-3">
@@ -19,8 +19,13 @@
             <dt class="col-5">Role</dt>
             <dd class="col-7">@Model.Role</dd>
 
-            <dt class="col-5">Created On</dt>
-            <dd class="col-7">@Model.CreatedOn</dd>
+            <dt class="col-5">Nationality</dt>
+            <dd class="col-7">@Model.Nationality</dd>
+
+            <dt class="col-5">Photo</dt>
+            <dd class="col-7">@Model.PhotoUrl</dd>
+
+
         </dl>
 
         <!-- use flex box to separate two divs containing primary actions on left and danger action on right -->
@@ -32,21 +37,23 @@
                         class="bi bi-bag-plus"></i> Add Recipe</a>           *@
 
                 <!-- navigation link to Details action, passing the correct route id parameter -->
-                <a asp-condition=@(User.IsInRole("admin") || User.IsInRole("manager")) asp-controller="User" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-primary"><i
-                        class="bi bi-pen"></i> Edit</a>
+                <a asp-condition=@(User.IsInRole("admin")) asp-controller="User" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-danger"><i
+                        class="bi bi-pen"></i> Edit User Details</a>
 
                 <!-- navigation link to redirect to Index action -->
-                <a asp-controller="User" asp-action="Index" class="btn btn-sm btn-link"><i class="bi bi-list"></i>
-                    Users</a>
+                <a asp-controller="User" asp-action="Index" class="btn btn-success">
+                    Back to User List</a>
 
             </div>
 
             <div>
                 <!-- toggle display of Delete Modal -->
-                <button asp-condition=@(User.IsInRole("admin")) type="button" class="btn btn-sm btn-danger" 
+                <button asp-condition=@(User.IsInRole("admin")) type="button" class="btn btn-danger" 
                         data-bs-toggle="modal" data-bs-target="#deleteUserModal">
-                    <i class="bi bi-trash"></i> Delete
+                    <i class="bi bi-trash"></i> Delete User
                 </button>
+                <a asp-controller="User" asp-action="UpdatePassword" type="button" class= "btn btn-success">
+                    Update User Password</a>
             </div>
         </div>
     </div>
@@ -60,6 +67,7 @@
 <div class="row pt-3">
     <partial name="_Recipes" />
 </div>
+
 
 <!-- Delete Modal -->
 <partial name="_DeleteUserModal" />

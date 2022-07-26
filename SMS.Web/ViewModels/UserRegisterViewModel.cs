@@ -1,39 +1,34 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 using Microsoft.AspNetCore.Mvc;
 using SMS.Data.Models;
-
 namespace SMS.Web.ViewModels
 {
-     public class UserRegisterViewModel
-    {    
+    public class UserRegisterViewModel
+    { 
         [Required]
-        public string Name { get; set; }  
-
+        public string Name { get; set; }
+ 
         [Required]
         [EmailAddress]
-        [Remote("VerifyEmailAddress", "User")] //remote validator - API - (true false result) use this so we dont have to submit form - this will do real time error messages
+        [Remote(action: "VerifyEmailAvailable", controller: "User")]
         public string Email { get; set; }
- 
+
         [Required]
         public string Password { get; set; }
 
         [Compare("Password", ErrorMessage = "Confirm password doesn't match, Type again !")]
-        [Display(Name = "Confirm Password")]  
         public string PasswordConfirm  { get; set; }
 
         [Required]
+        [JsonConverter(typeof(JsonStringEnumConverter))]
         public Role Role { get; set; }
 
         [Required]
-        public DateTime CreatedOn {get; set;}
-
-        [Required] 
-        public string Nationality {get; set; }
-
+        public string Nationality {get; set;}
 
         [Required]
-        public string PhotoUrl {get; set;}
-
+        public string PhotoUrl {get; set; }
 
     }
 }

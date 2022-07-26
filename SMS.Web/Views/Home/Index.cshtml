@@ -1,36 +1,35 @@
-﻿<div class="text-center">
-    @ViewBag.Message <b>@ViewBag.LongTime</b>
-</div>
-
-@* <div asp-condition=@(User.IsInRole("admin") || User.IsInRole("manager")) class="callout callout-warning text-center">
-    Only visible when logged in
-</div> *@
-
-
-@model AboutViewModel
+﻿@model AboutViewModel
 
 <partial name= "_LayoutsHome" />
 
-<partial name="_Breadcrumbs" model=@(new [] { ("", "Home") })>
+@* <partial name="_Breadcrumbs" model=@(new [] { ("", "Home") })> *@
 
-<div class="card shadow-lg ">
-  <div class="card-header text-center">
+ 
+<div class="image">
+  @* <div class="overlay"> *@
+<div class="navbar-title text-center">
+ 
     <h1>Welcome To The Good Food Atlas</h1> 
-  </div>
-  <div class="card-body text-center custom-body">
+  
+  @* <div class="card-body text-center">
     <h4 class="card-title">@Model.Message</h4>
       <div>
-        <img src =https://tse1.mm.bing.net/th?id=OIP.jCf4-kftA-TLid_JWf89DwHaE8&pid=Api&P=0&w=243&h=162 alt="Food Spice Map">
+        <img src =https://tse3.explicit.bing.net/th?id=OIP.jTP5lcPDIEb0Sl0c0tDw8wHaHa&pid=Api&P=0 alt="world Spices">
       </div>
-      <div>
-        <p><b>This Web Application can be used to:</b></p>
+      <div> *@
+        @* <p><b>This Web Application can be used to:</b></p>
           <ul style="list-style: none;">
             <li> - Display a list of Vehicles, its details and their MOT Records<i class="bi bi-truck ml-2"></i></i></li>
             <li>- Create, Edit or delete a Vehicle<i class="bi bi-pencil ml-2"></i></li>
             <li>- Add/delete an MOT Record <i class="bi bi-plus ml-2"></i></li>
             <li>- Search/Query Our Fleet of Vehicles</li>
-          </ul>
-        <a asp-controller="Vehicle" asp-action="Index" class="btn btn-lg btn-dark mt-4 mb-3">View All Vehicles</a>
-      </div>
+          </ul> *@
+</div>
+@* <div>
+        <a asp-controller="Vehicle" asp-action="Index" class="btn btn-lg btn-dark mt-4 mb-3">View All Recipes</a>
+      </div> *@
     </div>
-  </div>
+  
+@* </div> *@
+
+

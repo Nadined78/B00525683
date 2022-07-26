@@ -33,31 +33,30 @@ namespace SMS.Data.Services
             return (user != null && Hasher.ValidateHash(user.Password, password)) ? user : null;
         }
 
-        public User Register(string name, string email, string password, Role role, DateTime createdOn, string nationality, string photoUrl)
-        {
-            // check that the user does not already exist (unique user name)
-            var exists = GetUserByEmailAddress(email);
-            if (exists != null)
-            {
-                return null;
-            }
+        // public User Register(string name, string email, string password, Role role, string nationality, string photoUrl)
+        // {
+        //     // check that the user does not already exist (unique user name)
+        //     var exists = GetUserByEmailAddress(email);
+        //     if (exists != null)
+        //     {
+        //         return null;
+        //     }
 
-            // Custom Hasher used to encrypt the password before storing in database
-            var user = new User 
-            {
-                Name = name,
-                Email = email,
-                Password = Hasher.CalculateHash(password),
-                Role = role,
-                CreatedOn = createdOn,
-                Nationality = nationality,
-                PhotoUrl = photoUrl 
-            };
+        //     // Custom Hasher used to encrypt the password before storing in database
+        //     var user = new User 
+        //     {
+        //         Name = name,
+        //         Email = email,
+        //         Password = Hasher.CalculateHash(password),
+        //         Role = role,
+        //         Nationality = nationality,
+        //         PhotoUrl = photoUrl 
+        //     };
    
-            db.Users.Add(user);
-            db.SaveChanges();
-            return user;
-        }
+        //     db.Users.Add(user);
+        //     db.SaveChanges();
+        //     return user;
+        // }
 
         // retrieve list of Users
 
@@ -77,31 +76,28 @@ namespace SMS.Data.Services
 
         
         //Admin can add a new user - checking email is unique
-
-        public User AddUser(string name, string email, string password, Role role, DateTime createdOn, string nationality, string photoUrl)
-        {
-            // check if user with email exists            
-            var exists = GetUserByEmailAddress(email);
-            if (exists != null)
+ 
+ // Add a new User checking a User with same email does not exist
+        public User AddUser(string name, string email, string password, Role role, string nationality, string photoUrl)
+        {     
+            var existing = GetUserByEmailAddress(email);
+            if (existing != null)
             {
                 return null;
             } 
 
-            // create new user
-            var u = new User
-            {
+            var user = new User
+            {            
                 Name = name,
                 Email = email,
-                Password = password,
+                Password = Hasher.CalculateHash(password), // can hash if required 
                 Role = role,
-                CreatedOn = createdOn,
                 Nationality = nationality,
-                PhotoUrl = photoUrl
+                PhotoUrl = photoUrl         
             };
-
-            db.Users.Add(u); // add user to the list
+            db.Users.Add(user);
             db.SaveChanges();
-            return u; // return newly added user
+            return user; // return newly added User
         }
 
         // Delete the user identified by Id returning true if 
@@ -138,9 +134,7 @@ namespace SMS.Data.Services
             User.Email = updated.Email;
             User.Password = updated.Password;
             User.Role = updated.Role;
-            User.Nationality = updated.Nationality;
-            User.PhotoUrl = updated.PhotoUrl;
-
+          
 
             db.SaveChanges();
             return User;
@@ -153,12 +147,27 @@ namespace SMS.Data.Services
        
         public bool IsDuplicateUserEmail(string email, int userId) 
         {
-            var existing = GetUserByEmailAddress(email);
-            // if a user with email exists and the Id does not match
-            // the userId (if provided), then they cannot use the email
-            return existing != null && userId != existing.Id;           
+            // var existing = GetUserByEmailAddress(email);
+            // // if a user with email exists and the Id does not match
+            // // the userId (if provided), then they cannot use the email
+            // return existing != null && userId != existing.Id;           
+        return db.Users.FirstOrDefault(u => u.Email == email && u.Id != userId) == null;
         }
 
+        public IList<User> SearchAllUsers(AllUsers range, string query) 
+        {
+            // ensure query is not null    
+            query = query == null ? "" : query.ToLower();
+
+            // search recipe - fix
+        var results =  db.Users
+                            .Where(t => (t.Name.ToLower().Contains(query) || t.Nationality.ToLower().Contains(query) || 
+                            t.Email.ToLower().Contains(query)) && 
+                            (range == AllUsers.ALL)).ToList();
+
+                            return (results);
+          
+        }
 
         // ===================== Recipe Management ==========================
 
@@ -273,8 +282,6 @@ namespace SMS.Data.Services
                             || t.Translator.ToLower().Contains(query)) &&
                             (range == AllRecipes.ALL || range == AllRecipes.Vegetarian || range == AllRecipes.Vegan || range ==AllRecipes.Omnivorous
                             )).ToList(); 
-                        
-                            
             return  (results);  
         }
 

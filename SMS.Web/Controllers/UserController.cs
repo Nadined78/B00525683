@@ -51,37 +51,51 @@ namespace SMS.Web.Controllers
         {
             return View();
         }
-        
-        [HttpPost] [ValidateAntiForgeryToken]
-        public IActionResult Register([Bind("Name,Email,Password,PasswordConfirm,Role")] UserRegisterViewModel m)
-        {
-            // check if email address is already in use - replaced by use of remote validator in UserRegisterViewModel
-            if (_svc.GetUserByEmailAddress(m.Email) != null) {
-                ModelState.AddModelError(nameof(m.Email),"This email address is already in use. Choose another");
-            }
 
-            // check validation
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Register([Bind("Name,Email,Password,PasswordConfirm,Role,Nationality,PhotoUrl")] UserRegisterViewModel m)       
+        {
             if (!ModelState.IsValid)
             {
                 return View(m);
             }
+            
+            // add user via service
+            var user = _svc.AddUser(m.Name, m.Email,m.Password, m.Role, m.Nationality, m.PhotoUrl);
+            // check if error adding user and display warning
+            if (user == null) {
+                Alert("There was a problem Registering. Please try again", AlertType.warning);
+                return View(m);
+            }
 
-            // register user
-            var user = _svc.Register(m.Name, m.Email, m.Password, m.Role, m.CreatedOn, m.Nationality, m.PhotoUrl);               
-           
-            // registration successful now redirect to login page
-            Alert("Registration Successful - Now Login", AlertType.info);          
+            Alert("Successfully Registered. Now login", AlertType.info);
+
             return RedirectToAction(nameof(Login));
         }
+        
+        // [HttpPost]
+        // [ValidateAntiForgeryToken]
+        // public IActionResult Register([Bind("Name,Email,Password,PasswordConfirm,Role")] UserRegisterViewModel m)       
+        // {
+        //     if (!ModelState.IsValid)
+        //     {
+        //         return View(m);
+        //     }
+            
+        //     // add user via service
+        //     var user = _svc.AddUser(m.Name, m.Email, m.Password, m.Role, m.Nationality, m.PhotoUrl);
+        //     // check if error adding user and display warning
+        //     if (user == null) {
+        //         Alert("There was a problem Registering. Please try again", AlertType.warning);
+        //         return View(m);
+        //     }
 
-        [Authorize]
-        public IActionResult UserProfile()
-        {
-            var user = _svc.GetUser(User.GetSignedInUserId());
-            return View(user);
-        }
+        //     Alert("Successfully Registered. Now login", AlertType.info);
 
-        [Authorize]
+        //     return RedirectToAction(nameof(Login));
+        // }
+        
         public IActionResult UpdateProfile()
         {
            // use BaseClass helper method to retrieve Id of signed in user 
@@ -187,11 +201,14 @@ namespace SMS.Web.Controllers
         }        
 
         // GET /user
-        public IActionResult Index()
+        public IActionResult Index(UserSearchViewModel vm)
         {
-            var users = _svc.GetUsers();
+            // var users = _svc.GetUsers();
+         
+            vm.Users = _svc.SearchAllUsers(vm.Range, vm.Query);
+            return View(vm);
             
-            return View(users);
+            // return View(users);
         }
 
         // GET /users/details/{id}
@@ -236,7 +253,7 @@ namespace SMS.Web.Controllers
             if (ModelState.IsValid)
             {
                 // pass data to service to store 
-                u = _svc.Register(u.Name, u.Email, u.Password, u.Role, u.CreatedOn, u.Nationality, u.PhotoUrl);
+                u = _svc.AddUser(u.Name, u.Email, u.Password, u.Role, u.Nationality, u.PhotoUrl);
                 Alert($"User created successfully", AlertType.success);
 
                 return RedirectToAction(nameof(Details), new { Id = u.Id});

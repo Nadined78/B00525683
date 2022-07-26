@@ -1,8 +1,8 @@
 @model UserLoginViewModel
 
-<partial name='_loginregisterlayout'>
+<partial name='_ViewLayouts'>
 
-<h3 class="mt-4 mb-4">Login</h3>
+<h3 class="mt-4 navbar-title mb-4">Login</h3>
 
 <div class="card shadow rounded p-3">
     <form asp-action="Login" method="post">
@@ -10,19 +10,19 @@
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
         <div class="mt-2">
-            <label asp-for="Email" class="form-label"></label>
+            <label asp-for="Email" class="form-label"><i class="bi-envelope-fill"></i> Email</label>
             <input asp-for="Email" class="form-control" />
             <span asp-validation-for="Email" class="text-danger"></span>
         </div>
 
         <div class="mt-2">
-            <label asp-for="Password" class="form-label"></label>
+            <label asp-for="Password" class="form-label"><i class="bi-shield-lock-fill"></i> Password</label>
             <input type="password" asp-for="Password" class="form-control" />
             <span asp-validation-for="Password" class="text-danger"></span>
         </div>
 
         <div class="mt-2">
-            <input type="submit" value="Login" class="btn btn-primary" />
+            <input type="submit" value="Login" class="btn btn-danger" />
             <a class="btn btn-secondary" asp-controller="Home" asp-action="Index">Cancel</a>
         </div>
 

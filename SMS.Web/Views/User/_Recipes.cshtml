@@ -29,6 +29,8 @@ else
                                                 
                         <td>
                             <a asp-action="RecipeDelete" asp-route-id="@r.Id" class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></a>
+                            <a asp-condition=@(User.IsInRole("admin")) asp-controller="Recipe" asp-action="Details" asp-route-id="@Model.Id" class="btn btn-sm btn-danger"><i
+                        class="bi bi-info"></i> Details</a>
                         </td>             
                     </tr>   
                 }

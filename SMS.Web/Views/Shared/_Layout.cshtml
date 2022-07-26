@@ -31,10 +31,10 @@
 
         }
 
-        .box-shadow {
+        @* .box-shadow {
   box-shadow: 0.50rem .100rem rgba(0, 0, 0, .10);
 
-  }
+  } *@
 
 .btn-outline,
 .btn-outline:hover {
@@ -43,6 +43,10 @@
 
 .btn-outline {
   border-radius: var(--border-radius);
+}
+
+.a {
+    
 }
 
 
@@ -69,12 +73,12 @@
 
                         <!-- Users in nav bar -->                       
                        <li class="nav-item">
-                            <a asp-condition =@(User.IsInRole("admin")) class="nav-link text-dark" asp-controller="User" asp-action="Index">Users</a>
+                            <a asp-condition =@(User.IsInRole("admin")) class="nav-link text-dark" asp-controller="User" asp-action="Index"> Users</a>
                         </li> 
 
                         <!-- Members Own Profile in Nav bar -->
                         <li class="nav-item">
-                            <a asp-condition =@(User.IsInRole("member")) class="nav-link text-dark" asp-controller="User" asp-action="UserProfile">My Profile</a>
+                            <a asp-condition =@(User.IsInRole("member")) class="nav-link text-dark" asp-controller="User" asp-action="UserProfile"> My Profile</a>
                         </li> 
 
                         <!-- Members Own Recipes in Nav bar -->

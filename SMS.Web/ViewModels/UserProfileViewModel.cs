@@ -20,7 +20,7 @@ namespace SMS.Web.ViewModels
         public Role Role { get; set; }
 
         [Required]
-        public DateTime CreatedOn {get; set; }
+        public string Nationality {get; set;}
 
         [Required]
         public string PhotoUrl {get; set;}

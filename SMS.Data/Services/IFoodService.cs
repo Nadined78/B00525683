@@ -17,10 +17,10 @@ namespace SMS.Data.Services
         User GetUser(int id);
         User GetUserByEmailAddress(string email);
         User Authenticate(string email, string password);
-        User Register(string name, string email, string password, Role role, DateTime createdOn, string nationality, string PhotoUrl);
+        // User Register(string name, string email, string password, Role role, string nationality, string photoUrl);
 
-        User AddUser(string name, string email, string password, Role role, DateTime createdOn, string nationality, string photoUrl);
-        User UpdateUser (User updated);
+        User AddUser(string name, string email, string password, Role role, string nationality, string photoUrl);
+        User UpdateUser (User user);
         bool DeleteUser(int id);
         bool IsDuplicateUserEmail(string email, int userId);
 
@@ -40,6 +40,8 @@ namespace SMS.Data.Services
 
         IList<Recipe> SearchAllRecipes(AllRecipes range, string query);  
         IList<Recipe> SearchMyRecipes(AllRecipes range, int userId, string query);  
+
+        IList<User> SearchAllUsers(AllUsers range, string query);
 
 
         // ---------------- Review of Recipe --------------

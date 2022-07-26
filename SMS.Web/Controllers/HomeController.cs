@@ -49,8 +49,8 @@ public class HomeController : Controller
         var contactMessage = new ContactViewModel
         {   
             Title = "Do You Need Assistance?",
-            Message = "You can contact us in any of the following ways: ",
-            Email = "GoodFoodAtlasManagement@mail.com",
+            Message = "To report any technical issues you can contact us in any of the following ways: ",
+            Email = "GFAManagement@mail.com",
             Address = "124 Baronscourt Place, Derry City, BT48 9WQ",
             Phone = 02871319386
         };

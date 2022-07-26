@@ -6,6 +6,9 @@ using System.ComponentModel.DataAnnotations;
 namespace SMS.Data.Models {
      
     public enum Role { admin, member } 
+    
+    // used in user search feature
+    public enum AllUsers { ALL}
 
     public class User {
         public int Id { get; set; }
@@ -21,12 +24,10 @@ namespace SMS.Data.Models {
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Password Required")]
-        [StringLength(50, ErrorMessage ="The {0} must be at least {2} characters long",MinimumLength =4)]
+        [StringLength(50, ErrorMessage ="The {0} must be at least {2} characters long", MinimumLength =4)]
         public string Password { get; set; }
 
-        public Role Role { get; set; }
-
-        public DateTime CreatedOn { get; set; }
+        public Role Role { get; set; } 
 
         public string Nationality {get; set; }
 
