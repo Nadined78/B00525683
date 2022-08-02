@@ -60,6 +60,9 @@ namespace SMS.Web.ViewModels
         public int Servings {get; set; }
 
         [Required]
+        public double Price {get; set; }
+
+        [Required]
         public string PhotoUrl { get; set; }
     }
 

@@ -26,7 +26,7 @@ namespace SMS.Web.Controllers
             return View();
         }
 
-        [HttpPost] [ValidateAntiForgeryToken] 
+        [HttpPost] [ValidateAntiForgeryToken] [AllowAnonymous]
         public async Task<IActionResult> Login([Bind("Email,Password")] UserLoginViewModel m)
         {        
             // call service to Authenticate User
@@ -74,6 +74,11 @@ namespace SMS.Web.Controllers
             return RedirectToAction(nameof(Login));
         }
 
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
 
         public IActionResult UserProfile()
         {
@@ -90,28 +95,8 @@ namespace SMS.Web.Controllers
             // pass user as parameter to the view
             return View(u);
         }
+    
 
-        // [HttpPost]
-        // [ValidateAntiForgeryToken]
-        // public IActionResult UserProfile(int id)
-        // {
-        //     // retrieve the user with specifed id from the service
-        //     var u = _svc.GetUser(User.GetSignedInUserId());
-
-        //     // Alert and redirection
-        //     if (u == null)
-        //     {
-        //         Alert($"User profile {id} not found", AlertType.warning);
-        //         return RedirectToAction(nameof(Index));
-        //     }
-
-        //     // pass user as parameter to the view
-        //     return View(u);
-        // }
-        
-
-
-        
         public IActionResult UpdateProfile()
         {
            // use BaseClass helper method to retrieve Id of signed in user 
@@ -373,7 +358,6 @@ namespace SMS.Web.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            // create a recipe view model and set StudentId (foreign key) - to doooo
             var recipe = new Recipe { UserId = id }; 
 
             return View(recipe);
@@ -386,7 +370,7 @@ namespace SMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {                
-                var recipe = _svc.CreateRecipe(r.UserId, r.Name, r.Diet, r.MealType, r.RecipeIngredients, r.Method, r.PrepTime, r.CookTime, r.Cuisine, r.Region, r.Translator, r.Calories, r.Servings, r.PhotoUrl);
+                var recipe = _svc.CreateRecipe(r.UserId, r.Name, r.Diet, r.MealType, r.RecipeIngredients, r.Method, r.PrepTime, r.CookTime, r.Cuisine, r.Region, r.Translator, r.Calories, r.Servings, r.Price, r.PhotoUrl);
                 Alert($"Recipe created successfully for user {r.UserId}", AlertType.success);
                 return RedirectToAction(nameof(Details), new { Id = recipe.UserId });
             }

@@ -84,7 +84,7 @@ namespace SMS.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                svc.CreateRecipe(rvm.UserId, rvm.Name, rvm.Diet, rvm.MealType, rvm.RecipeIngredients, rvm.Method, rvm.PrepTime, rvm.CookTime, rvm.Cuisine, rvm.Region, rvm.Translator, rvm.Calories, rvm.Servings, rvm.PhotoUrl);// fix
+                svc.CreateRecipe(rvm.UserId, rvm.Name, rvm.Diet, rvm.MealType, rvm.RecipeIngredients, rvm.Method, rvm.PrepTime, rvm.CookTime, rvm.Cuisine, rvm.Region, rvm.Translator, rvm.Calories, rvm.Servings, rvm.Price, rvm.PhotoUrl);// fix
      
                 Alert($"Recipe Created", AlertType.info);  
                 return RedirectToAction(nameof(Index));
@@ -146,6 +146,7 @@ namespace SMS.Web.Controllers
             recipe.Translator = r.Translator;
             recipe.Calories = r.Calories;
             recipe.Servings = r.Servings;
+            recipe.Price = r.Price;
             recipe.PhotoUrl = r.PhotoUrl;
        
             var updated = svc.UpdateRecipe(recipe);

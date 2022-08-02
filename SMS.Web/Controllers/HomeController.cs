@@ -17,7 +17,7 @@ public class HomeController : Controller
     {
         var homeMessage = new AboutViewModel {      
                 Title = "Welcome to the Good Food Atlas",
-                Message = "",
+                Message = "Connecting Food Lovers World-Wide bi bi-globe2 ",
             };
             return View(homeMessage);
     }

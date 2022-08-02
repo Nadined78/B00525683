@@ -104,6 +104,13 @@
         </div>
 
         <div class="mt-3">
+                <label asp-for="Price" class="form-label"></label>
+                <input asp-for="Price" class="form-control"/>
+                <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+
+
+        <div class="mt-3">
                 <label asp-for="PhotoUrl" class="form-label"></label>
                 <input type="url" asp-for="PhotoUrl" class="form-control"/>
                 <span asp-validation-for="PhotoUrl" class="text-danger"></span>

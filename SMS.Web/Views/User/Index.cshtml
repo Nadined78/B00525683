@@ -6,38 +6,16 @@
 }) />
 
 <partial name = "_ViewLayouts">
-<partial name = "_SearchUser">
 
 <h3 class="navbar-title mb-3">User List</h3>
 
 <div>
-<a asp-condition=@(User.IsInRole("admin")) class="btn btn-sm btn-danger my-3" asp-action="Create" >
-    <i class="bi bi-plus"></i> Create
-</a>  
+    <a asp-condition=@(User.IsInRole("admin")) class="btn btn-sm btn-danger my-3" asp-action="Create" >
+        <i class="bi bi-plus"></i> Create a User
+    </a>  
+    <partial name = "_SearchUser">
 </div>   
-
-@* <table class="table table-hover">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Role</th>
-            <th>Nationality</th>
-        </tr>
-    </thead>
-    <tbody> *@
-        @* @foreach(var u in Model) {
-            <tr>
-                <td>@u.Id</td>
-                <td>@u.Name</td>
-                <td>@u.Email</td>
-                <td>@u.Role</td>
-                <td>@u.Nationality</td>
-                
-                <td> *@
-
-
+        
     <div class="card-deck">
          @foreach (var r in Model.Users) 
          {
@@ -51,13 +29,20 @@
 
                   <p class = "card-text">
                      @r.Email
+                     </p>
+
+                     <p class = "card-text">
                      @r.Role
+                     </p>
+
+                    <p class = "card-text">
                      @r.Nationality
-                  </p>             
+                     </p>
+               
             </div>
 
             <div class="card-footer shadow-lg text-muted">
-               <a asp-controller="Recipe" asp-action="Edit" asp-route-id=@r.Id><i class="bi bi-pen"></i>Edit</a>
+               <a asp-controller="User" asp-action="Edit" asp-route-id=@r.Id><i class="bi bi-pen"></i>Edit</a>
                <a asp-action="Details" asp-route-id=@r.Id><i class="bi bi-info-circle"></i> Details</a>
                <a asp-controller="User" asp-action="RecipeDelete" asp-route-id=@r.Id><i class="bi bi-trash"></i> Delete</a>
             </div>

@@ -33,30 +33,30 @@ namespace SMS.Data.Services
             return (user != null && Hasher.ValidateHash(user.Password, password)) ? user : null;
         }
 
-        // public User Register(string name, string email, string password, Role role, string nationality, string photoUrl)
-        // {
-        //     // check that the user does not already exist (unique user name)
-        //     var exists = GetUserByEmailAddress(email);
-        //     if (exists != null)
-        //     {
-        //         return null;
-        //     }
+        public User Register(string name, string email, string password, Role role, string nationality, string photoUrl)
+        {
+            // check that the user does not already exist (unique user name)
+            var exists = GetUserByEmailAddress(email);
+            if (exists != null)
+            {
+                return null;
+            }
 
-        //     // Custom Hasher used to encrypt the password before storing in database
-        //     var user = new User 
-        //     {
-        //         Name = name,
-        //         Email = email,
-        //         Password = Hasher.CalculateHash(password),
-        //         Role = role,
-        //         Nationality = nationality,
-        //         PhotoUrl = photoUrl 
-        //     };
+            // Custom Hasher used to encrypt the password before storing in database
+            var user = new User 
+            {
+                Name = name,
+                Email = email,
+                Password = Hasher.CalculateHash(password),
+                Role = role,
+                Nationality = nationality,
+                PhotoUrl = photoUrl 
+            };
    
-        //     db.Users.Add(user);
-        //     db.SaveChanges();
-        //     return user;
-        // }
+            db.Users.Add(user);
+            db.SaveChanges();
+            return user;
+        }
 
         // retrieve list of Users
 
@@ -176,7 +176,7 @@ namespace SMS.Data.Services
             return db.Recipes.ToList();
         }     
 
-        public Recipe CreateRecipe(int userId, string name, Diet diet, MealType mealType, string recipeIngredients, string method, int prepTime, int cookTime, string cuisine, Region region, string translator, int calories, int servings, string photoUrl)
+        public Recipe CreateRecipe(int userId, string name, Diet diet, MealType mealType, string recipeIngredients, string method, int prepTime, int cookTime, string cuisine, Region region, string translator, int calories, int servings, double price, string photoUrl)
         {
             var user = GetUser(userId);
             if (user == null) return null;
@@ -197,6 +197,7 @@ namespace SMS.Data.Services
                 Translator = translator,
                 Calories = calories,
                 Servings = servings,
+                Price = price,
                 PhotoUrl = photoUrl  
             };
 
@@ -259,6 +260,7 @@ namespace SMS.Data.Services
             recipe.Translator = updated.Translator;
             recipe.Calories = updated.Calories;
             recipe.Servings = updated.Servings;
+            recipe.Price = updated.Price;
             recipe.PhotoUrl = updated.PhotoUrl;            
 
             db.SaveChanges();
@@ -268,7 +270,7 @@ namespace SMS.Data.Services
 
         // // // perform a search of the recipes based on a query and
         // // // a range 'ALL', 'Omnivorous', 'Vegetarian', 'Vegan'
-        public IList<Recipe> SearchMyRecipes(AllRecipes range, int userId, string query) 
+        public IList<Recipe> SearchMyRecipes(AllRecipes range, int userId, string query)  //how do i include price 
         {
             // ensure query is not null    
             query = query == null ? "" : query.ToLower();

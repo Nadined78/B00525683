@@ -17,7 +17,7 @@
    <partial name="_AllSearch" />
 </div>
 
-<div class="card-deck">
+<div class="card-deck tooltiptext">
          @foreach (var r in Model.Recipes) 
          {
             <div class="row row-cols-1 row-cols-md-3">
@@ -39,7 +39,7 @@
             </div>
 
             <div class="card-footer shadow-lg text-muted">
-               <a asp-controller="Recipe" asp-action="Edit" asp-route-id=@r.Id><i class="bi bi-pen"></i> Edit</a>
+               <a class= "tooltiptext" asp-controller="Recipe" asp-action="Edit" asp-route-id=@r.Id><i class="bi bi-pen"></i> Edit</a>
                <a asp-action="Details" asp-route-id=@r.Id><i class="bi bi-info-circle"></i> Details</a>
                <a asp-controller="User" asp-action="RecipeDelete" asp-route-id=@r.Id><i class="bi bi-trash"></i> Delete</a>
             </div>

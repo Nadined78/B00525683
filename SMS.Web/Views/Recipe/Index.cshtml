@@ -37,6 +37,7 @@
                <a asp-controller="Recipe" asp-action="Edit" asp-route-id=@r.Id><i class="bi bi-pen"></i>Edit</a>
                <a asp-action="Details" asp-route-id=@r.Id><i class="bi bi-info-circle"></i> Details</a>
                <a asp-controller="User" asp-action="RecipeDelete" asp-route-id=@r.Id><i class="bi bi-trash"></i> Delete</a>
+               <a asp-controller="Recipe" asp-action="Favourite" asp-route-id=@r.Id><i class ="btn-link glyphicon glyphicon-heart-empty"></i></a>
             </div>
       </div>
    </div>

@@ -43,6 +43,9 @@
         <dt class="col-5">Servings</dt>
         <dd class="col-7">@Model.Servings</dd>
 
+        <dt class="col-5">Cost</dt>
+        <dd class="col-7">@Model.Price</dd>
+
         <dt class="col-5">Rating %</dt>
         <dd class="col-7">@Model.Rating</dd>
 
@@ -67,6 +70,7 @@
             </div>
 
             <div>
+                <button asp-condition=@(User.IsInRole("member")) type="button" class="btn btn-sm btn-danger"><i class="bi bi-heart"></i></button>
                 <!-- toggle display of Delete Modal -->
                 <button asp-condition=@(User.IsInRole("admin")) || (User.IsInRole("Member"))  type="button" class="btn btn-sm btn-danger" 
                         data-bs-toggle="modal" data-bs-target="#deleteRecipeModal">

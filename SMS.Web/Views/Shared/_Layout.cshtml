@@ -45,8 +45,28 @@
   border-radius: var(--border-radius);
 }
 
-.a {
-    
+
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  padding: 5px 0;
+  border-radius: 6px;
+   position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
 }
 
 
@@ -71,15 +91,16 @@
                             <a class="nav-link text-dark" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
 
+                         <!-- Members/Admin Own Profile in Nav bar -->
+                        <li class="nav-item">
+                            <a asp-condition=@(User.HasOneOfRoles("admin,member")) class="nav-link text-dark" asp-controller="User" asp-action="UserProfile"> My Profile</a>
+                        </li> 
+
                         <!-- Users in nav bar -->                       
                        <li class="nav-item">
                             <a asp-condition =@(User.IsInRole("admin")) class="nav-link text-dark" asp-controller="User" asp-action="Index"> Users</a>
                         </li> 
 
-                        <!-- Members Own Profile in Nav bar -->
-                        <li class="nav-item">
-                            <a asp-condition =@(User.IsInRole("member")) class="nav-link text-dark" asp-controller="User" asp-action="UserProfile"> My Profile</a>
-                        </li> 
 
                         <!-- Members Own Recipes in Nav bar -->
                         <li class="nav-item">

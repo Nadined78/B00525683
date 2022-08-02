@@ -53,6 +53,8 @@ namespace SMS.Data.Models
 
         public int Servings {get; set; }
 
+        public double Price {get; set; }
+
         [UrlResource]
         public string PhotoUrl { get; set; }    
 
@@ -69,7 +71,8 @@ namespace SMS.Data.Models
 
         // EF Relationship - a recipe can have many reviews 
         public IList<Review> Reviews { get; set; } = new List<Review>();
-        public int UserId {get; set; } //foregin key - possibly change this to id in the model
+
+        public int UserId {get; set; } //forgein key
 
         public User User {get; set; } //navigational property
     }
