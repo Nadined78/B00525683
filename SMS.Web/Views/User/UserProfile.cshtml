@@ -1,12 +1,12 @@
 @model User
 
+ <partial name="_BreadCrumbs" model=@(new [] {
+    ("/","Home"),
+    ("","My Profile")
+}) />
+
 <partial name = "_ViewLayouts">
 
-@* <partial name="_BreadCrumbs" model=@(new [] {
-    ("/","Home"),
-    ($"/user/details/{Model.Id}",$"{Model.Id}"),
-    ("","Details")
-}) />  *@
 
 <h3 class="mt-4 mb-4 navbar-title">My Details</h3>
 <div class="row">
@@ -24,18 +24,11 @@
 
             <dt class="col-5">Nationality</dt>
             <dd class="col-7">@Model.Nationality</dd>
-
-             <dt class="col-5">Photo</dt>
-            <dd class="col-7">@Model.PhotoUrl</dd>
         </dl>
 
         <!-- use flex box to separate two divs containing primary actions on left and danger action on right -->
         <div class="mt-4 d-flex flex-row justify-content-between">
             <div>
-              
-                <!-- navigation link to CreateRecipe action, passing correct route parameter -->
-                <a asp-controller= "Recipe" asp-action="Create" asp-route-id="@Model.Id" class="btn btn-sm btn-primary"><i
-                        class="bi bi-bag-plus"></i> Add Recipe</a>          
 
                 <!-- navigation link to Details action, passing the correct route id parameter -->
                 <a asp-condition=@(User.IsInRole("admin") || User.IsInRole("member")) asp-controller="User" asp-action="UpdateProfile" asp-route-id="@Model.Id" class="btn btn-sm btn-primary"><i

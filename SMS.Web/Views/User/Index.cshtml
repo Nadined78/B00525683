@@ -10,7 +10,7 @@
 <h3 class="navbar-title mb-3">User List</h3>
 
 <div>
-    <a asp-condition=@(User.IsInRole("admin")) class="btn btn-sm btn-danger my-3" asp-action="Create" >
+    <a asp-condition=@(User.IsInRole("admin")) title="Create a User" class="btn btn-sm btn-danger my-3" asp-action="Create" >
         <i class="bi bi-plus"></i> Create a User
     </a>  
     <partial name = "_SearchUser">
@@ -42,9 +42,9 @@
             </div>
 
             <div class="card-footer shadow-lg text-muted">
-               <a asp-controller="User" asp-action="Edit" asp-route-id=@r.Id><i class="bi bi-pen"></i>Edit</a>
-               <a asp-action="Details" asp-route-id=@r.Id><i class="bi bi-info-circle"></i> Details</a>
-               <a asp-controller="User" asp-action="RecipeDelete" asp-route-id=@r.Id><i class="bi bi-trash"></i> Delete</a>
+               <a asp-controller="User" title="Edit User" asp-action="Edit" asp-route-id=@r.Id><i class="bi bi-pen"></i></a>
+               <a asp-action="Details" title="User Details"asp-route-id=@r.Id><i class="bi bi-info-circle"></i></a>
+               <a asp-controller="User" title="Delete User"asp-action="RecipeDelete" asp-route-id=@r.Id><i class="bi bi-trash"></i></a>
             </div>
       </div>
    </div>

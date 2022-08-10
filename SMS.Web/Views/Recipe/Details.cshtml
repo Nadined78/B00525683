@@ -6,6 +6,7 @@
 <partial name="_Breadcrumbs" model=@(new [] { ("/", "Home"), ("/recipe", "Recipes"), ("","Details") })>
     
 <h3 class="mt-4 mb-4 navbar-title">Recipe: @Model.Name</h3>
+
 <div class="row">   
     <div class="col-8 card rounded shadow p-3">
         <dl class="row">  
@@ -54,27 +55,28 @@
     <!-- use flex box to separate two divs containing primary actions on left and danger action on right -->
         <div class="mt-4 d-flex flex-row justify-content-between">
             <div>
-    
-                <!-- navigation link to Details action, passing the correct route id parameter -->
-                <a asp-condition=@(User.IsInRole("admin") || User.IsInRole("Member")) asp-controller="Recipe" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-secondary"><i
-                        class="bi bi-pen"></i> Edit</a>
 
                 <!-- navigation link to redirect to Index action -->
-                <a asp-controller="Recipe" asp-action="Index" class="btn btn-sm btn-link"><i class="bi bi-list"></i>
+                <a asp-controller="Recipe" asp-action="RecipeIndex" class="btn btn-sm btn-danger">
                     Back to All Recipes</a>
 
                     <!-- navigation link to redirect to Members Profile (Owner of the Recipe) action -->
-                <a asp-controller="User" asp-action="UserProfile" asp-route-id="@Model.Id" class="btn btn-sm btn-link"><i class="bi bi-list"></i>
+                <a asp-controller="Recipe" asp-action="RecipeOwnerUserProfile" asp-route-id="@Model.Id" class="btn btn-sm btn-success">
                     Check Out This Member's Profile</a>
 
             </div>
 
             <div>
                 <button asp-condition=@(User.IsInRole("member")) type="button" class="btn btn-sm btn-danger"><i class="bi bi-heart"></i></button>
+ 
+                <!-- navigation link to Details action, passing the correct route id parameter -->
+                <a asp-condition=@(User.IsInRole("admin") || User.IsInRole("Member")) title="Edit Recipe" asp-controller="Recipe" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-success"><i
+                        class="bi bi-pen"></i></a>
+  
                 <!-- toggle display of Delete Modal -->
-                <button asp-condition=@(User.IsInRole("admin")) || (User.IsInRole("Member"))  type="button" class="btn btn-sm btn-danger" 
+                <button asp-condition=@(User.IsInRole("admin")) || (User.IsInRole("Member")) title="Delete Recipe" type="button" class="btn btn-sm btn-danger" 
                         data-bs-toggle="modal" data-bs-target="#deleteRecipeModal">
-                    <i class="bi bi-trash"></i> Delete
+                    <i class="bi bi-trash"></i>
                 </button>
             </div>
         </div>

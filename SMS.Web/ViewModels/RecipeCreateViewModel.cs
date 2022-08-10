@@ -7,12 +7,6 @@ namespace SMS.Web.ViewModels
 {
     public class RecipeCreateViewModel
     {
-        // selectlist of users (id, name)       
-        public SelectList Users { set; get; }
-
-        
-        [Required(ErrorMessage = "Please select a user")]
-        [Display(Name = "Select User")]
         public int UserId { get; set; }
 
         [Required]
@@ -46,7 +40,6 @@ namespace SMS.Web.ViewModels
         public string Cuisine { get; set; }
 
         [Required]
-        [StringLength(50, MinimumLength = 3)]
         public Region Region {get; set; }
 
         [Required]

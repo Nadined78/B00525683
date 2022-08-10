@@ -115,7 +115,7 @@ namespace SMS.Web.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UpdateProfile([Bind("Id,Name,Email,Role")] UserProfileViewModel m)       
+        public async Task<IActionResult> UpdateProfile([Bind("Id,Name,Email,Role,Nationality,PhotoUrl")] UserProfileViewModel m)       
         {
             var user = _svc.GetUser(m.Id);
             // check if form is invalid and redisplay
@@ -127,7 +127,10 @@ namespace SMS.Web.Controllers
             // update user details and call service
             user.Name = m.Name;
             user.Email = m.Email;
-            user.Role = m.Role;        
+            user.Role = m.Role;    
+            user.Nationality = m.Nationality;
+            user.PhotoUrl = m.PhotoUrl;
+
             var updated = _svc.UpdateUser(user);
 
             // check if error updating service
@@ -288,9 +291,9 @@ namespace SMS.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [Authorize(Roles="admin")]
-        public IActionResult Edit(int id, [Bind("Name, Email, Password, Nationality, PhotoUrl")] User u)
+        public IActionResult Edit(int id, [Bind("Id, Name, Email, Password, Role, Nationality, PhotoUrl")] User u)
         {
-            // check email is unique for this user  
+            // // check email is unique for this user  
             if (_svc.IsDuplicateUserEmail(u.Email,u.Id)) 
             {
                 // add manual validation error
@@ -358,15 +361,16 @@ namespace SMS.Web.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
+            // create a recipe view model and set UserId (foreign key)
             var recipe = new Recipe { UserId = id }; 
 
-            return View(recipe);
+            return View( recipe );
         }
 
-        // POST /user/create
+        // POST /recipe/create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult RecipeCreate([Bind("UserId, Name, RecipeIngredients, PhotoUrl, Region")] Recipe r)
+        public IActionResult RecipeCreate([Bind("UserId, Name, Diet, MealType, RecipeIngredients, Method, PrepTime, CookTime, Cuisine, Region, Translator, Calories, Servings, Price, PhotoUrl")] Recipe r)
         {
             if (ModelState.IsValid)
             {                
@@ -374,6 +378,7 @@ namespace SMS.Web.Controllers
                 Alert($"Recipe created successfully for user {r.UserId}", AlertType.success);
                 return RedirectToAction(nameof(Details), new { Id = recipe.UserId });
             }
+
             // redisplay the form for editing
             return View(r);
         }
@@ -404,7 +409,7 @@ namespace SMS.Web.Controllers
             Alert($"Recipe deleted successfully", AlertType.success);
             
             // redirect to the recipe index view
-            return RedirectToAction(nameof(Details), new { Id = userId });
+            return RedirectToAction("RecipeIndex", "Recipe", new { Id = userId });
         }
 
 

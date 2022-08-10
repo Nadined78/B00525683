@@ -17,8 +17,8 @@ namespace SMS.Data.Services
             var u1 = svc.AddUser("Pasta", "pasta@mail.com", "pasta123", Role.member, "Italian",  "https://tse3.mm.bing.net/th?id=OIP.HIBwLtEXMnop_y4pGUVbQwHaLH&pid=Api&P=0&w=109&h=163" );
            
             // add recipes for pasta
-            var r1 = svc.CreateRecipe(u1.Id, "Cajun Chicken Pasta", Diet.Omnivorous, MealType.Dinner, "chicken, onion, peppers, cajun spice, pasta, double cream", "Marninate Chicken breast fillets in Cajun Spices over night, fry on a low heat in olive oil until cooked. remove chicken from pan and set aside", 20, 18, "Italian", Region.Europe, "Cajun Pollo Pasta", 470, 2, 2.50, "https://tse1.mm.bing.net/th?id=OIP.iw_7gH8lF80C5RcIhVWlLQHaLH&pid=Api&P=0&w=102&h=153");
-            var r2 = svc.CreateRecipe(u1.Id, "Spaghetti Bolognese", Diet.Omnivorous, MealType.Dinner, "Lean mince beef, tomato puree, passata, onion, bacon, red wine", "fry off onion for 5 minutes, season mince and fry until browned, add tablespoon puree, carton of passata, cup of red wine, boil pasta", 15, 60, "Italian", Region.Europe, "Spaghetti Alla Bolognese", 500, 4, 2.00, "https://tse2.mm.bing.net/th?id=OIP.lzO82PYyrudX9qcEnqS28wHaKN&pid=Api&P=0&w=117&h=161" );
+            var r1 = svc.CreateRecipe(u1.Id, "Cajun Chicken Pasta", Diet.Omnivorous, MealType.Dinner, "chicken, onion, peppers, cajun spice, pasta, double cream", "Marninate Chicken breast fillets in Cajun Spices over night, fry on a low heat in olive oil until cooked. remove chicken from pan and set aside, fry off onions and peppers, add cream and let it simmer for 10 minutes. Re-add the chicken and serve", 20, 18, "Italian", Region.Europe, "Cajun Pollo Pasta", 470, 2, 2.50, "https://tse1.mm.bing.net/th?id=OIP.iw_7gH8lF80C5RcIhVWlLQHaLH&pid=Api&P=0&w=102&h=153");
+            var r2 = svc.CreateRecipe(u1.Id, "Spaghetti Bolognese", Diet.Omnivorous, MealType.Dinner, "Lean mince beef, tomato puree, passata, onion, bacon, red wine", "fry off onion for 5 minutes, season mince and fry until browned, add tablespoon puree, carton of passata, cup of red wine, boil pasta. Simmer sauce for 10 minutes to allow flavours to mix, once pasta is boiled, add sauce mix on top, top with parmesan and serve", 15, 60, "Italian", Region.Europe, "Spaghetti Alla Bolognese", 500, 4, 2.00, "https://tse2.mm.bing.net/th?id=OIP.lzO82PYyrudX9qcEnqS28wHaKN&pid=Api&P=0&w=117&h=161" );
             var r3 = svc.CreateRecipe(u1.Id, "Chicken and Bacon Carbonara", Diet.Omnivorous, MealType.Dinner, "pasta, onion, chicken, parmasean, egg yolk, bacon", "cook pasta, fry onion, add bacon until browned, add egg yolk and parmesan to bowl and mix to a thick consistency, lower heat to lowest setting, add mix to pan with half a cup of pasta water and bring together", 20, 45, "Italian", Region.Europe, "pancetta di pollo carbonara", 375, 2, 3.00, "https://tse1.mm.bing.net/th?id=OIP.REMYdE2c1UbI5QUQXS3FqQHaJQ&pid=Api&P=0&w=136&h=170" );
             
             // add reviews for pasta's recipes 
@@ -88,7 +88,7 @@ namespace SMS.Data.Services
             
 
             // Register curry member
-            var u3 = svc.AddUser("Curry", "curry@mail.com", "curry123", Role.member, "Indian", "" );
+            var u3 = svc.AddUser("Curry", "curry@mail.com", "curry123", Role.member, "Indian", "https://tse3.mm.bing.net/th?id=OIP.ogIx0NqKwIigj7lxwz83wwHaLG&pid=Api&P=0" );
 
             // // add recipes for curry 
             var t7 = svc.CreateRecipe(u3.Id, "Chicken Madras", Diet.Omnivorous, MealType.Dinner, "1 onion, peeled and quartered, 2 garlic cloves, thumb-sized chunk of ginger, peeled red chilli, 1 tbsp vegetable oil, 1 tsp turmeric, 1 tsp ground cumin, 1 tsp ground coriander, 1-2 tsp hot chilli powder (depending on how spicy you like your curry), 4 chicken breasts, cut into chunks,400g can chopped tomatoes, small pack coriander, chopped rice, naan and mango chutney, to serve", "Blitz 1 quartered onion, 2 garlic cloves, a thumb-sized chunk of ginger and ½ red chilli together in a food processor until it becomes a coarse paste. Heat 1 tbsp vegetable oil in a large saucepan and add the paste, fry for 5 mins, until softened. If it starts to stick to the pan at all, add a splash of water, Tip in ½ tsp turmeric, 1 tsp ground cumin, 1 tsp ground coriander and 1-2 tsp hot chilli powder and stir well, cook for a couple of mins to toast them a bit, then add 4 chicken breasts, cut into chunks. Stir and make sure everything is covered in the spice mix. Cook until the chicken begins to turn pale, adding a small splash of water if it sticks to the base of the pan at all. Pour in 400g can chopped tomatoes, along with a big pinch of salt, cover and cook on a low heat for 30 mins, until the chicken is tender. Stir through small pack of coriander and serve with rice, naan and a big dollop of mango chutney.", 30, 35,  "Indian", Region.Asia, "Ciken madrās/Kōḻi meṭrās", 373, 4, 4.25, "https://tse1.mm.bing.net/th?id=OIP.ZPko7gRxk0cgNcrmqDkqxwHaLH&pid=Api&P=0" );
@@ -192,7 +192,7 @@ namespace SMS.Data.Services
             svc.AddReview(e45);
 
             // Register Stock Member
-            var u6 = svc.AddUser("Stock", "stock@mail.com", "stock123", Role.member,  "Irish" ,"" );
+            var u6 = svc.AddUser("Stock", "stock@mail.com", "stock123", Role.member,  "Irish" ,"https://tse1.mm.bing.net/th?id=OIP.WYni2MN-426nGod4j9FSzQHaJQ&pid=Api&P=0" );
 
             var t16 = svc.CreateRecipe(u6.Id, "Slow cooker honey mustard chicken", Diet.Omnivorous, MealType.Dinner, "1 tsp sunflower, vegetable or light olive oil, 6–8 chicken thighs, with skin and bone-in,300ml/10fl oz hot chicken stock, made with 1 stock cube, 2 tbsp mustard, English, wholegrain or a combination,2 tbsp runny honey, ½ tsp dried mixed herbs, 4 tbsp double cream, 1 tbsp cornflour mixed with 1 tbsp cold water, salt and freshly ground black pepper", "Heat the oil in a large non-stick frying pan over a medium-high heat. Season the chicken thighs on all sides with salt and freshly ground black pepper. Fry the chicken thighs, skin-side down, for 3–5 minutes or until crisp and golden. Turn and cook on the other side for 2 minutes. Frying the chicken will give it a lovely colour and render out some of the fat that sits just below the skin, but take care as it can spit a little as it fries. While the chicken is frying, pour the stock into the slow cooker and stir in the mustard, honey and herbs until thoroughly mixed. Add the chicken pieces to the slow cooker, skin-side up, cover and cook on high for 3–4 hours. Once the chicken is cooked, gently stir in the cream and cornflour mixture, cover and cook for a further 10 minutes or until the sauce thickens. (If your chicken releases lots of fat into the pot, you may want to spoon a little off before adding the cream.), Serve the chicken hot with the sauce and lots of freshly cooked vegetables, with potatoes or rice on the side.", 30, 120, "Traditional English", Region.Europe, "", 600, 4, 3.25, "https://tse3.mm.bing.net/th?id=OIP.SLTDY8MBsTOd7jdQ2KRCegHaLJ&pid=Api&P=0");
             var t17 = svc.CreateRecipe(u6.Id, "Hainanese Chicken Rice", Diet.Omnivorous, MealType.Dinner, "1 (3-1/2 pound) whole chicken, preferably free-range, Rock salt, for cleaning, 1/2 cup rice wine, 4 quarts chicken broth, 2 shallots, peeled and halved, 4 garlic cloves, smashed, 1-inch ginger root, scrubbed, 1 stalk lemongrass, white portion only, lightly pounded, 6 whole peppercorns, Salt, to taste, 3 cups chicken broth (reserved from poaching chicken), 2 cups long-grain rice, 2 tablespoons grated ginger, 2 tablespoons finely chopped scallions, 4 tablespoons peanut oil", "Rub the chicken all over with rock salt to remove impurities. Do this two to three times until you see that the skin is clean. Place the chicken in a pot deep enough to allow the chicken to be submerged in the cooking liquid. Pour in the rice wine and enough chicken broth so that there is at least an inch of liquid above the chicken. Bring to a boil, skimming off any scum that rises; then lower the heat so that the liquid is barely simmering. Add the shallots, garlic, ginger, lemongrass, peppercorns, and salt, if the broth is unsalted. Cover the pot and let the chicken poach—about 45 minutes. When the poaching time is finished, turn off the heat but leave the chicken in the pot, still covered, for another 10 minutes. strain the broth and measure 3 cups broth to cook the rice in. Let the broth cool. In a medium to large pot, add the cold broth to the rice and bring the mixture to a boil. Mix together the grated ginger, chopped scallions, peanut oil, and enough salt to taste.Cut the Chicken and Serve", 25, 80, "Singaporean", Region.Asia, "Nasi Ayam Hainan", 550, 4, 3.75, "https://tse1.mm.bing.net/th?id=OIP.5dMeTaEAxcIaJZ6eRZGcOgHaIr&pid=Api&P=0");
@@ -210,7 +210,7 @@ namespace SMS.Data.Services
             var e49 = new Review {RecipeId = 17, Name = "Phyliss", ReviewedOn = new DateTime(07/01/2021), Comment = "A great asian dish!! Thank You!", Rating = 9};
             svc.AddReview(e49);
 
-            var e50 = new Review {RecipeId = 17, Name = "Brenda", ReviewedOn = new DateTime(17/-4/2021), Comment = "I enjoyed it. Other family members found chicken a little dry", Rating = 8};
+            var e50 = new Review {RecipeId = 17, Name = "Brenda", ReviewedOn = new DateTime(17/4/2021), Comment = "I enjoyed it. Other family members found chicken a little dry", Rating = 8};
             svc.AddReview(e50);
 
             var e51 = new Review {RecipeId = 17, Name = "James", ReviewedOn = new DateTime(09/12/2021), Comment = "Tasty!!!!", Rating = 8};
@@ -227,43 +227,225 @@ namespace SMS.Data.Services
 
 
             // Register Balsamic Member 
-            var u7 = svc.AddUser("balsamic", "balsamic@mail.com", "balsamic123", Role.member, "French", "" );
+            var u7 = svc.AddUser("balsamic", "balsamic@mail.com", "balsamic123", Role.member, "French", "https://tse2.mm.bing.net/th?id=OIP.QVZCL29lFq6hGOh2rLKhlAHaI-&pid=Api&P=0" );
 
-            var t19 = svc.CreateRecipe(u7.Id, "", Diet.Omnivorous, MealType.Dinner, "", "", 0, 0, "", Region.Europe, "", 600, 4, 3.25, "https://tse3.mm.bing.net/th?id=OIP.SLTDY8MBsTOd7jdQ2KRCegHaLJ&pid=Api&P=0");
-            var t20 = svc.CreateRecipe(u7.Id, "", Diet.Omnivorous, MealType.Dinner, "1 (3-1/2 pound) whole chicken, preferably free-range, Rock salt, for cleaning, 1/2 cup rice wine, 4 quarts chicken broth, 2 shallots, peeled and halved, 4 garlic cloves, smashed, 1-inch ginger root, scrubbed, 1 stalk lemongrass, white portion only, lightly pounded, 6 whole peppercorns, Salt, to taste, 3 cups chicken broth (reserved from poaching chicken), 2 cups long-grain rice, 2 tablespoons grated ginger, 2 tablespoons finely chopped scallions, 4 tablespoons peanut oil", "Rub the chicken all over with rock salt to remove impurities. Do this two to three times until you see that the skin is clean. Place the chicken in a pot deep enough to allow the chicken to be submerged in the cooking liquid. Pour in the rice wine and enough chicken broth so that there is at least an inch of liquid above the chicken. Bring to a boil, skimming off any scum that rises; then lower the heat so that the liquid is barely simmering. Add the shallots, garlic, ginger, lemongrass, peppercorns, and salt, if the broth is unsalted. Cover the pot and let the chicken poach—about 45 minutes. When the poaching time is finished, turn off the heat but leave the chicken in the pot, still covered, for another 10 minutes. strain the broth and measure 3 cups broth to cook the rice in. Let the broth cool. In a medium to large pot, add the cold broth to the rice and bring the mixture to a boil. Mix together the grated ginger, chopped scallions, peanut oil, and enough salt to taste.Cut the Chicken and Serve", 25, 80, "Singaporean", Region.Asia, "Nasi Ayam Hainan", 550, 4, 3.75, "https://tse1.mm.bing.net/th?id=OIP.5dMeTaEAxcIaJZ6eRZGcOgHaIr&pid=Api&P=0");
+            var t19 = svc.CreateRecipe(u7.Id, "Balsamic Peppers", Diet.Omnivorous, MealType.Lunch, "Extra-virgin olive oil, 1 large red pepper, seeded and cut lengthwise into chunky slices,  large orange or yellow pepper, seeded and cut likewise, 2 tbsps balsamic vinegar, ground black pepper, salt", " In a large skillet, stir together the olive oil and peppers over medium heat. Sauté the peppers for 5-7 minutes, until they are tender but still firm. Stir in the balsamic vinegar, pepper, and salt; cook for an additional 1 minute. Transfer the peppers and sauce to a dish and serve hot", 20, 20, "French", Region.Europe, "Poivre Balsamique", 600, 4, 3.25, "https://tse3.mm.bing.net/th?id=OIP.SLTDY8MBsTOd7jdQ2KRCegHaLJ&pid=Api&P=0");
+            var t20 = svc.CreateRecipe(u7.Id, "Hainanese Chicken Rice", Diet.Omnivorous, MealType.Dinner, "1 (3-1/2 pound) whole chicken, preferably free-range, Rock salt, for cleaning, 1/2 cup rice wine, 4 quarts chicken broth, 2 shallots, peeled and halved, 4 garlic cloves, smashed, 1-inch ginger root, scrubbed, 1 stalk lemongrass, white portion only, lightly pounded, 6 whole peppercorns, Salt, to taste, 3 cups chicken broth (reserved from poaching chicken), 2 cups long-grain rice, 2 tablespoons grated ginger, 2 tablespoons finely chopped scallions, 4 tablespoons peanut oil", "Rub the chicken all over with rock salt to remove impurities. Do this two to three times until you see that the skin is clean. Place the chicken in a pot deep enough to allow the chicken to be submerged in the cooking liquid. Pour in the rice wine and enough chicken broth so that there is at least an inch of liquid above the chicken. Bring to a boil, skimming off any scum that rises; then lower the heat so that the liquid is barely simmering. Add the shallots, garlic, ginger, lemongrass, peppercorns, and salt, if the broth is unsalted. Cover the pot and let the chicken poach—about 45 minutes. When the poaching time is finished, turn off the heat but leave the chicken in the pot, still covered, for another 10 minutes. strain the broth and measure 3 cups broth to cook the rice in. Let the broth cool. In a medium to large pot, add the cold broth to the rice and bring the mixture to a boil. Mix together the grated ginger, chopped scallions, peanut oil, and enough salt to taste.Cut the Chicken and Serve", 25, 80, "Singaporean", Region.Asia, "Nasi Ayam Hainan", 550, 4, 3.75, "https://tse1.mm.bing.net/th?id=OIP.5dMeTaEAxcIaJZ6eRZGcOgHaIr&pid=Api&P=0");
             var t21 = svc.CreateRecipe(u7.Id, "Shrimp Risotto", Diet.Omnivorous, MealType.Dinner, "3 tablespoons olive oil, 1 pound extra jumbo (16 to 20) shrimp, peeled and deveined, 1 teaspoon salt, 1/2 teaspoon freshly ground black pepper, 5 ounces (10 tablespoons) unsalted butter, divided, 6 cloves garlic, minced, 1 1/2 cups white wine, 1 1/2 tablespoons lemon juice, 2 tablespoons finely chopped parsley, 3 cups chicken stock, 2 tablespoons olive oil, 4 tablespoons unsalted butter, divided, 2 small shallots, minced, 3 clove garlic, minced, 1 cup Arborio rice, 1/2 cup shredded Parmesan cheese", "Sear the shrimp to golden brown on both sides. Remove the shrimp from the heat, Turn the heat to medium-low. Add 2 tablespoons of the butter to the pan and add the minced garlic. Sauté until fragrant, about 1 minute. Add the white wine and lemon juice to deglaze the pan. Allow the sauce to reduce by about a third. Whisk in the remaining butter and the parsley. Heat the olive oil and 2 tablespoons of the butter in the large skillet. Once the butter has melted, add the shallots and garlic. Add the Arborio rice and toss to coat in the oil and butter. Sauté until the rice is very lightly browned. Add a ladleful of the hot stock and stir until the stock is absorbed, repeat. Serve immediately", 30, 45, "Italian", Region.Europe, "Risotto ai gamberi", 450, 4, 3.15, "https://tse4.mm.bing.net/th?id=OIP.BdFSK8nvF94Ja7GNydzISQHaLH&pid=Api&P=0");
 
+            var e55 = new Review {RecipeId = 19, Name = "Kennedy", ReviewedOn = new DateTime(07/11/2021), Comment = "Nice Recipe!", Rating = 7};
+            svc.AddReview(e55);
+
+            var e56 = new Review {RecipeId = 19, Name = "Michael", ReviewedOn = new DateTime(19/11/2021), Comment = "Nicest Peppers I have ever tried", Rating = 9};
+            svc.AddReview(e56);
+
+            var e57 = new Review {RecipeId = 20, Name = "Stacey", ReviewedOn = new DateTime(04/10/2021), Comment = "What a fantastic recipe. Everyone loved it!", Rating = 10};
+            svc.AddReview(e57);
+
+            var e58 = new Review {RecipeId = 20, Name = "Yolanda", ReviewedOn = new DateTime(06/07/2021), Comment = "Delicious. Can not fault it at all. Will be a weekly favourite", Rating = 10};
+            svc.AddReview(e58);
+
+            var e59 = new Review {RecipeId = 21, Name = "Monique", ReviewedOn = new DateTime(17/04/2021), Comment = "Not a bad recipe - shrimp were a little chewy", Rating = 7};
+            svc.AddReview(e59);
+
+            var e60 = new Review {RecipeId = 21, Name = "Leon", ReviewedOn = new DateTime(09/02/2021), Comment = "Tasty!!!!", Rating = 7};
+            svc.AddReview(e60);
+
+            var u8 = svc.AddUser("Taco", "taco@mail.com", "taco123", Role.member, "Mexician", "https://tse2.mm.bing.net/th?id=OIP.i-7SOToQAjo7Mp9PKgEi8wHaJQ&pid=Api&P=0" );
+
+            var t22 = svc.CreateRecipe(u8.Id, "Spicy Black Bean Taco", Diet.Vegetarian, MealType.Lunch, "3 garlic cloves, 3 x 400g cans black beans, drained and rinsed, 3 tbsp cider vinegar, 1 ½ tbsp honey, 1 ½ tbsp smoked paprika, 1 ½ tbsp ground cumin. 8-12 corn or flour tortillas, chipotle or other hot sauce, soured cream or coconut yogurt", "In a large frying pan, heat the oil and add the garlic. Fry until golden, then add the beans. Pour in the cider vinegar, honey and spices along with 1 tsp or more of salt, to taste. Cook until warmed through, crushing gently with the back of your wooden spoon, then set aside. To serve, put 1-2 heaped tbsp of beans on a tortilla. Top with a big spoonful of guacamole and some salsa, hot sauce and a dollop of soured cream or yogurt.", 20, 20, "Mexician", Region.NorthAmerica, "taco de frijol picante", 500, 4, 2.25, "https://tse3.mm.bing.net/th?id=OIP.gSA_zxesOksqi2QTejR5ZAHaJ4&pid=Api&P=0");
+            var t23 = svc.CreateRecipe(u8.Id, "Easy Vegan Tacos", Diet.Vegan, MealType.Dinner, "175g pack baby corn, 1 large red onion, 1 red pepper, ½ tsp cumin seeds, 2 tsp olive oil, 1large ripe kiwi, 1 large tomato, 100g wholemeal flour, 1 large garlic clove, 15g fresh coriander, 1 tsp vegan bouillon powder, ½ tsp smoked paprika, 85g red cabbage", "Pile the corn, red onion and pepper into a large shallow roasting tin and toss with the cumin seeds and oil. Remove the cooked tomato and kiwi from the tin and return the veg to the oven for 10 mins. Remove the skin from the kiwi and scoop the flesh into a bowl with the tomato, garlic, half the coriander, bouillon and paprika. Use a hand blender to blitz to a smooth salsa, Heat a large non-stick frying pan, without oil, and cook the tortillas one at a time for a minute on one side and about 10 seconds on the other, until you see them puff up a little. Spread a tortilla with some salsa, top with cabbage and roasted veg, then scatter with the remaining coriander. Add a spoonful more salsa and eat with your hands.", 10, 30, "Mexician", Region.NorthAmerica, "Taco Vegano Facil", 450, 2, 2.19, "https://tse3.mm.bing.net/th?id=OIP.Fufnun-gwNjEg-Jh3O_CDgHaLH&pid=Api&P=0");
+            var t24 = svc.CreateRecipe(u8.Id, "Curried Tofu Wraps", Diet.Vegan, MealType.Dinner, "½ red cabbage, 4 heaped tbsp dairy-free yogurt, 3 tbsp mint sauce, 3 x 200g packs tofu , each cut into 15 cubes, 2 tbsp tandoori curry paste, 2 tbsp oil, 2 onions, 2 large garlic cloves, 8 chapatis, 2 limes , cut into quarters",  "Mix the cabbage, yogurt and mint sauce, season and set aside. Toss the tofu with the tandoori paste and 1 tbsp of the oil. Heat a frying pan and cook the tofu, in batches, for a few mins each side until golden. Remove from the pan with a slotted spoon and set aside. Add the remaining oil to the pan, stir in the onions and garlic, and cook for 8-10 mins until softened. Return the tofu to the pan and season well. Warm the chapatis following pack instructions, then top each one with some cabbage, followed by the curried tofu and a good squeeze of lime", 20, 25, "Mexician", Region.NorthAmerica, "Envolturas de tofu al curry", 350, 4, 3.15, "https://tse4.mm.bing.net/th?id=OIP.cxoiCyb2dl7qXaTDymtaNwHaJ4&pid=Api&P=0");
+
+            var e61 = new Review {RecipeId = 22, Name = "Paula", ReviewedOn = new DateTime(17/09/2021), Comment = "What a fantastic recipe! So delicious!", Rating = 9};
+            svc.AddReview(e61);
+
+            var e62 = new Review {RecipeId = 22, Name = "Patricia", ReviewedOn = new DateTime(09/01/2021), Comment = "9/10 - tasty recipe", Rating = 9};
+            svc.AddReview(e62);
+
+            var e63 = new Review {RecipeId = 23, Name = "Heather", ReviewedOn = new DateTime(14/03/2021), Comment = "Easy vegan taco, easy vegan recipe! Thank you. ", Rating = 10};
+            svc.AddReview(e63);
+
+            var e64 = new Review {RecipeId = 23, Name = "Mateo", ReviewedOn = new DateTime(09/04/2021), Comment = "Delicious", Rating = 9};
+            svc.AddReview(e64);
+
+            var e65 = new Review {RecipeId = 24, Name = "Angelo", ReviewedOn = new DateTime(17/03/2021), Comment = "Real Good. Could have a few more ingredients", Rating = 7};
+            svc.AddReview(e65);
+
+            var e66 = new Review {RecipeId = 24, Name = "Liam", ReviewedOn = new DateTime(09/02/2021), Comment = "7/10 - I have tried better", Rating = 7};
+            svc.AddReview(e66);
+
+            var u9 = svc.AddUser("Breadstick", "breadstick@mail.com", "breadstick123", Role.member,  "French", "https://tse4.mm.bing.net/th?id=OIP.tS1bVzkDgDwi6DmWMY1ofAHaJQ&pid=Api&P=0" );
+
+            var t25 = svc.CreateRecipe(u9.Id, "Niçoise stuffed baguette", Diet.Omnivorous, MealType.Lunch, "3 large eggs, 130g can tuna in olive oil, oil reserved, 1 large flute or baguette measuring approx 54cm, 2 tbsp mayonnaise, 3 tomatoes , 12-24 basil leaves, 12 pitted Kalamata olives, 8 anchovy fillets", "Bring a small pan of water to the boil. Add the eggs and boil for 10 mins. Drain, then run the eggs under the cold tap to cool quickly. Carefully shell and cut the eggs into wedge-shaped quarters. Meanwhile, mix all the ingredients for the shallot vinaigrette with seasoning and stir in the oil from the tuna. Slice the loaf in half lengthways, but not all the way through, so it opens up like a book. Use your fingers to pull out any bread that easily comes away from the top half to hollow the loaf a little. On the bottom half of the loaf, drizzle over the vinaigrette. Stir the mayonnaise into the tuna and spread on top. Now layer in the tomatoes, basil, olives, eggs and anchovies. Tightly roll up in baking parchment and secure down the length with elastic bands or string. Press really well all the way down the loaf, then chill overnight. Cut into slices if feeding a crowd, or into 4 lengths", 10, 10, "French", Region.Europe, "Baguette Farcie Niçoise", 200, 4, 1.45, "https://tse2.mm.bing.net/th?id=OIP.lGAoA57yJ9gBkW-OCc6VPwHaLH&pid=Api&P=0");
+            var t26 = svc.CreateRecipe(u9.Id, "Mozzarella & salami picnic baguette", Diet.Omnivorous, MealType.Lunch, "1 white or brown baguette, 3 tbsp fresh green pesto, 1 beef tomato, 1 ball mozzarella, 2 handfuls baby spinach leaves, handful basil leaves, 6 slices salami", "Slice the baguette in half lengthways and hollow out (make crumbs from the bread centre and save for another recipe). Spread the bottom half with the pesto. Slice the tomato and layer it over the pesto. Slice the mozzarella and add in a layer over the tomato. Finish with layers of spinach and basil, plus the salami, folded in half if necessary to fit the width of the baguette", 10, 10, "French", Region.Europe, "Baguette pique-nique mozzarella & salami", 550, 4, 2.00, "https://tse3.mm.bing.net/th?id=OIP.IWPTXvpGEWT8IUvJsZ60IwAAAA&pid=Api&P=0");
+            var t27 = svc.CreateRecipe(u9.Id, "Cheesy Garlic Baguette", Diet.Vegan,  MealType.Snack, "125g mozzarella ball, 140g taleggio cheese, 100g butter, 3 garlic cloves, handful parsley leaves, 1 tsp fresh marjoram leaves, 1 long baguette, large pinch of paprika", "Light the barbecue. Chop the mozzarella and taleggio into small chunks and tip into a bowl with the butter, garlic, herbs and some salt and pepper. If you want, you can mix everything together with a wooden spoon, but I prefer to use my hands. Using a bread knife, cut diagonal slices along the loaf about three quarters of the way into the bread – don’t cut all the way through. If it looks like the bread won’t fit on the barbecue, cut it in half and make two smaller ones.", 10, 10, "French", Region.Europe, "Baguette au fromage et à l'ail", 650, 4, 1.95, "https://tse3.mm.bing.net/th?id=OIP.87dpiO54yLUV1TeEFtD3GgDIE4&pid=Api&P=0&w=300&h=300");
+
+            var e67 = new Review {RecipeId = 25, Name = "Angela", ReviewedOn = new DateTime(24/02/2021), Comment = "We love this picnic recipe, no need no alter it in any way", Rating = 9};
+            svc.AddReview(e67);
+
+            var e68 = new Review {RecipeId = 25, Name = "Bernie", ReviewedOn = new DateTime(20/12/2021), Comment = "Love this! I added cheese and de-seed the tomatoes. Great for picnic and late lunch", Rating = 9};
+            svc.AddReview(e68);
+
+            var e69 = new Review {RecipeId = 26, Name = "Leslie", ReviewedOn = new DateTime(10/03/2021), Comment = "The mozzerella was completely over powered by the pesto and again the use of both spinach and basil seemed pointless as i only tastes the basil.", Rating = 6};
+            svc.AddReview(e69);
+
+            var e70 = new Review {RecipeId = 26, Name = "Karen", ReviewedOn = new DateTime(17/10/2021), Comment = "Did not enjoy too much, little too many clashes of flavours", Rating = 5};
+            svc.AddReview(e70);
+
+            var e71 = new Review {RecipeId = 27, Name = "Garett", ReviewedOn = new DateTime(18/03/2021), Comment = "Very easy and tasty. Cooked in the oven for 8 minutes and was lovely", Rating = 8};
+            svc.AddReview(e71);
+
+            var e72 = new Review {RecipeId = 27, Name = "Kathleen", ReviewedOn = new DateTime(09/02/2021), Comment = "Very easy to make and with great results!", Rating = 7};
+            svc.AddReview(e72);
+
+            var u10 = svc.AddUser("Hummus", "hummus@mail.com", "hummus123", Role.member,  "Morrocan", "https://tse4.mm.bing.net/th?id=OIP.5MEBZoEzPTxAFnfCGkct9QHaGs&pid=Api&P=0" );
+            
+            var t28 = svc.CreateRecipe(u10.Id, "Classic Hummus", Diet.Vegan, MealType.Snack, "200g/7oz canned chickpeas, 2 tbsp lemon juice, 2 garlic cloves, 1 tsp ground cumin, pinch salt, 1 tbsp tahini, 4 tbsp water, 2 tbsp extra virgin olive oil, 1 tsp paprika, 4 rounds of pitta bread", "Drain the chickpeas and rinse. Reserve a few whole chick peas for serving. Combine the chickpeas, lemon juice, garlic, cumin, salt, tahini, and water in a food processor, and blend to a creamy purée. Add more lemon juice, garlic, cumin or salt to taste. Turn out into a dinner plate, and make smooth with the back of a spoon. Drizzle with extra virgin olive oil and scatter with the reserved chickpeas. Sprinkle with paprika and serve with pita bread, warmed in a moderate oven for three minutes, and cut into quarters.", 30, 10, "Mediterranean", Region.MiddleEast, "Alhimas/ho͝oməs", 200, 10, 0.69, "https://tse2.mm.bing.net/th?id=OIP.54gMLZ17TyAZlLvvm_N21AHaLM&pid=Api&P=0");
+            var t29 = svc.CreateRecipe(u10.Id, "Roasted Red Pepper Hummus", Diet.Vegan, MealType.Snack, "3 large red peppers, 1 red chilli, 1 tsp olive oil, 1 small onion, 1/2 tsp ground coriander, 1 tsp ground cumin, 1 x 400g/14oz can chickpeas, ½ garlic clove, ½ unwaxed lemon, 1 tbsp pomegranate molasses, ½ tsp sea salt, freshly ground black pepper, to taste", "Grill the peppers for 10-15 minutes or until the skins are black all over. With a pair of tongs, transfer the hot peppers to a bowl and cover tightly with cling film. The steam will help finish cooking the peppers and loosen their skins. Leave to cool for 10 minutes or so. Meanwhile heat the olive oil in a small frying pan. Add the chopped onion and fry over a medium heat for five minutes, or until softened, stirring occasionally. Stir in the ground coriander and ground cumin, then leave to cool for five minutes.", 30, 30, "Moroccan", Region.MiddleEast, "hims bialfilfil al'ahmar almuhamas", 350, 10, 0.99, "https://tse3.mm.bing.net/th?id=OIP.Mjd20BFB08_kezOf7X7hSwHaLH&pid=Api&P=0");
+            var t30 = svc.CreateRecipe(u10.Id, "Beetroot Hummus", Diet.Vegan,  MealType.Snack, "1 tsp cumin seeds, 250g/9oz cooked beetroot, 400g tin chickpeas, 1 garlic clove, 1 tsp ground coriander, ½ tsp flaked sea salt, 2 tbsp extra virgin olive oil, 2 tbsp fresh lemon juice, ground black pepper", "Toast the cumin seeds gently in a small dry frying pan for 2 minutes, stirring occasionally, then remove from the heat. Put the beetroot, chickpeas, garlic, coriander, salt and olive oil in a food processor. Add the cumin seeds and lemon juice and season well with freshly ground black pepper. Blitz until smooth. Check the seasoning to taste, adding a little more salt, pepper or lemon juice if needed, and blitz again. Use the hummus as a spread for sandwiches and wraps or as a dip. Keep covered in the fridge for up to 3 days, or freeze.", 25, 5, "Metiterranean", Region.MiddleEast, "hims shamandar", 250, 8, 0.95, "https://tse2.mm.bing.net/th?id=OIP.iJmTib--EL9dpWnhM3ORPQHaLH&pid=Api&P=0");
+
+            var e73 = new Review {RecipeId = 28, Name = "Olivia", ReviewedOn = new DateTime(24/04/2021), Comment = "Basic recipe but very good hummus", Rating = 9};
+            svc.AddReview(e73);
+
+            var e74 = new Review {RecipeId = 28, Name = "Newton", ReviewedOn = new DateTime(29/12/2021), Comment = "Simple and tasty!", Rating = 9};
+            svc.AddReview(e74);
+
+            var e75 = new Review {RecipeId = 29, Name = "John", ReviewedOn = new DateTime(10/06/2021), Comment = "Very good, thank you. Will never buy from store again ", Rating = 9};
+            svc.AddReview(e75);
+
+            var e76 = new Review {RecipeId = 29, Name = "Travis", ReviewedOn = new DateTime(05/06/2021), Comment = "Good hummus, little bit more salt needed perhaps", Rating = 7};
+            svc.AddReview(e76);
+
+            var e77 = new Review {RecipeId = 30, Name = "Gerard", ReviewedOn = new DateTime(18/03/2021), Comment = "Family party favourite. DELICIOUS",  Rating = 10};
+            svc.AddReview(e77);
+
+            var e78 = new Review {RecipeId = 30, Name = "Kitty", ReviewedOn = new DateTime(19/04/2021), Comment = "Enjoyed the recipe. Made a few chances", Rating = 7};
+            svc.AddReview(e78);
 
 
+            var u11 = svc.AddUser("Burger", "burger@mail.com", "burger123", Role.member,  "American", "https://tse2.mm.bing.net/th?id=OIP.hSKZ32Bq0CJxXUT3T12_iwHaJU&pid=Api&P=0");
 
-            var u8 = svc.AddUser("Taco", "taco@mail.com", "taco123", Role.member, "Mexician", "" );
-            var u9 = svc.AddUser("Breadstick", "breadstick@mail.com", "breadstick123", Role.member,  "French", "" );
-            var u10 = svc.AddUser("Hummus", "hummus@mail.com", "hummus123", Role.member,  "Morrocan", "" );
-            var u11 = svc.AddUser("Pepperoni", "pepperoni@mail.com", "pepperoni123", Role.member, "Italian", "" );
-            var u12 = svc.AddUser("Burger", "burger@mail.com", "burger123", Role.member,  "American", "");
-            var u13 = svc.AddUser("Hotdog", "hotdog@mail.com", "hotdog123", Role.member,  "American" , "" );
-            var u14 = svc.AddUser("Spaghetti", "spaghetti@mail.com", "spaghetti123", Role.member,  "Italian", "" );
-            var u15 = svc.AddUser("Seabass", "seabass@mail.com", "seabass123", Role.member, "Spanish", "" );
-            var u16 = svc.AddUser("Chicken", "chicken@mail.com", "chicken123", Role.member, "Scottish", "" );
-            var u17 = svc.AddUser("Beef", "beef@mail.com", "beef123", Role.member, "Portuguese", "");
-            var u18 = svc.AddUser("Fish", "fish@mail.com", "fish123", Role.member, "Greek", "" );
-            var u19 = svc.AddUser("Pepper", "pepper@mail.com", "pepper123", Role.member, "German", "" );
-            var u20 = svc.AddUser("Onion", "onion@mail.com", "onion123", Role.member, "English", "" );
-           
+            var t31 = svc.CreateRecipe(u11.Id, "Perfect American Burger", Diet.Omnivorous, MealType.Dinner, "1 large egg, ½ teaspoon salt, ½ teaspoon ground black pepper, 1 pound ground beef, ½ cup fine dry bread crumbs", "Preheat an outdoor grill for high heat and lightly oil grate. Whisk together egg, salt, and pepper in a medium bowl. Add ground beef and bread crumbs and mix with your hands or a fork until well blended. Form into four 3/4-inch-thick patties. Place patties on the preheated grill. Cover and cook 6 to 8 minutes per side, or to desired doneness. An instant-read thermometer inserted into the center should read at least 160 degrees", 5, 15, "American", Region.CentralAmerica, "", 200, 4, 1.25, "https://tse4.mm.bing.net/th?id=OIP.YeSGawDErkXmQocnADt_0QHaJ9&pid=Api&P=0");
+            var t32 = svc.CreateRecipe(u11.Id, "Veggie Burger", Diet.Vegetarian, MealType.Dinner, "1 shallot or ½ onion, 1 stick of celery, parsley, 400g can chickpeas, 1-2 tsp garam masala, 1 tbsp tomato purée, 2 tbsp plain flour, 1 tbsp polenta , couscous, or dried breadcrumbs", "Whizz the shallot, celery, parsley and most of the chickpeas to a coarse paste. Don’t overdo this, you want a texture slightly rougher than hummus. Mash the remaining chickpeas and stir them into the paste with the garam masala, tomato purée, flour and polenta. Season well. Shape the mixture into four patties. Let them rest for at least 30 mins – you can leave them overnight in the fridge if you like. The polenta needs time to absorb any extra liquid.", 10, 10, "American", Region.CentralAmerica, "", 350, 2, 1.25, "https://tse2.mm.bing.net/th?id=OIP.5vcS3lzAiTZhe73vL9Mk9AHaLH&pid=Api&P=0");
+            var t33 = svc.CreateRecipe(u11.Id, "Really Easy Beef Burger", Diet.Omnivorous,  MealType.Dinner, "500g pack lean minced beef, 1 tsp mild chilli powder, 4 slices mild cheddar, 4 burger buns, choice of lettuce , cucumber, gherkin, tomato and red onion, ketchup or mayonnaise , or both", "Fry the burgers on a hot griddle or grill them outside on the barbecue for 5 mins on each side, turning them carefully with a metal spatula. Take care as hot fat from the meat may spit a little. Top with cheese and toast the buns: If you want to make cheeseburgers, put a slice of cheese on top of the burgers when you turn them over and let it melt while the other side cooks. When they are ready, cut the burger baps in half and warm them in the toaster or on the barbecue - take care that you don’t burn them.",  20, 25, "American", Region.CentralAmerica, "", 350, 4, 1.95, "https://tse3.mm.bing.net/th?id=OIP.tjk9EAWUiTUou3bcKag7-gHaJQ&pid=Api&P=0");
+
+            var e79 = new Review {RecipeId = 31, Name = "Christine", ReviewedOn = new DateTime(24/04/2021), Comment = "Basic recipe but very good", Rating = 9};
+            svc.AddReview(e79);
+
+            var e80 = new Review {RecipeId = 31, Name = "Kelly", ReviewedOn = new DateTime(29/12/2021), Comment = "Simple and tasty!", Rating = 9};
+            svc.AddReview(e80);
+
+            var e81 = new Review {RecipeId = 32, Name = "John", ReviewedOn = new DateTime(10/06/2021), Comment = "Very good, thank you! ", Rating = 9};
+            svc.AddReview(e81);
+
+            var e82 = new Review {RecipeId = 32, Name = "Mary", ReviewedOn = new DateTime(05/06/2021), Comment = "Little bit more salt needed perhaps", Rating = 7};
+            svc.AddReview(e82);
+
+            var e83 = new Review {RecipeId = 33, Name = "Gerrard", ReviewedOn = new DateTime(18/03/2021), Comment = "Family BBQ favourite. DELICIOUS",  Rating = 10};
+            svc.AddReview(e83);
+
+            var e84 = new Review {RecipeId = 33, Name = "Kathleen", ReviewedOn = new DateTime(19/04/2021), Comment = "Enjoyed the recipe. Made a few chances", Rating = 7};
+            svc.AddReview(e84);
+
+            var u12 = svc.AddUser("Seabass", "seabass@mail.com", "seabass123", Role.member, "Spanish", "https://tse3.mm.bing.net/th?id=OIP.GUA4cD2RI2IM8bA0M820QQHaJF&pid=Api&P=0" );
+
+            var t34 = svc.CreateRecipe(u12.Id, "Ginger and Chilli Seabass", Diet.Vegetarian, MealType.Dinner, "6 x sea bass fillets, about 140g/5oz each, about 3 tbsp sunflower oil, large knob of ginger, 3 garlic cloves, 3 fat, fresh red chillies, bunch spring onion, 1 tbsp soy sauce", "Once hot, fry the sea bass fillets, skin-side down, for 5 mins or until the skin is very crisp and golden. The fish will be almost cooked through. Turn over, cook for another 30 seconds - 1 minute, then transfer to a serving plate and keep warm. You’ll need to fry the sea bass fillets in 2 batches", 15, 10, "Mediterranaen", Region.Europe, "lubina con chile y jengibre", 400, 4, 1.25, "https://tse1.mm.bing.net/th?id=OIP.9G043S8I_owHGuiWt8PvTwHaLH&pid=Api&P=0");
+            var t35 = svc.CreateRecipe(u12.Id, "Lemon Caper Seabass", Diet.Vegetarian, MealType.Dinner, "4 x 100g/4oz sea bass fillets, olive oil, For the caper dressing: 3 tbsp extra virgin olive oil, grated zest 1 lemon, plus 2 tbsp juice, 2 tbsp small capers, 2 tsp gluten-free Dijon mustard, 2 tbsp chopped flat-leaf parsley", "Heat the oven to 220C/200C fan/gas 7. Line a baking tray with baking parchment and put the fish, skin-side up, on top. Brush the skin with oil and sprinkle with some flaky salt. Bake for 7 mins or until the flesh flakes when tested with a knife. Arrange the fish on warm serving plates, spoon over the dressing and scatter with extra parsley leaves, if you like.", 10, 10, "Mediterranean", Region.Europe, "lubina alcaparras limón", 350, 4, 1.25, "https://tse3.mm.bing.net/th?id=OIP.1DOvqGwcrNEcshd0Z9-B1AHaLL&pid=Api&P=0");
+            var t36 = svc.CreateRecipe(u12.Id, "Fennel Seabass", Diet.Vegetarian,  MealType.Dinner, "2 small sea bass, 1 fennel bulb, 1 lemon, handful basil leaves, small handful black olives, 1 tbsp olive oil", "Rinse and dry the fish. Season all over, then stuff the cavity with some fennel slices, lemon and basil. Scatter the olives and any leftover fennel, basil and lemon into a roasting tin. Place the sea bass on top. Drizzle each fish with the oil and bake for about 30 mins or until cooked through and starting to brown.",  15, 30, "Mediterranean", Region.Europe, "lubina al hinojo al horno", 350, 4, 3.95, "https://tse1.mm.bing.net/th?id=OIP.CEsdJw4tE9yBezLXah0FHgHaHa&pid=Api&P=0&w=300&h=300");
+
+            var e85 = new Review {RecipeId = 34, Name = "Nadine", ReviewedOn = new DateTime(24/04/2021), Comment = "The nicest seabass I have ever eaten", Rating = 10};
+            svc.AddReview(e85);
+
+            var e86= new Review {RecipeId = 34, Name = "Cillian", ReviewedOn = new DateTime(29/12/2021), Comment = "Simple but tasty!", Rating = 9};
+            svc.AddReview(e86);
+
+            var e87 = new Review {RecipeId = 35, Name = "Anna", ReviewedOn = new DateTime(10/06/2021), Comment = "Would not be a big fan of capers but it was delicious", Rating = 9};
+            svc.AddReview(e87);
+
+            var e88 = new Review {RecipeId = 35, Name = "Mary", ReviewedOn = new DateTime(05/06/2021), Comment = "Little bit more salt needed perhaps", Rating = 8};
+            svc.AddReview(e88);
+
+            var e89 = new Review {RecipeId = 36, Name = "Angelo", ReviewedOn = new DateTime(18/03/2021), Comment = "easy, one pan dish. great for all the family",  Rating = 10};
+            svc.AddReview(e89);
+
+            var e90 = new Review {RecipeId = 36, Name = "Mateo", ReviewedOn = new DateTime(19/04/2021), Comment = "Enjoyed the recipe. Made a few chances", Rating = 8};
+            svc.AddReview(e90);
+
+            var u13 = svc.AddUser("Chicken", "chicken@mail.com", "chicken123", Role.member, "Scottish", "https://tse1.mm.bing.net/th?id=OIP.80sQGt-bdTXixTVotmtDpwHaJI&pid=Api&P=0" );
+
+            var t37 = svc.CreateRecipe(u13.Id, "Chicken and Sweet Potato Curry", Diet.Omnivorous, MealType.Dinner, "500g sweet potato, 1 tbsp olive oil, 4 skinless chicken thigh fillets, 1 large red onion, 2 tbsp rogan josh curry paste, 2 large tomatoes, roughly chopped, 125g spinach", "Cook the sweet potatoes in boiling, salted water for 5-7 mins until just tender. Drain well, then set aside. Meanwhile, heat the oil in a large frying pan, then add the chicken and onion. Cook for 5-6 mins until the chicken is browned and cooked through. Stir in the curry paste, cook for 1 min, add the tomatoes, then cook for another min.", 10, 20, "Indian", Region.Asia, "shakarakand chikan karee/Cilagaḍadumpa ciken kūra", 400, 4, 2.25, "https://tse3.mm.bing.net/th?id=OIP.4XyiUcluvuSytpouVtsaLAHaLH&pid=Api&P=0");
+            var t38 = svc.CreateRecipe(u13.Id, "Lemon and Herb Chicken", Diet.Omnivorous, MealType.Dinner, "800g potatoes, 3 tbsp olive oil, 1 red onion, 4 garlic cloves, 400g can tomatoes, 2 x 400g cans butter beans, 1 tsp mixed dried herbs, 1kg skin-on, 1 lemon", "ake the wedges and chicken traybake in the oven at 180C/160C fan/gas 4 for 45 mins until the chicken is cooked through. Check the potatoes after about 30 mins, shaking them around in the tray – depending on the size of the wedges, they may already be cooked through.", 10, 10, "Mediterranean", Region.Europe, "pollo a la hierba de limon", 350, 4, 1.25, "https://tse1.mm.bing.net/th?id=OIP.x9cZtZlC2Gewfysx0zREOQHaLH&pid=Api&P=0");
+            var t39 = svc.CreateRecipe(u13.Id, "Asian Chicken Rice", Diet.Omnivorous,  MealType.Dinner, "1/4 cup rice vinegar, 1 green onion, minced, 2 tablespoons reduced-sodium soy sauce, 1 tablespoon toasted sesame seeds, 1 tablespoon sesame oil, 1 tablespoon honey", "For dressing, whisk together first 7 ingredients. Cook rice according to package directions. Divide among 4 bowls. In a large bowl, toss coleslaw mix and chicken with half of the dressing. Serve edamame and slaw mixture over rice; drizzle with remaining dressing.",  15, 30, "Asian", Region.Asia, "Yàzhōu jī fàn", 450, 4, 2.95, "https://tse4.mm.bing.net/th?id=OIP.XuTGDOKH2k5W23JmDe74XAHaLH&pid=Api&P=0");
+
+            var e91 = new Review {RecipeId = 37, Name = "Amy", ReviewedOn = new DateTime(24/04/2021), Comment = "Super Tasty - a great hit any time of the year", Rating = 9};
+            svc.AddReview(e85);
+
+            var e92= new Review {RecipeId = 37, Name = "Saoirse", ReviewedOn = new DateTime(29/12/2021), Comment = "Simple to make - tastes great. Thank You!", Rating = 9};
+            svc.AddReview(e86);
+
+            var e93 = new Review {RecipeId = 38, Name = "Ashling", ReviewedOn = new DateTime(10/06/2021), Comment = "Delicious!!!!", Rating = 9};
+            svc.AddReview(e87);
+
+            var e94 = new Review {RecipeId = 38, Name = "Annette", ReviewedOn = new DateTime(05/06/2021), Comment = "Great recipe. Will make again!", Rating = 8};
+            svc.AddReview(e88);
+
+            var e95 = new Review {RecipeId = 39, Name = "Monique", ReviewedOn = new DateTime(18/03/2021), Comment = "easy, one pan dish. great for all the family",  Rating = 10};
+            svc.AddReview(e89);
+
+            var e96 = new Review {RecipeId = 39, Name = "Mateo", ReviewedOn = new DateTime(19/04/2021), Comment = "Enjoyed the recipe. Made a few chances", Rating = 8};
+            svc.AddReview(e90);
+    
+            var u14 = svc.AddUser("Beef", "beef@mail.com", "beef123", Role.member, "Portuguese", "https://tse1.mm.bing.net/th?id=OIP.gMVhsmglSQVX8KTj56qeRwHaE8&pid=Api&P=0");
+
+            var t40 = svc.CreateRecipe(u14.Id, "Beef Broccoli Noodles ", Diet.Omnivorous, MealType.Dinner, "3 blocks egg noodles, 1 head broccoli , 1 tbsp sesame oil, 400g pack beef stir-fry strips, sliced spring onion", "Start by making up the sauce. Mix the ingredients together in a small bowl. Boil the noodles according to pack instructions. A minute before they are ready, tip in broccoli. Meanwhile, heat the oil in a wok until very hot, then stir-fry the beef for 2-3 mins until well browned. Tip in the sauce, give it a stir, let it simmer for a moment, then turn off the heat. Drain the noodles, stir into the beef and serve straight away, scattered with spring onions.", 10, 10, "Asian", Region.Asia, "Goḍḍu mānsaṁ mariyu brōkalī nūḍuls", 400, 4, 2.25, "https://tse1.mm.bing.net/th?id=OIP.zjjtJiWEvUjksSb7CyxabwHaKX&pid=Api&P=0");
+            var t41 = svc.CreateRecipe(u14.Id, "Beef Stroganaff", Diet.Omnivorous, MealType.Dinner, "1 tbsp olive oil, 1 clove of garlic, 1 tbsp butter, 250g mushrooms, 1 tbsp plain flour, 500g fillet steak, 150g crème fraîche, 1 tsp English mustard, 100ml beef stock, ½ small pack of parsley, chopped", "Heat 1 tbsp olive oil in a non-stick frying pan then add 1 sliced onion and cook on a medium heat until completely softened, around 15 mins, adding a little splash of water if it starts to stick", 10, 35, "Russian", Region.Europe, "befstroganov", 450, 4, 2.25, "https://tse3.mm.bing.net/th?id=OIP.7rIzNaYnV0mDmPEo-WSx0QHaKx&pid=Api&P=0");
+            var t42 = svc.CreateRecipe(u14.Id, "Easy Roast Beef", Diet.Omnivorous,  MealType.Dinner, "1 tsp plain flour, 1 tsp mustard powder, 950g beef top rump joint, 1 onion, cut into 8 wedges, 500g carrots, halved lengthways", "",  15, 60, "British", Region.Europe, "", 650, 6, 5.95, "https://tse4.mm.bing.net/th?id=OIP.k5p08y50g0410aABG9ua8AHaLI&pid=Api&P=0");
+
+            var e97 = new Review {RecipeId = 40, Name = "Theo", ReviewedOn = new DateTime(24/04/2021), Comment = "Super Tasty - a great hit any time of the year", Rating = 7};
+            svc.AddReview(e97);
+
+            var e98= new Review {RecipeId = 40, Name = "Thomas", ReviewedOn = new DateTime(29/12/2021), Comment = "Simple to make - tastes great. Thank You!", Rating = 7};
+            svc.AddReview(e98);
+
+            var e99 = new Review {RecipeId = 41, Name = "Lola", ReviewedOn = new DateTime(10/06/2021), Comment = "Delicious!!!!", Rating = 9};
+            svc.AddReview(e99);
+
+            var e100 = new Review {RecipeId = 41, Name = "Ann", ReviewedOn = new DateTime(05/06/2021), Comment = "Great recipe. Will make again!", Rating = 8};
+            svc.AddReview(e100);
+
+            var e101 = new Review {RecipeId = 42, Name = "Yolanda", ReviewedOn = new DateTime(18/03/2021), Comment = "British Favourite - really good!",  Rating = 10};
+            svc.AddReview(e101);
+
+            var e102 = new Review {RecipeId = 42, Name = "William", ReviewedOn = new DateTime(19/04/2021), Comment = "Sensational!!!!! ", Rating = 10};
+            svc.AddReview(e102);
+    
+            var u15 = svc.AddUser("Fish", "fish@mail.com", "fish123", Role.member, "Greek", "https://tse2.mm.bing.net/th?id=OIP.zOXwKbQfHdJEOyMSiy7_iAHaJQ&pid=Api&P=0" );
+    
+            var t43 = svc.CreateRecipe(u15.Id, "Curried Cod", Diet.Vegetarian, MealType.Dinner, "1 tbsp oil, 1 onion, 2 tbsp medium curry powder, thumb-sized piece ginger, 3 garlic cloves, 2 x 400g cans chopped tomatoes, 400g can chickpeas, 4 cod fillets, zest 1 lemon, handful coriander, roughly chopped", "Heat the oil in a large, lidded frying pan. Cook the onion over a high heat for a few mins, then stir in the curry powder, ginger and garlic. Cook for another 1-2 mins until fragrant, then stir in the tomatoes, chickpeas and some seasoning.", 10, 40, "Indian", Region.Asia, "Kūra kāḍ/ikan tongkol kari", 400, 4, 2.25, "https://tse2.mm.bing.net/th?id=OIP.d-tyFMzOUiydKQblakpv-gHaKf&pid=Api&P=0");
+            var t44 = svc.CreateRecipe(u15.Id, "Chorizo Haddock", Diet.Vegetarian, MealType.Dinner, "1 tbsp extra-virgin olive oil , 50g chorizo , 450g salad or new potatoes , 4 tbsp dry sherry , 2 skinless haddock, good handful cherry tomatoes , 20g bunch parsley , crusty bread", "Season the fish well. Give the potatoes another stir, add the cherry tomatoes and most of the chopped parsley to the pan, then lay the fish on top. Splash over 1 tbsp sherry, put the lid on again, then leave to cook for 5 mins, or until the fish has turned white and is flaky when prodded in the middle. Scatter the whole dish with a little more parsley and drizzle with more extra virgin oil. Serve straight away with crusty bread", 10, 30, "Mediterranean", Region.Europe, "eglefino con chorizo", 350, 4, 2.25, "https://tse3.mm.bing.net/th?id=OIP.DB1Ml8ehNXyiz99adX59jwHaJ4&pid=Api&P=0");
+            var t45 = svc.CreateRecipe(u15.Id, "Tuna Pasta Bake", Diet.Vegetarian,  MealType.Dinner, "600g rigatoni, 50g butter, 50g plain flour, 600ml milk, 250g strong cheddar, grated, 2 x 160g cans tuna steak in spring water, drained, 330g can sweetcorn, drained, large handful chopped parsley", "Drain the pasta, mix with the white sauce, two 160g drained cans tuna, one 330g drained can sweetcorn and a large handful of chopped parsley, then season. Transfer to a baking dish and top with the rest of the grated cheddar. Bake for 15-20 mins until the cheese on top is golden and starting to brown.",  15, 30, "Italian", Region.Europe, "pasta al tonno", 450, 4, 2.95, "https://tse4.mm.bing.net/th?id=OIP.rxG4u4gV0TAGYCInL0Pd5AHaLH&pid=Api&P=0");
+            
+            var e103 = new Review {RecipeId = 43, Name = "Marcella", ReviewedOn = new DateTime(24/04/2021), Comment = "Paired with some crsuty bread - perfect", Rating = 7};
+            svc.AddReview(e103);
+
+            var e104= new Review {RecipeId = 43, Name = "Alana", ReviewedOn = new DateTime(29/12/2021), Comment = "Made with pumpkin instead - delicious", Rating = 7};
+            svc.AddReview(e104);
+
+            var e105 = new Review {RecipeId = 44, Name = "Deborah", ReviewedOn = new DateTime(10/06/2021), Comment = "A great recipe - fish was great!!!!", Rating = 9};
+            svc.AddReview(e105);
+
+            var e106 = new Review {RecipeId = 44, Name = "Carol", ReviewedOn = new DateTime(05/06/2021), Comment = "Great recipe. Will make again!", Rating = 8};
+            svc.AddReview(e106);
+
+            var e107 = new Review {RecipeId = 45, Name = "Abi", ReviewedOn = new DateTime(18/03/2021), Comment = "Reminds me of my Mother - Thank You",  Rating = 10};
+            svc.AddReview(e107);
+
+            var e108 = new Review {RecipeId = 45, Name = "Dale", ReviewedOn = new DateTime(19/04/2021), Comment = "Reminds me of my childhood! Superb!", Rating = 10};
+            svc.AddReview(e108);
+
             //Register an administrator 
-            var u21 = svc.AddUser("Admin", "admin@mail.com", "admin", Role.admin, "Spanish", "");
-            
-            
-            
-
-
-          
-            
-            // // add recipes for curry
-            // var t5 = svc.CreateTicket(s3.Id, "No internet connection");
-            // var t6 = svc.CreateTicket(s3.Id, "Internet not working.");
-        
-  
+            var u16 = svc.AddUser("Admin", "admin@mail.com", "admin", Role.admin, "Spanish", "https://tse4.mm.bing.net/th?id=OIP.5jGag5iSzz-Cdsy1FEsd2QHaJC&pid=Api&P=0");
 
         }
     }

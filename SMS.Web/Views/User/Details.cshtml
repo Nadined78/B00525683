@@ -21,42 +21,40 @@
 
             <dt class="col-5">Nationality</dt>
             <dd class="col-7">@Model.Nationality</dd>
-
-            <dt class="col-5">Photo</dt>
-            <dd class="col-7">@Model.PhotoUrl</dd>
-
-
         </dl>
 
         <!-- use flex box to separate two divs containing primary actions on left and danger action on right -->
         <div class="mt-4 d-flex flex-row justify-content-between">
             <div>
               
-                @* <!-- navigation link to CreateRecipe action, passing correct route parameter -->
-                <a asp-action="RecipeCreate" asp-route-id="@Model.UserId" class="btn btn-sm btn-primary"><i
-                        class="bi bi-bag-plus"></i> Add Recipe</a>           *@
-
-                <!-- navigation link to Details action, passing the correct route id parameter -->
-                <a asp-condition=@(User.IsInRole("admin")) asp-controller="User" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-danger"><i
-                        class="bi bi-pen"></i> Edit User Details</a>
+                 <!-- navigation link to CreateRecipe action, passing correct route parameter -->
+                <a asp-action="RecipeCreate" asp-route-id="@Model.Id" class="btn btn-danger"><i
+                        class="bi bi-plus"></i> Add New Recipe</a>
 
                 <!-- navigation link to redirect to Index action -->
                 <a asp-controller="User" asp-action="Index" class="btn btn-success">
-                    Back to User List</a>
+                    User List</a>
 
             </div>
 
             <div>
-                <!-- toggle display of Delete Modal -->
-                <button asp-condition=@(User.IsInRole("admin")) type="button" class="btn btn-danger" 
-                        data-bs-toggle="modal" data-bs-target="#deleteUserModal">
-                    <i class="bi bi-trash"></i> Delete User
-                </button>
                 <a asp-controller="User" asp-action="UpdatePassword" type="button" class= "btn btn-success">
-                    Update User Password</a>
+                    Update Password</a>
+
+                <!-- navigation link to Details action, passing the correct route id parameter -->
+                <a asp-condition=@(User.IsInRole("admin")) title="Edit User Details" asp-controller="User" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-danger"><i
+                        class="bi bi-pen"></i></a>
+
+                <!-- toggle display of Delete Modal -->
+                <button asp-condition=@(User.IsInRole("admin")) title="Delete User" type="button" class="btn btn-danger" 
+                        data-bs-toggle="modal" data-bs-target="#deleteUserModal">
+                    <i class="bi bi-trash "></i>
+                </button>
             </div>
+
         </div>
     </div>
+
     <!-- Photo -->
     <div class="col-4">
         <img src="@Model.PhotoUrl" class="img-fluid" width="100" height="75">

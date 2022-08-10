@@ -8,10 +8,10 @@
     ("","Recipes")
 }) />
 
-<h3><b class="navbar-title mb-3">Recipe List</b></h3>
+<h2><b class="navbar-title mb-3">Recipe List</b></h2>
 
 <div class="my-4 d-flex flex-row justify-content-between align-items-center">  
-   <a asp-condition=@(User.IsInRole("member")) class="btn btn-sm btn-danger my-3" asp-action="Create" >
+   <a asp-condition=@(User.IsInRole("member")) class="btn btn-sm btn-danger my-3" title="Create a recipe" asp-action="Create" >
       <i class="bi bi-plus"></i> Create Recipe
    </a>   
    <partial name="_AllSearch" />
@@ -39,9 +39,9 @@
             </div>
 
             <div class="card-footer shadow-lg text-muted">
-               <a class= "tooltiptext" asp-controller="Recipe" asp-action="Edit" asp-route-id=@r.Id><i class="bi bi-pen"></i> Edit</a>
-               <a asp-action="Details" asp-route-id=@r.Id><i class="bi bi-info-circle"></i> Details</a>
-               <a asp-controller="User" asp-action="RecipeDelete" asp-route-id=@r.Id><i class="bi bi-trash"></i> Delete</a>
+               <a asp-controller="Recipe" title="Edit a Recipe" asp-action="Edit" asp-route-id=@r.Id><i class="bi bi-pen"></i></a>
+               <a asp-action="Details" title="Recipe Details" asp-route-id=@r.Id><i class="bi bi-info-circle"></i></a>
+               <a asp-controller="User" title="Delete a Recipe" asp-action="RecipeDelete" asp-route-id=@r.Id><i class="bi bi-trash"></i></a>
             </div>
       </div>
    </div>

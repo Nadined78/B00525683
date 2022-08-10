@@ -118,28 +118,25 @@ namespace SMS.Data.Services
         public User UpdateUser(User updated)
         {
             // verify the user exists
-            var User = GetUser(updated.Id);
-            if (User == null)
-            {
-                return null;
-            }
-
-            if (!IsDuplicateUserEmail(updated.Email, updated.Id))
+            var user = GetUser(updated.Id);
+            if (user == null)
             {
                 return null;
             }
 
             // update the details of the user retrieved and save
-            User.Name = updated.Name;
-            User.Email = updated.Email;
-            User.Password = updated.Password;
-            User.Role = updated.Role;
+            user.Name = updated.Name;
+            user.Email = updated.Email;
+            user.Role = updated.Role;
+            user.Nationality = updated.Nationality;
+            user.PhotoUrl = updated.PhotoUrl;
           
 
             db.SaveChanges();
-            return User;
+            return user;
         }
 
+      
         public User GetUserByEmailAddress(string email)
         {
             return db.Users.FirstOrDefault(u => u.Email == email);
@@ -147,11 +144,11 @@ namespace SMS.Data.Services
        
         public bool IsDuplicateUserEmail(string email, int userId) 
         {
-            // var existing = GetUserByEmailAddress(email);
+             var existing = GetUserByEmailAddress(email);
             // // if a user with email exists and the Id does not match
             // // the userId (if provided), then they cannot use the email
-            // return existing != null && userId != existing.Id;           
-        return db.Users.FirstOrDefault(u => u.Email == email && u.Id != userId) == null;
+             return existing != null && userId != existing.Id;           
+        // return db.Users.FirstOrDefault(u => u.Email == email && u.Id != userId) == null;
         }
 
         public IList<User> SearchAllUsers(AllUsers range, string query) 

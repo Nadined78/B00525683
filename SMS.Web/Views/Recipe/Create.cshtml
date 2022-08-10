@@ -9,6 +9,10 @@
 <div class="card rounded shadow-lg p-3">
     <form asp-action="Create">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        
+       @* <!-- we hide the id as its not user editable but needs to be in the -->
+        <!-- form to ensure the recipe passed to the controller is complete -->    
+        <input type="hidden" asp-for="UserId" class="form-control"/> *@
 
         <div class="form-group">
             <label asp-for="Name" class="form-label"></label>      
@@ -34,6 +38,11 @@
                 </select>
                 <span asp-validation-for="MealType" class="text-danger"></span>
             </div>
+
+            <div class="form-group mt-3">
+            <label asp-for="RecipeIngredients" class="form-label"></label>      
+            <textarea rows="10" asp-for="RecipeIngredients" class="form-control"></textarea>       
+        </div>
 
         <div class="form-group mt-3">
             <label asp-for="Method" class="form-label"></label>      

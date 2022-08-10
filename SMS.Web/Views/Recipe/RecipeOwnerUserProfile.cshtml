@@ -1,0 +1,50 @@
+@model User
+
+<partial name = "_ViewLayouts">
+
+<partial name="_BreadCrumbs" model=@(new [] {
+    ("/","Home"),
+    ("",$"{Model.Name}"),
+    ("","Details")
+}) /> 
+
+<h3 class="mt-4 mb-4 navbar-title">@Model.Name's Details</h3>
+<div class="row">
+    <!-- Details -->
+    <div class="col-8 card rounded shadow p-3">
+        <dl class="row">
+            <dt class="col-5">Name</dt>
+            <dd class="col-7">@Model.Name</dd>
+
+            <dt class="col-5">Email</dt>
+            <dd class="col-7">@Model.Email</dd>
+
+            <dt class="col-5">Role</dt>
+            <dd class="col-7">@Model.Role</dd>
+
+            <dt class="col-5">Nationality</dt>
+            <dd class="col-7">@Model.Nationality</dd>
+        </dl>
+
+        <!-- use flex box to separate two divs containing primary actions on left and danger action on right -->
+        <div class="mt-4 d-flex flex-row justify-content-between">
+            <div>
+
+                <!-- navigation link to redirect to Home action -->
+                <a asp-controller="Home" title="Back to Home" asp-action="Index" class="btn btn-sm btn-danger">
+                    Back to Home Page</a>
+
+                <!-- navigation link to redirect to all recipes -->    
+                <a asp-controller="Recipe" title="All Recipes" asp-action="RecipeIndex" class="btn btn-sm btn-success">
+                    All Recipes</a>
+            </div>
+        </div>
+    </div>
+    <!-- Photo -->
+    <div class="col-4">
+        <img src="@Model.PhotoUrl" class="img-fluid" width="160" height="140">
+    </div>
+</div>
+
+<!-- Delete Modal -->
+<partial name="_DeleteUserModal" />

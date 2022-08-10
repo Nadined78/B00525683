@@ -1,0 +1,42 @@
+@model Recipe
+
+<!-- Delete Modal -->
+<div id="deleteRecipeModal" class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="navbar-title modal-title">Delete Recipe</h5>
+            </div>
+            
+            <div class="modal-body text-center">
+                <p>Are you sure you want to delete this Recipe?</p>
+                <p><b>This action can not be undone</b></p>
+            </div>
+
+            <div class="col card rounded shadow p-3">
+                <dl class="row">       
+                    <dt class="col-5">Recipe Name</dt>
+                    <dd class="col-7">@Model.Name</dd>
+
+                    <dt class="col-5">Cuisine</dt>
+                    <dd class="col-7">@Model.Cuisine</dd>
+
+                    <dt class="col-5">Translation</dt>
+                    <dd class="col-7">@Model.Translator</dd> 
+                    
+                    <dt class="col-5">Rating</dt>
+                    <dd class="col-7">@Model.Rating%</dd>        
+                </dl>
+            </div>
+
+            <div class="modal-footer">
+                <form asp-controller="User" asp-action="RecipeDeleteConfirm" type="post">
+                    <input type="hidden" asp-for="Id" />
+                    <input type="hidden" asp-for="UserId"/>
+
+                    <input type="submit" value="Confirm" class="btn btn-danger" />
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                </form>
+            </div>
+        </div>
+   

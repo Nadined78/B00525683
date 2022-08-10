@@ -9,32 +9,4 @@
     ("","Delete Recipe")
 }) /> 
 
-<h3 class="mt-4 mb-4">Delete Recipe</h3>
-
-<h4 class="mb-4">Are you sure you want to delete this Recipe?</h4>
-
-<div>
-    <div class="col card rounded shadow p-3">
-        <dl class="row">       
-            <dt class="col-5">Recipe Name</dt>
-            <dd class="col-7">@Model.Name</dd>
-
-            <dt class="col-5">Translator</dt>
-            <dd class="col-7">@Model.Translator</dd> 
-            
-            <dt class="col-5">Rating</dt>
-            <dd class="col-7">@Model.Rating</dd>        
-        </dl>
-    </div>
-
-    <div class="mt-4">
-        <form asp-action="RecipeDeleteConfirm" type="post">
-            <input type="hidden" asp-for="Id"/>
-            <input type="hidden" asp-for="UserId"/>
-            
-            <input type="submit" value="Confirm" class="btn btn-danger" />
-            <a class="btn btn-secondary" asp-controller="User" asp-action="Details" asp-route-id=@Model.Id >Cancel</a>
-        </form>
-    </div>
-    
-</div>
+<partial name="_DeleteRecipeModal"/>

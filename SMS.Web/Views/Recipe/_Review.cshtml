@@ -1,10 +1,4 @@
-@* @if (Model.Reviews.Count == 0)
-{
-    <h4>This Recipe has yet to recieve any reviews</h4>
-    
-}
-else
-{ *@
+<!-- partial used to reduce code amount in recipe page -->
 
 <div>
 <h3>Recipe Reviews</h3>
@@ -30,7 +24,7 @@ else
                 <td>@r.Name</td>
                 <td>@r.Comment</td>
                 <td>@r.Rating</td>
-                <td><a asp-controller="Recipe" asp-action="DeleteReview" asp-route-id="@Model.Id" class="btn btn-sm btn-light mr-4">Delete</a></td>
+                <td><a asp-controller="Recipe" title="Delete a Review" asp-action="DeleteReview" asp-route-id="@Model.Id" class="bi bi-trash bi-dark ml-2"></a></td>
                 
             </tr>    
         }

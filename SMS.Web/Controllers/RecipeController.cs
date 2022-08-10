@@ -36,18 +36,7 @@ namespace SMS.Web.Controllers
             rm.Recipes = svc.SearchAllRecipes(rm.Range, rm.Query);
             return View(rm);  
     
-        }
-               
-
-        // [HttpGet("search")] API THING - no???
-        // public IActionResult Search(string query = "", recipeSearch range = recipeSearch.ALL)
-        // {                             
-        //     var recipes = svc.SearchAllRecipes(range, query);
-        //     var results = recipes.Select( r => ConvertToCustomRecipeObject(r) ).ToList();
-            
-        //     // return custom results list
-        //     return Ok(results);
-        // }        
+        }    
 
         // GET/recipe/{id}
         public IActionResult Details(int id)
@@ -64,22 +53,19 @@ namespace SMS.Web.Controllers
         }
       
         // GET /recipe/create
-        [Authorize(Roles="admin, member")]
-        public IActionResult Create()
+        [Authorize(Roles="member")]
+        public IActionResult Create(int id)
         {
-            var users = svc.GetUsers();
-            // populate viewmodel select list property
-            var tvm = new RecipeCreateViewModel {
-                Users = new SelectList(users,"Id","Name") 
-            };
+            var users = svc.GetUser(id);
+                        
+            // // render blank form
+            return View(users);
             
-            // render blank form
-            return View( tvm );
         }
        
         // POST /recipe/create
         [HttpPost]
-        [Authorize(Roles="admin, member")]
+        [Authorize(Roles="member")]
         public IActionResult Create(RecipeCreateViewModel rvm)
         {
             if (ModelState.IsValid)
@@ -171,6 +157,23 @@ namespace SMS.Web.Controllers
             
         }
 
+        public IActionResult RecipeOwnerUserProfile(int id)
+        {
+            // retrieve the user with specifed id from the service
+            var u = svc.GetUser(id);
+
+            // Alert and redirection
+            if (u == null)
+            {
+                Alert($"User not found", AlertType.warning);
+                return RedirectToAction(nameof(Index));
+            }
+
+            // pass user as parameter to the view
+            return View(u);
+        }
+
+        
         // GET
         public IActionResult AddReview(int id)
         {
@@ -188,9 +191,9 @@ namespace SMS.Web.Controllers
                 RecipeId = id,
                 Name = r.Name,
                 
-            }; //do i need more here
+            };
             //render form
-            return View("AddReview", r);  
+            return View("AddReview", re);  
 
         }
 
@@ -237,6 +240,8 @@ namespace SMS.Web.Controllers
   
             return RedirectToAction("Index");
         }
+
+        
 
 
     }

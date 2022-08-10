@@ -7,7 +7,7 @@
 <h3><b class= "navbar-title mb-3"> My Recipes</b></h3>
 
  <div class="my-4 d-flex flex-row justify-content-between align-items-center">  
-   <a asp-condition=@(User.IsInRole("member")) class="btn btn-sm btn-danger my-3" asp-action="Create" >
+   <a asp-condition=@(User.IsInRole("member")) class="btn btn-sm btn-danger my-3" title="Create Recipe" asp-action="Create" >
       <i class="bi bi-plus"></i> Create Recipe
    </a>    
    <partial name="_MySearch" />
@@ -34,35 +34,14 @@
             </div>
 
             <div class="card-footer shadow-lg text-muted">
-               <a asp-controller="Recipe" asp-action="Edit" asp-route-id=@r.Id><i class="bi bi-pen"></i>Edit</a>
-               <a asp-action="Details" asp-route-id=@r.Id><i class="bi bi-info-circle"></i> Details</a>
-               <a asp-controller="User" asp-action="RecipeDelete" asp-route-id=@r.Id><i class="bi bi-trash"></i> Delete</a>
-               <a asp-controller="Recipe" asp-action="Favourite" asp-route-id=@r.Id><i class ="btn-link glyphicon glyphicon-heart-empty"></i></a>
+               <a asp-controller="Recipe" title="Edit Recipe" asp-action="Edit" asp-route-id=@r.Id><i class="bi bi-pen"></i></a>
+               <a asp-action="Details" title="Recipe Details" asp-route-id=@r.Id><i class="bi bi-info-circle"></i></a>
+               <a asp-controller="User" title="Delete Recipe" asp-action="RecipeDelete" asp-route-id=@r.Id><i class="bi bi-trash"></i></a>
+               <a asp-controller="Recipe" Title="Add to my favourites" asp-action="Favourite" asp-route-id=@r.Id><i class ="btn-link glyphicon glyphicon-heart-empty"></i></a>
             </div>
       </div>
    </div>
 }
 </div>
             
-            
-            
-            @* <td class="recipename">@r.Name</td>
-            <td>@r.Diet</td>
-            @* <td>@r.MealType</td>
-            <td>@r.PrepTime Mins </td>
-            <td>@r.CookTime Mins</td>
-            <td>@r.Cuisine</td> *@
-            @* <td>@r.Calories</td>
-            <td>@r.Servings</td> *@
-            @* <td>@r.Rating</td> *@
-            @* <td class="recipeimage"><img src="@r.PhotoUrl" class="img-fluid" width="100" height="75"></td> *@
-            
-            @* <td> *@
-               @* <a asp-action="Details" asp-route-id="@r.Id"><i class="bi bi-lightbulb"></i> Details</a>                                          
-            </td>
-         </tr>
-      }
-    </tbody>
-</table> *@
-
 

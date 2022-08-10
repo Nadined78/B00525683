@@ -2,29 +2,21 @@
 
 <partial name= "_LayoutsHome" />
 
-@* <partial name="_Breadcrumbs" model=@(new [] { ("", "Home") })> *@
+<partial name="_Breadcrumbs" model=@(new [] { ("", "Home") })>
 
- 
 <div class="image">
-<div class="navbar-title text-center">
- 
-    <h1>@Model.Title</h1> 
-    @* <h2>@Model.Message</h2> *@
-  
- 
-        @* <p><b>This Web Application can be used to:</b></p>
-          <ul style="list-style: none;">
-            <li> - Display a list of Vehicles, its details and their MOT Records<i class="bi bi-truck ml-2"></i></i></li>
-            <li>- Create, Edit or delete a Vehicle<i class="bi bi-pencil ml-2"></i></li>
-            <li>- Add/delete an MOT Record <i class="bi bi-plus ml-2"></i></li>
-            <li>- Search/Query Our Fleet of Vehicles</li>
-          </ul> *@
+  <div class="navbar-title text-center">
+     <h1>@Model.Title</h1> 
+  </div>
+
+  <div class="weatherwidget">
+    <partial name="_Weather"/> 
 </div>
-@* <div>
-        <a asp-controller="Vehicle" asp-action="Index" class="btn btn-lg btn-dark mt-4 mb-3">View All Recipes</a>
-      </div> *@
-    </div>
-  
-@* </div> *@
+
+
+
+
+
+
 
 

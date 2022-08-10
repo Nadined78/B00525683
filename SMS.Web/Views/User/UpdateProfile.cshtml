@@ -37,14 +37,14 @@
         </div>
 
         <div class="form-group mt-3">
-            <label asp-for="PhotoUrl" class="control-label"><i class="bi-envelope-fill"></i> Email</label>
+            <label asp-for="PhotoUrl" class="control-label"><i class="bi-envelope-fill"></i> Photo</label>
             <input asp-for="PhotoUrl" class="form-control" />
             <span asp-validation-for="PhotoUrl" class="text-danger"></span>
         </div>
 
         <div class="form-group mt-3">
             <input type="submit" value="Save" class="btn btn-primary" />
-            <a class="btn btn-secondary" asp-controller="User" asp-action="UserProfile">Cancel</a>
+            <a class="btn btn-secondary" asp-controller="User" asp-action="Index">Cancel</a>
         </div>
 
     </form>

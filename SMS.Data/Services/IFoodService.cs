@@ -20,7 +20,7 @@ namespace SMS.Data.Services
         // User Register(string name, string email, string password, Role role, string nationality, string photoUrl);
 
         User AddUser(string name, string email, string password, Role role, string nationality, string photoUrl);
-        User UpdateUser (User user);
+        User UpdateUser (User updated);
         bool DeleteUser(int id);
         bool IsDuplicateUserEmail(string email, int userId);
 
