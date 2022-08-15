@@ -7,7 +7,7 @@ namespace SMS.Web.ViewModels
 {
     public class RecipeCreateViewModel
     {
-        public int UserId { get; set; }
+        public int Id {get; set;}
 
         [Required]
         [StringLength(100, MinimumLength = 5)]
@@ -57,6 +57,10 @@ namespace SMS.Web.ViewModels
 
         [Required]
         public string PhotoUrl { get; set; }
+
+        public int UserId { get; set; }
+
+        public User User {get; set;}
     }
 
 }

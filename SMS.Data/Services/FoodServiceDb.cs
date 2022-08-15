@@ -33,7 +33,7 @@ namespace SMS.Data.Services
             return (user != null && Hasher.ValidateHash(user.Password, password)) ? user : null;
         }
 
-        public User Register(string name, string email, string password, Role role, string nationality, string photoUrl)
+        public User Register(string name, string email, string password, Role role, string nationality, string cookingExperience, string photoUrl)
         {
             // check that the user does not already exist (unique user name)
             var exists = GetUserByEmailAddress(email);
@@ -50,6 +50,7 @@ namespace SMS.Data.Services
                 Password = Hasher.CalculateHash(password),
                 Role = role,
                 Nationality = nationality,
+                CookingExperience = cookingExperience,
                 PhotoUrl = photoUrl 
             };
    
@@ -78,7 +79,7 @@ namespace SMS.Data.Services
         //Admin can add a new user - checking email is unique
  
  // Add a new User checking a User with same email does not exist
-        public User AddUser(string name, string email, string password, Role role, string nationality, string photoUrl)
+        public User AddUser(string name, string email, string password, Role role, string nationality, string cookingExperience, string photoUrl)
         {     
             var existing = GetUserByEmailAddress(email);
             if (existing != null)
@@ -93,6 +94,7 @@ namespace SMS.Data.Services
                 Password = Hasher.CalculateHash(password), // can hash if required 
                 Role = role,
                 Nationality = nationality,
+                CookingExperience = cookingExperience,
                 PhotoUrl = photoUrl         
             };
             db.Users.Add(user);
@@ -129,6 +131,7 @@ namespace SMS.Data.Services
             user.Email = updated.Email;
             user.Role = updated.Role;
             user.Nationality = updated.Nationality;
+            user.CookingExperience = updated.CookingExperience;
             user.PhotoUrl = updated.PhotoUrl;
           
 
@@ -181,7 +184,6 @@ namespace SMS.Data.Services
             var recipe = new Recipe
             {
                 // Id created by Database
-                UserId = userId,
                 Name = name,
                 Diet = diet,
                 MealType = mealType,
@@ -195,7 +197,8 @@ namespace SMS.Data.Services
                 Calories = calories,
                 Servings = servings,
                 Price = price,
-                PhotoUrl = photoUrl  
+                PhotoUrl = photoUrl,
+                UserId = userId,
             };
 
             db.Recipes.Add(recipe);

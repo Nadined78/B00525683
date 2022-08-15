@@ -29,7 +29,10 @@ namespace SMS.Data.Models {
 
         public Role Role { get; set; } 
 
+        [Required(ErrorMessage = "Nationality Required")]
         public string Nationality {get; set; }
+
+        public string CookingExperience {get; set;}
 
         public string PhotoUrl { get; set; }
 

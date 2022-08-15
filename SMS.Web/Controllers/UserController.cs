@@ -54,7 +54,7 @@ namespace SMS.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Register([Bind("Name,Email,Password,PasswordConfirm,Role,Nationality,PhotoUrl")] UserRegisterViewModel m)       
+        public IActionResult Register([Bind("Name,Email,Password,PasswordConfirm,Role,Nationality, CookingExperience,PhotoUrl")] UserRegisterViewModel m)       
         {
             if (!ModelState.IsValid)
             {
@@ -62,7 +62,7 @@ namespace SMS.Web.Controllers
             }
             
             // add user via service
-            var user = _svc.AddUser(m.Name, m.Email,m.Password, m.Role, m.Nationality, m.PhotoUrl);
+            var user = _svc.AddUser(m.Name, m.Email,m.Password, m.Role, m.Nationality, m.CookingExperience, m.PhotoUrl);
             // check if error adding user and display warning
             if (user == null) {
                 Alert("There was a problem Registering. Please try again", AlertType.warning);
@@ -259,7 +259,7 @@ namespace SMS.Web.Controllers
             if (ModelState.IsValid)
             {
                 // pass data to service to store 
-                u = _svc.AddUser(u.Name, u.Email, u.Password, u.Role, u.Nationality, u.PhotoUrl);
+                u = _svc.AddUser(u.Name, u.Email, u.Password, u.Role, u.Nationality, u.CookingExperience, u.PhotoUrl);
                 Alert($"User created successfully", AlertType.success);
 
                 return RedirectToAction(nameof(Details), new { Id = u.Id});

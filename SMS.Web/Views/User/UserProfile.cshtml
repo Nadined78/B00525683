@@ -24,6 +24,12 @@
 
             <dt class="col-5">Nationality</dt>
             <dd class="col-7">@Model.Nationality</dd>
+
+            <dt class="col-5">Cooking Experience</dt>
+            <dd class="col-7">@Model.CookingExperience</dd>
+
+
+
         </dl>
 
         <!-- use flex box to separate two divs containing primary actions on left and danger action on right -->
@@ -31,11 +37,11 @@
             <div>
 
                 <!-- navigation link to Details action, passing the correct route id parameter -->
-                <a asp-condition=@(User.IsInRole("admin") || User.IsInRole("member")) asp-controller="User" asp-action="UpdateProfile" asp-route-id="@Model.Id" class="btn btn-sm btn-primary"><i
+                <a asp-condition=@(User.HasOneOfRoles("admin,member")) asp-controller="User" asp-action="UpdateProfile" asp-route-id="@Model.Id" class="btn btn-sm btn-primary"><i
                         class="bi bi-pen"></i> Edit</a>
 
                         <!-- navigation link to Details action, passing the correct route id parameter -->
-                <a asp-condition=@(User.IsInRole("admin") || User.IsInRole("member")) asp-controller="User" asp-action="UpdatePassword" asp-route-id="@Model.Id" class="btn btn-sm btn-primary"><i
+                <a asp-condition=@(User.HasOneOfRoles("admin,member")) asp-controller="User" asp-action="UpdatePassword" asp-route-id="@Model.Id" class="btn btn-sm btn-primary"><i
                         class="bi bi-pen"></i> Change Password</a>
 
                 <!-- navigation link to redirect to Home action -->

@@ -70,11 +70,11 @@
                 <button asp-condition=@(User.IsInRole("member")) type="button" class="btn btn-sm btn-danger"><i class="bi bi-heart"></i></button>
  
                 <!-- navigation link to Details action, passing the correct route id parameter -->
-                <a asp-condition=@(User.IsInRole("admin") || User.IsInRole("Member")) title="Edit Recipe" asp-controller="Recipe" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-success"><i
+                <a asp-condition=@(User.HasOneOfRoles("admin,member")) title="Edit Recipe" asp-controller="Recipe" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-success"><i
                         class="bi bi-pen"></i></a>
   
                 <!-- toggle display of Delete Modal -->
-                <button asp-condition=@(User.IsInRole("admin")) || (User.IsInRole("Member")) title="Delete Recipe" type="button" class="btn btn-sm btn-danger" 
+                <button asp-condition=@(User.HasOneOfRoles("admin,member")) title="Delete Recipe" type="button" class="btn btn-sm btn-danger" 
                         data-bs-toggle="modal" data-bs-target="#deleteRecipeModal">
                     <i class="bi bi-trash"></i>
                 </button>

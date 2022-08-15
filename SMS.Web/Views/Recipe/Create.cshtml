@@ -10,9 +10,9 @@
     <form asp-action="Create">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         
-       @* <!-- we hide the id as its not user editable but needs to be in the -->
+     <!-- we hide the id as its not user editable but needs to be in the -->
         <!-- form to ensure the recipe passed to the controller is complete -->    
-        <input type="hidden" asp-for="UserId" class="form-control"/> *@
+        <input type="hidden" asp-for="UserId" class="form-control"/>
 
         <div class="form-group">
             <label asp-for="Name" class="form-label"></label>      
