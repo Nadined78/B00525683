@@ -14,7 +14,6 @@ builder.Services.AddScoped<IFoodService, FoodServiceDb>(); //interface (IFleetSe
 //we use a scoped- for a single request we have one same service but we could use singleton or transient
 
 
-
 var app = builder.Build();
 
 // // Configure the HTTP request pipeline.

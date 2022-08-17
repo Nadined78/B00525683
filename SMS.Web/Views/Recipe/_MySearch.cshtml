@@ -1,6 +1,5 @@
 @model RecipeSearchViewModel
 
-
 <!-- search form -->
 <form asp-controller="Recipe" asp-action="Index" class="d-flex flex-row align-items-center">
     <div class="form-check me-3">
@@ -20,7 +19,7 @@
         <label class="form-check-label" for="Range">Vegan</label>
     </div>
 
-    <input class="form-control me-2" asp-for="Query" placeholder="Search..">
+    <input class="form-control me-2" asp-for="Query" class="form-input" placeholder="Search..">
    
-    <button type="button" class="btn btn-outline-danger" type="submit">Search</button>
+    <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
 </form>

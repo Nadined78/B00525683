@@ -48,7 +48,7 @@ namespace SMS.Data.Services
                 Name = name,
                 Email = email,
                 Password = Hasher.CalculateHash(password),
-                Role = role,
+                Role = Role.member,
                 Nationality = nationality,
                 CookingExperience = cookingExperience,
                 PhotoUrl = photoUrl 
@@ -66,19 +66,17 @@ namespace SMS.Data.Services
             return db.Users.ToList();
         }
 
-        // Retrive user by Id and related tickets
-
+        
+        // Retrive user by Id and related recipes
         public User GetUser(int id)
         {
             return db.Users
                      .Include(r => r.Recipes)
                      .FirstOrDefault(r => r.Id == id);
         }
-
-        
-        //Admin can add a new user - checking email is unique
+       
  
- // Add a new User checking a User with same email does not exist
+        // Add a new User checking a User with same email does not exist
         public User AddUser(string name, string email, string password, Role role, string nationality, string cookingExperience, string photoUrl)
         {     
             var existing = GetUserByEmailAddress(email);
@@ -120,23 +118,30 @@ namespace SMS.Data.Services
         public User UpdateUser(User updated)
         {
             // verify the user exists
-            var user = GetUser(updated.Id);
-            if (user == null)
+            var User = GetUser(updated.Id);
+            if (User == null)
+            {
+                return null;
+            }
+
+            // verify email address is registered or available to this user
+            if (!IsDuplicateUserEmail(updated.Email, updated.Id))
             {
                 return null;
             }
 
             // update the details of the user retrieved and save
-            user.Name = updated.Name;
-            user.Email = updated.Email;
-            user.Role = updated.Role;
-            user.Nationality = updated.Nationality;
-            user.CookingExperience = updated.CookingExperience;
-            user.PhotoUrl = updated.PhotoUrl;
+            User.Name = updated.Name;
+            User.Email = updated.Email;
+            User.Password = Hasher.CalculateHash(updated.Password); 
+            User.Role = updated.Role;
+            User.Nationality = updated.Nationality;
+            User.CookingExperience = updated.CookingExperience;
+            User.PhotoUrl = updated.PhotoUrl;
           
 
             db.SaveChanges();
-            return user;
+            return User;
         }
 
       
@@ -147,11 +152,8 @@ namespace SMS.Data.Services
        
         public bool IsDuplicateUserEmail(string email, int userId) 
         {
-             var existing = GetUserByEmailAddress(email);
-            // // if a user with email exists and the Id does not match
-            // // the userId (if provided), then they cannot use the email
-             return existing != null && userId != existing.Id;           
-        // return db.Users.FirstOrDefault(u => u.Email == email && u.Id != userId) == null;
+              return db.Users.FirstOrDefault(u => u.Email == email && u.Id != userId) == null;
+                     
         }
 
         public IList<User> SearchAllUsers(AllUsers range, string query) 
@@ -277,13 +279,12 @@ namespace SMS.Data.Services
 
             // search recipe by multiple queries, by range and by users id
             var results = db.Recipes
-                            .Include(t => t.User)
-                            .Where(t => (t.UserId == userId) &&                           
-                            (t.Name.ToLower().Contains(query) || t.RecipeIngredients.ToLower().Contains(query) || 
-                            t.Cuisine.ToLower().Contains(query) || t.Translator.ToLower().Contains(query)) &&
-                            (range == AllRecipes.ALL || range == AllRecipes.Vegetarian || range == AllRecipes.Vegan || range ==AllRecipes.Omnivorous
-                            )).ToList(); 
-            return  (results);  
+                            .Where(t => (t.Name.ToLower().Contains(query) || t.RecipeIngredients.ToLower().Contains(query) || 
+                            t.Cuisine.ToLower().Contains(query) || t.Translator.ToLower().Contains(query)) && 
+                            (range == AllRecipes.ALL || range == AllRecipes.Vegetarian  || range == AllRecipes.Vegan || range ==AllRecipes.Omnivorous
+                            ) && t.UserId == userId).ToList();
+
+                            return results;
         }
 
         public IList<Recipe> SearchAllRecipes(AllRecipes range, string query) 
@@ -291,16 +292,16 @@ namespace SMS.Data.Services
             // ensure query is not null    
             query = query == null ? "" : query.ToLower();
 
-            // search recipe, active status and users name // change
-        var results =  db.Recipes
-                            .Include(t => t.User)
+            // search recipe
+                    var results =  db.Recipes
+                    .Include(t => t.User)
+
                             .Where(t => (t.Name.ToLower().Contains(query) || t.RecipeIngredients.ToLower().Contains(query) || 
                             t.Cuisine.ToLower().Contains(query) || t.Translator.ToLower().Contains(query)) && 
                             (range == AllRecipes.ALL || range == AllRecipes.Vegetarian || range == AllRecipes.Vegan || range ==AllRecipes.Omnivorous
                             )).ToList();
 
-                            return (results);
-          
+                            return results;
         }
 
         //Get a review by Id

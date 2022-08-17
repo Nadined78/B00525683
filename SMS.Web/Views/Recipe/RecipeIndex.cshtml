@@ -5,7 +5,7 @@
 
 <partial name="_BreadCrumbs" model=@(new [] {
     ("/","Home"),
-    ("","Recipes")
+    ("","All Recipes")
 }) />
 
 <h2><b class="navbar-title mb-3">Recipe List</b></h2>
@@ -39,9 +39,9 @@
             </div>
 
             <div class="card-footer shadow-lg text-muted">
-               <a asp-controller="Recipe" title="Edit a Recipe" asp-action="Edit" asp-route-id=@r.Id><i class="bi bi-pen"></i></a>
+               <a asp-condition=@(User.IsInRole("admin")) asp-controller="Recipe" title="Edit a Recipe" asp-action="Edit" asp-route-id=@r.Id><i class="bi bi-pen"></i></a>
                <a asp-action="Details" title="Recipe Details" asp-route-id=@r.Id><i class="bi bi-info-circle"></i></a>
-               <a asp-controller="User" title="Delete a Recipe" asp-action="RecipeDelete" asp-route-id=@r.Id><i class="bi bi-trash"></i></a>
+               <a asp-condition=@(User.IsInRole("admin")) asp-controller="User" title="Delete a Recipe" asp-action="RecipeDelete" asp-route-id=@r.Id><i class="bi bi-trash"></i></a>
             </div>
       </div>
    </div>

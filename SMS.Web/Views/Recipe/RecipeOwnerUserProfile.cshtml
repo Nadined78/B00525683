@@ -24,19 +24,22 @@
 
             <dt class="col-5">Nationality</dt>
             <dd class="col-7">@Model.Nationality</dd>
+
+            <dt class="col-5">Cooking Experience</dt>
+            <dd class="col-7">@Model.CookingExperience</dd>
         </dl>
 
         <!-- use flex box to separate two divs containing primary actions on left and danger action on right -->
         <div class="mt-4 d-flex flex-row justify-content-between">
             <div>
 
-                <!-- navigation link to redirect to Home action -->
-                <a asp-controller="Home" title="Back to Home" asp-action="Index" class="btn btn-sm btn-danger">
-                    Back to Home Page</a>
+                <!-- navigation link to redirect to All Recipes action -->
+                <a asp-controller="Recipe" asp-action="RecipeIndex" class="btn btn-sm btn-danger">
+                    Back to All Recipes </a>
 
-                <!-- navigation link to redirect to all recipes -->    
-                <a asp-controller="Recipe" title="All Recipes" asp-action="RecipeIndex" class="btn btn-sm btn-success">
-                    All Recipes</a>
+                    <!-- navigation link to redirect to All Users action for Admin-->
+                <a asp-condition=@(User.IsInRole("admin")) asp-controller="User" asp-action="Index" class="btn btn-sm btn-danger">
+                    Back to All Users </a>
             </div>
         </div>
     </div>
@@ -46,5 +49,11 @@
     </div>
 </div>
 
-<!-- Delete Modal -->
+<!-- Recipes -->
+<div class="row pt-3">
+    <partial name="_Recipes" />
+</div>
+
+<!-- Delete Modals -->
 <partial name="_DeleteUserModal" />
+

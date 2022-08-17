@@ -37,11 +37,13 @@
                <a asp-controller="Recipe" title="Edit Recipe" asp-action="Edit" asp-route-id=@r.Id><i class="bi bi-pen"></i></a>
                <a asp-action="Details" title="Recipe Details" asp-route-id=@r.Id><i class="bi bi-info-circle"></i></a>
                <a asp-controller="User" title="Delete Recipe" asp-action="RecipeDelete" asp-route-id=@r.Id><i class="bi bi-trash"></i></a>
-               <a asp-controller="Recipe" Title="Add to my favourites" asp-action="Favourite" asp-route-id=@r.Id><i class ="btn-link glyphicon glyphicon-heart-empty"></i></a>
+               
             </div>
       </div>
    </div>
 }
+
+
 </div>
             
 

@@ -22,6 +22,7 @@ namespace SMS.Web.ViewModels
         [Required]
         public string Nationality {get; set;}
 
+        [Required]
         public string CookingExperience {get; set;}
 
         [Required]

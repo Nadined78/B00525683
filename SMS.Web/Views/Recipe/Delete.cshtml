@@ -3,9 +3,9 @@
 <partial name="_BreadCrumbs" model=@(new [] {
     ("/","Home"),
     ("/user","Users"),
-    ($"/user/details/{Model.UserId}",$"{Model.UserId}"),
-    ("","Delete Recipe")
-}) /> 
+    ($"/user/details/{Model.Id}",$"{Model.Id}"),
+    ("","Delete")
+}) />
 
 <h3 class="mt-4 navbar-title mb-4">Delete Recipe</h3>
 
@@ -23,11 +23,13 @@
             <dt class="col-5">Translation</dt>
             <dd class="col-7">@Model.Translator</dd>
             
+            <dt class="col-5">Recipe Owner</dt>
+            <dd class="col-7">@Model.User.Name</dd>
         </dl>
     </div>
 
     <div class="mt-4">
-        <form asp-action="RecipeDeleteConfirm" type="post">
+        <form asp-controller= "Recipe" asp-action="DeleteConfirm" type="post">
             <input type="hidden" asp-for="Id"/>
             <input type="submit" value="Confirm" class="btn btn-danger" />
             <a class="btn btn-secondary" asp-controller="User" asp-action="Index" >Cancel</a>
@@ -35,5 +37,3 @@
     </div>
     
 </div>
-
-<partial name="_DeleteRecipeModal"/>

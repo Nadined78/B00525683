@@ -36,53 +36,6 @@
   border-radius: var(--border-radius);
 }
 
-@* /* Tooltip container */
-.tooltip {
-  position: relative;
-  display: inline-block;
-  border-bottom: 1px dotted black; 
-}
-
-/* Tooltip text */
-.tooltip .tooltiptext {
-  visibility: hidden;
-  width: 120px;
-  background-color: #555;
-  color: #fff;
-  text-align: center;
-  padding: 5px 0;
-  border-radius: 6px;
-
-  /* Position the tooltip text */
-  position: absolute;
-  z-index: 1;
-  bottom: 125%;
-  left: 50%;
-  margin-left: -60px;
-
-  /* Fade in tooltip */
-  opacity: 0;
-  transition: opacity 0.3s;
-} *@
-@* 
-/* Tooltip arrow */
-.tooltip .tooltiptext::after {
-  content: "";
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  margin-left: -5px;
-  border-width: 5px;
-  border-style: solid;
-  border-color: #555 transparent transparent transparent;
-}
-
-/* Show the tooltip text when you mouse over the tooltip container */
-.tooltip:hover .tooltiptext {
-  visibility: visible;
-  opacity: 1;
-} *@
-
     </style>
 </head>
 <body>
@@ -130,9 +83,9 @@
                             <a class="nav-link text-dark dropdown-toggle" data-bs-toggle="dropdown" href="#" 
                                role="button" aria-expanded="false">Company</a>
                             <ul class="dropdown-menu">
-                                <li> <a class="dropdown-item" asp-controller="Home" asp-action="About">About</a></li>
-                                <li> <a class="dropdown-item" asp-controller="Home" asp-action="Privacy">Privacy</a></li>
-                                <li> <a class="dropdown-item" asp-controller="Home" asp-action="Contact">Contact</a></li>
+                                <li> <a class="dropdown-item bi bi-building" asp-controller="Home" asp-action="About"> About Us</a></li>
+                                <li> <a class="dropdown-item bi bi-shield-fill-exclamation" asp-controller="Home" asp-action="Privacy"> Our Privacy</a></li>
+                                <li> <a class="dropdown-item bi bi-person-lines-fill" asp-controller="Home" asp-action="Contact"> Contact Us</a></li>
                             </ul>
                         </li>
                     </ul>

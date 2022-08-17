@@ -22,7 +22,7 @@ namespace SMS.Web.ViewModels
 
         [Required]
         [JsonConverter(typeof(JsonStringEnumConverter))]
-        public Role Role { get; set; }
+        public Role Role { get; set; } = Role.member;
 
         [Required]
         public string Nationality {get; set;}

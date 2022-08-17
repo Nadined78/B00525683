@@ -37,16 +37,12 @@
             <div>
 
                 <!-- navigation link to Details action, passing the correct route id parameter -->
-                <a asp-condition=@(User.HasOneOfRoles("admin,member")) asp-controller="User" asp-action="UpdateProfile" asp-route-id="@Model.Id" class="btn btn-sm btn-primary"><i
-                        class="bi bi-pen"></i> Edit</a>
+                <a asp-condition=@(User.HasOneOfRoles("admin,member")) asp-controller="User" asp-action="EditProfile" asp-route-id="@Model.Id" class="btn btn-sm btn-danger"><i
+                        class="bi bi-pen"></i> Update Profile</a>
 
                         <!-- navigation link to Details action, passing the correct route id parameter -->
-                <a asp-condition=@(User.HasOneOfRoles("admin,member")) asp-controller="User" asp-action="UpdatePassword" asp-route-id="@Model.Id" class="btn btn-sm btn-primary"><i
+                <a asp-condition=@(User.HasOneOfRoles("admin,member")) asp-controller="User" asp-action="UpdatePassword" asp-route-id="@Model.Id" class="btn btn-sm btn-danger"><i
                         class="bi bi-pen"></i> Change Password</a>
-
-                <!-- navigation link to redirect to Home action -->
-                <a asp-controller="Home" asp-action="Index" class="btn btn-sm btn-link"><i class="bi bi-list"></i>
-                    Home</a>
 
             </div>
 
@@ -65,5 +61,13 @@
     </div>
 </div>
 
-<!-- Delete Modal -->
+<!-- Recipes -->
+<div class="row pt-3">
+    <partial name="_Recipes" />
+</div>
+
+
+<!-- Delete Modals -->
 <partial name="_DeleteUserModal" />
+
+

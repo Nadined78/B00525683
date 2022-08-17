@@ -20,6 +20,8 @@ namespace Template.Web
     [HtmlTargetElement(Attributes = "asp-authorize,asp-policy")]
     [HtmlTargetElement(Attributes = "asp-authorize,asp-roles")]
     [HtmlTargetElement(Attributes = "asp-authorize,asp-authentication-schemes")]
+
+    
     public class AuthorizeTagHelper : TagHelper, IAuthorizeData
     {
         private readonly IAuthorizationPolicyProvider _policyProvider;

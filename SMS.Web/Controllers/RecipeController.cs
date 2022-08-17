@@ -21,22 +21,27 @@ namespace SMS.Web.Controllers
 
 
         // GET /recipe/index - 
-        public IActionResult Index(RecipeSearchViewModel rm) //this needs to be specific for user 
+        public IActionResult Index(RecipeSearchViewModel rm) //indivdual user recipe index
         {
             var userId = User.GetSignedInUserId();
+
             rm.Recipes = svc.SearchMyRecipes(rm.Range, userId, rm.Query);
             return View(rm);
         }
 
         // // GET /recipe/index - 
         
-        public IActionResult RecipeIndex(RecipeSearchViewModel rm) //recipe list - recipeindex - all recipes 
+        public IActionResult RecipeIndex(RecipeSearchViewModel rm, string sortOrder) //recipe list - recipeindex - all users recipes 
         {
-            
+                 
             rm.Recipes = svc.SearchAllRecipes(rm.Range, rm.Query);
             return View(rm);  
+
+            
     
         }    
+
+       
 
         // GET/recipe/{id}
         public IActionResult Details(int id)
@@ -49,19 +54,20 @@ namespace SMS.Web.Controllers
             }
 
             return View(recipe);
-
         }
-      
+
+        
         // GET /recipe/create
         [Authorize(Roles="member")]
-        public IActionResult Create(int id)
+        public IActionResult Create()
         {
-            var users = svc.GetUser(id);
-                        
-            // // render blank form
-            return View(users);
-            
+            var userId = User.GetSignedInUserId();
+            var recipe = new RecipeCreateViewModel {
+                UserId = userId };
+
+            return View(recipe);
         }
+                
        
         // POST /recipe/create
         [HttpPost]
@@ -72,7 +78,7 @@ namespace SMS.Web.Controllers
             {
                 svc.CreateRecipe(rvm.UserId, rvm.Name, rvm.Diet, rvm.MealType, rvm.RecipeIngredients, rvm.Method, rvm.PrepTime, rvm.CookTime, rvm.Cuisine, rvm.Region, rvm.Translator, rvm.Calories, rvm.Servings, rvm.Price, rvm.PhotoUrl);// fix
      
-                Alert($"Recipe Created", AlertType.info);  
+                Alert($"Recipe created successfully for user {rvm.UserId}", AlertType.success); 
                 return RedirectToAction(nameof(Index));
             }
             
@@ -80,6 +86,7 @@ namespace SMS.Web.Controllers
             return View(rvm);
         }
 
+        
         public IActionResult Edit(int id)
         {        
             // load the recipe using the service
@@ -103,15 +110,6 @@ namespace SMS.Web.Controllers
         public IActionResult Edit(Recipe r)
         {
             var recipe = svc.GetRecipeById(r.Id);
-
-             //  // validate and complete POST action to save recipe changes
-            // if (ModelState.IsValid)
-            // {
-            //     // pass data to service to update
-            //     svc.UpdateRecipe(r);      
-            //     Alert("Recipe updated successfully", AlertType.info);
-            //     return RedirectToAction(nameof(Index));
-            // }
             
             // check if form is invalid and redisplay
             if (!ModelState.IsValid || recipe == null)
@@ -172,6 +170,39 @@ namespace SMS.Web.Controllers
             // pass user as parameter to the view
             return View(u);
         }
+
+        // GET / recipe/delete/{id}
+        [Authorize(Roles="admin, member")]      
+        public IActionResult Delete(int id)
+        {       
+            // load the recipe using the service
+            var r = svc.GetRecipeById(id);
+            // check the returned recipe is not null and if so return NotFound()
+            if (r == null)
+            {
+                // warning alert and redirect
+                Alert($"Recipe {id} not found", AlertType.warning);
+                return RedirectToAction(nameof(Index));
+            }     
+            
+            // pass recipe to view for deletion confirmation
+            return View(r);
+        }
+
+        // POST /recipe/delete/{id}
+        [HttpPost]
+        [Authorize(Roles="admin, member")]
+        [ValidateAntiForgeryToken]              
+        public IActionResult DeleteConfirm(int id)
+        {
+            // delete recipe via service
+            svc.DeleteRecipe(id);
+
+            Alert("Recipe deleted successfully", AlertType.info);
+            // redirect to the index view
+            return RedirectToAction(nameof(Index));
+        }
+
 
         
         // GET

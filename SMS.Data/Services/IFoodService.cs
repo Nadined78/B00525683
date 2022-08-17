@@ -15,6 +15,7 @@ namespace SMS.Data.Services
 
         IList<User> GetUsers();
         User GetUser(int id);
+
         User GetUserByEmailAddress(string email);
         User Authenticate(string email, string password);
         // User Register(string name, string email, string password, Role role, string nationality, string photoUrl);

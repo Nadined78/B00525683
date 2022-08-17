@@ -1,10 +1,12 @@
 @model UserProfileViewModel
 
+<partial name="_ViewLayouts"/>
+
 <div class="card shadow p-4 mt-4">
 
-    <h3 class="mb-3">Update Profile</h3>
+    <h3 class="navbar-title mb-3">Edit Profile</h3>
 
-    <form asp-action="UpdateProfile" method="post">
+    <form asp-action="EditProfile" method="post">
 
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -48,8 +50,8 @@
         </div>
 
         <div class="form-group mt-3">
-            <input type="submit" value="Save" class="btn btn-primary" />
-            <a class="btn btn-secondary" asp-controller="User" asp-action="Index">Cancel</a>
+            <input type="submit" value="Save" class="btn btn-danger" />
+            <a class="btn btn-secondary" asp-controller="User" asp-action="UserProfile">Cancel</a>
         </div>
 
     </form>

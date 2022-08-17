@@ -4,6 +4,7 @@ using System.Text;
 using System.Security.Claims;
 // using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.Cookies;
+
 using SMS.Data.Models;
 using Microsoft.Extensions.Configuration;
 
@@ -25,6 +26,7 @@ namespace SMS.Web
                 new Claim(ClaimTypes.Sid, user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email),
                 new Claim(ClaimTypes.Name, user.Name),
+                
                 new Claim(ClaimTypes.Role, user.Role.ToString())                              
             }, CookieAuthenticationDefaults.AuthenticationScheme);
 

@@ -74,11 +74,6 @@ namespace SMS.Web.Controllers
             return RedirectToAction(nameof(Login));
         }
 
-        public ActionResult ForgotPassword()
-        {
-            return View();
-        }
-
 
         public IActionResult UserProfile()
         {
@@ -97,7 +92,7 @@ namespace SMS.Web.Controllers
         }
     
 
-        public IActionResult UpdateProfile()
+        public IActionResult EditProfile()
         {
            // use BaseClass helper method to retrieve Id of signed in user 
             var user = _svc.GetUser(User.GetSignedInUserId());
@@ -107,6 +102,7 @@ namespace SMS.Web.Controllers
                 Email = user.Email,                 
                 Role = user.Role,
                 Nationality = user.Nationality,
+                CookingExperience = user.CookingExperience,
                 PhotoUrl = user.PhotoUrl
             };
             return View(userViewModel);
@@ -115,7 +111,7 @@ namespace SMS.Web.Controllers
         [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> UpdateProfile([Bind("Id,Name,Email,Role,Nationality,PhotoUrl")] UserProfileViewModel m)       
+        public async Task<IActionResult> EditProfile([Bind("Id,Name,Email,Role,Nationality,CookingExperience,PhotoUrl")] UserProfileViewModel m)       
         {
             var user = _svc.GetUser(m.Id);
             // check if form is invalid and redisplay
@@ -129,6 +125,7 @@ namespace SMS.Web.Controllers
             user.Email = m.Email;
             user.Role = m.Role;    
             user.Nationality = m.Nationality;
+            user.CookingExperience = m.CookingExperience;
             user.PhotoUrl = m.PhotoUrl;
 
             var updated = _svc.UpdateUser(user);
@@ -206,6 +203,7 @@ namespace SMS.Web.Controllers
             return RedirectToAction("Login", "User"); 
         }        
 
+        
         // GET /user
         public IActionResult Index(UserSearchViewModel vm)
         {
@@ -214,7 +212,7 @@ namespace SMS.Web.Controllers
             vm.Users = _svc.SearchAllUsers(vm.Range, vm.Query);
             return View(vm);
             
-            // return View(users);
+            
         }
 
         // GET /users/details/{id}
@@ -409,7 +407,7 @@ namespace SMS.Web.Controllers
             Alert($"Recipe deleted successfully", AlertType.success);
             
             // redirect to the recipe index view
-            return RedirectToAction("RecipeIndex", "Recipe", new { Id = userId });
+            return RedirectToAction("Index", "User", new { Id = userId });
         }
 
 

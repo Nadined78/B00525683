@@ -21,9 +21,12 @@
 
             <dt class="col-5">Nationality</dt>
             <dd class="col-7">@Model.Nationality</dd>
+
+            <dt class="col-5">Cooking Experience</dt>
+            <dd class="col-7">@Model.CookingExperience</dd>
         </dl>
 
-        <!-- use flex box to separate two divs containing primary actions on left and danger action on right -->
+        <!-- use flex box to separate two divs containing primary actions on left and right -->
         <div class="mt-4 d-flex flex-row justify-content-between">
             <div>
               
@@ -38,8 +41,9 @@
             </div>
 
             <div>
-                <a asp-controller="User" asp-action="UpdatePassword" type="button" class= "btn btn-success">
+                <a asp-condition=@(User.IsInRole("member")) asp-controller="User" asp-action="UpdatePassword" type="button" class= "btn btn-success">
                     Update Password</a>
+                    
 
                 <!-- navigation link to Details action, passing the correct route id parameter -->
                 <a asp-condition=@(User.IsInRole("admin")) title="Edit User Details" asp-controller="User" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-danger"><i
@@ -69,3 +73,5 @@
 
 <!-- Delete Modal -->
 <partial name="_DeleteUserModal" />
+
+
