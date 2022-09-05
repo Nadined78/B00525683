@@ -1,35 +1,48 @@
-<!-- partial used to reduce code amount in recipe page -->
+<!-- Review partial to reduce code in Recipe Details Page -->
+
+<partial name="_ViewLayouts" />
+
+@if (Model.Reviews.Count == 0)
+{
+    <h4>This Recipe has yet to recieve any reviews</h4>
+    
+}
+else
+{
 
 <div>
-<h3>Recipe Reviews</h3>
-<a asp-controller="Recipe" asp-action="AddReview" asp-route-id="@Model.Id" class="btn btn-sm btn-dark mt-1 mb-2"></i>Add Review<i class="bi bi-pen ml-2"></i></a>
+    <h3 class="mt-4 navbar-title"> Recipe Reviews </h3>
+    <a asp-condition =@(User.IsInRole("member")) asp-controller="Recipe" asp-action="AddReview" asp-route-id="@Model.Id" class="btn btn-sm btn-danger mt-1 mb-2"> Add Review <i class="bi bi-pen ml-2"></i></a>
 </div>
 
-<div class="card rounded shadow">
+
 <table class="table table-sm table-striped table-bordered table-hover">
     <thead class="thead-dark">
         <tr>
             <th>Reviewed On</th>
             <th>Name</th>
             <th>Comment</th>
-            <th>Recipe Rating 1 - 10<i class="bi bi-star-fill bi bi-star ml-2"></i></th>
-            <th><i class="bi bi-trash ml-2"><th>
+            <th>Rating 1 - 10 <i class="bi bi-star-fill bi bi-star ml-2"></i></th>
+            <th><a asp-condition=@(User.IsInRole("admin"))></a> Edit</th>
+            <th><a asp-condition=@(User.IsInRole("admin"))></a>Delete</th>
         </tr>
     </thead>
     <tbody>
         @foreach(var r in Model.Reviews)
         {
             <tr>
-                <td>@r.ReviewedOn.ToString("MM/dd/yy H:mm")</td>
+                <td>@r.ReviewedOn.ToShortDateString()</td>
                 <td>@r.Name</td>
                 <td>@r.Comment</td>
                 <td>@r.Rating</td>
-                <td><a asp-controller="Recipe" title="Delete a Review" asp-action="DeleteReview" asp-route-id="@Model.Id" class="bi bi-trash bi-dark ml-2"></a></td>
+                <td><a asp-condition=@(User.IsInRole("admin")) asp-controller="Recipe" title="Edit a Review" asp-action="EditReview" asp-route-id="@Model.Id" class="bi bi-pen bi-dark"></a></td>
+                <td><a asp-condition=@(User.IsInRole("admin")) asp-controller="Recipe" title="Delete a Review" asp-action="DeleteReview" asp-route-id="@Model.Id" class="bi bi-trash bi-dark"></a></td>
                 
             </tr>    
         }
     </tbody>    
 </table>  
+}
 
 
 

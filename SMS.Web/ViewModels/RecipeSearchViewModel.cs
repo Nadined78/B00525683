@@ -9,8 +9,10 @@ namespace SMS.Web.ViewModels
 
         // search options        
         public string Query { get; set; } = ""; //string query
-        
-        public AllRecipes Range { get; set; } = AllRecipes.ALL; //defaults to all
+
+        // enum from recipe model
+        public Diet Range { get; set; } //defaults to all
+
         
     }
 }

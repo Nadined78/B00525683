@@ -1,16 +1,20 @@
 ﻿@model PrivacyViewModel
 
+<!-- View for Privacy page-->
+
 <partial name= "_LayoutsHome" />  
 
+<partial name="_Breadcrumbs" model=@(new [] { ("", "Privacy") })>
+ 
+ <!--Google Translate -->    
+    <partial name="_google" />
+
 <div class="card text-center">
-    <div class="card-header custom-body">
+    <div class="card-header navbar-title custom-body">
         <h2>@Model.Title</h2>
     </div>
     <div class="card-body">
-        <h5 class="card-title"><i>@Model.Aim</i></h5>
-    </div>
-    <div class="card-footer text-muted">
-        <div><i>Formed on @Model.FormedString</i></div>
+        <h6 class="card-title"><i>@Model.Aim</i></h6>
     </div>
 </div>
 

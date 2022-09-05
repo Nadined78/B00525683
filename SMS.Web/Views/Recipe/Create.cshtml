@@ -1,8 +1,14 @@
 @model RecipeCreateViewModel
 
-<partial name = "_ViewLayouts">
+<!-- View for Create a recipe page -->
+
+<!-- Partial used for page layout -->
+<partial name="_ViewLayouts" /> 
 
 <partial name="_Breadcrumbs" model=@(new [] { ("/", "Home"), ("/recipe", "My Recipes"), ("","Create") })>
+
+ <!--Google Translate -->    
+    <partial name="_google" />
 
 <h3 class="mt-4 navbar-title mb-4">Create Recipe</h3>
 

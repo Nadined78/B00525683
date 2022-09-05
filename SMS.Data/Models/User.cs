@@ -3,17 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.ComponentModel.DataAnnotations; 
 
-namespace SMS.Data.Models {
+namespace SMS.Data.Models 
+{
      
     public enum Role { admin, member } 
     
     // used in user search feature
     public enum AllUsers { ALL}
 
-    public class User {
+    public class User 
+    {
         public int Id { get; set; }
 
-        [StringLength(50)]
+        [StringLength(100)]
         [Required(ErrorMessage = "Name Required")]
         public string Name { get; set; }
 
@@ -32,9 +34,12 @@ namespace SMS.Data.Models {
         [Required(ErrorMessage = "Nationality Required")]
         public string Nationality {get; set; }
 
+        [Required(ErrorMessage = "Please enter your experience with cooking/food")]
         public string CookingExperience {get; set;}
 
+        [Required(ErrorMessage = "You must enter a photo of yourself")]
         public string PhotoUrl { get; set; }
+
 
         //relationship 1-M - A user can have mutiple recipes 
         

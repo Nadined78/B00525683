@@ -1,21 +1,32 @@
 @model ContactViewModel
 
+<!-- View for contact us page-->
+
 <partial name="_LayoutsHome" />   
+
+<partial name="_Breadcrumbs" model=@(new [] { ("", "Contact") })>
+
+ <!--Google Translate -->    
+    <partial name="_google" />
 
 <div class="card text-center">
   <div class="card-header navbar-title custom-body">
     <h1>@Model.Title</h2>
   </div>
     <div class="card-body">
-      <h4 class="card-title">@Model.Message</h5> 
-      <br>    
-        <p class="card-text"><b>Address:</b> @Model.Address</p>
-        <p><i class="bi bi-envelope-open-fill mr-1"></i> @Model.Email</p>
-        <p><i class="bi bi-telephone-fill mr-1"></i> @Model.Phone</p>
-        <h5>Alternatively, please contact us through our social media pages and a member of staff will assist any of your queries</h5>
+      <h6 class="card-title">@Model.Message</h6> 
+      <h6>Alternatively, please contact us through our social media pages and a member of staff will assist any of your queries</h6>
         <a href="#"><i class="bi bi-twitter mr-2"></i></a>
         <a href="#"><i class="bi bi-instagram mr-2"></i></a>
         <a href="#"><i class="bi bi-facebook"></i><a>
+      <script charset="utf-8" type="text/javascript" src="//js-eu1.hsforms.net/forms/v2.js?pre=1"></script>
+<script>
+  hbspt.forms.create({
+    region: "eu1",
+    portalId: "26176013",
+    formId: "396bd197-1e33-4896-84ae-7519da3e0123"
+  });
+</script>
   </div>
 </div>
 

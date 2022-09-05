@@ -1,6 +1,6 @@
-@model ReviewViewModel
+@model Review
 
-<!-- View for Add Review -->
+<!-- View for Edit review page -->
 
 <!-- partial used for view layout -->
 <partial name="_ViewLayouts" /> 
@@ -9,15 +9,15 @@
     ("/", "Home"), 
     ("/recipe", "Recipes"), 
     ($"/recipe/details/{Model.RecipeId}",$"{Model.RecipeId}"), 
-    ("","Add Review"), 
+    ("","Edit Review"), 
 })>
 
  <!--Google Translate -->    
     <partial name="_google" />
 
-<h3 class="my-4 navbar-title">Add Review</h3>
+<h3 class="my-4 navbar-title">Edit Review for @Model.Name</h3>
   <div class="card rounded shadow p-3 custom-body">
-  <form asp-action="AddReview">
+  <form asp-action="EditReview">
     <div asp-validation-summary="ModelOnly" class="text-danger"></div>
     <input type="hidden" asp-for="RecipeId" class="form-control"/>
 

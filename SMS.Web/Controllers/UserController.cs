@@ -26,7 +26,9 @@ namespace SMS.Web.Controllers
             return View();
         }
 
-        [HttpPost] [ValidateAntiForgeryToken] [AllowAnonymous]
+        [HttpPost] 
+        [ValidateAntiForgeryToken] 
+        [AllowAnonymous]
         public async Task<IActionResult> Login([Bind("Email,Password")] UserLoginViewModel m)
         {        
             // call service to Authenticate User
@@ -144,6 +146,7 @@ namespace SMS.Web.Controllers
             return RedirectToAction("Index","Home");
         }
 
+
         // Change Password
         [Authorize]
         public IActionResult UpdatePassword()
@@ -204,6 +207,7 @@ namespace SMS.Web.Controllers
         }        
 
         
+        [Authorize(Roles="admin")]
         // GET /user
         public IActionResult Index(UserSearchViewModel vm)
         {
@@ -216,6 +220,8 @@ namespace SMS.Web.Controllers
         }
 
         // GET /users/details/{id}
+        [Authorize(Roles="admin")]
+        
         public IActionResult Details(int id)
         {  
             // retrieve the user with specifed id from the service
@@ -247,7 +253,7 @@ namespace SMS.Web.Controllers
         public IActionResult Create([Bind("Name, Email, Password, Nationality, PhotoUrl")]  User u) //if admin only wants to add an admin/member
         {
             // check email is unique for this user
-            if (_svc.IsDuplicateUserEmail(u.Email, u.Id))
+            if (_svc.IsDuplicateUserEmailCreate(u.Email, u.Id))
             {
                 // add manual validation error
                 ModelState.AddModelError(nameof(u.Email),"The email address is already in use");
@@ -292,7 +298,7 @@ namespace SMS.Web.Controllers
         public IActionResult Edit(int id, [Bind("Id, Name, Email, Password, Role, Nationality, PhotoUrl")] User u)
         {
             // // check email is unique for this user  
-            if (_svc.IsDuplicateUserEmail(u.Email,u.Id)) 
+            if (_svc.IsDuplicateUserEmailCreate(u.Email,u.Id)) 
             {
                 // add manual validation error
                 ModelState.AddModelError("Email", "This email is already registered");
@@ -337,6 +343,16 @@ namespace SMS.Web.Controllers
         [ValidateAntiForgeryToken]              
         public IActionResult DeleteConfirm(int id)
         {
+            if (User.IsInRole("admin"))
+            {
+                var usID = User.GetSignedInUserId();
+                if (id == usID)
+                {
+                Alert("Admin Accounts can not be deleted", AlertType.warning);
+                return RedirectToAction("UserProfile");
+                }
+            }
+
             //delete user via service
             _svc.DeleteUser(id);
 
@@ -399,6 +415,7 @@ namespace SMS.Web.Controllers
 
         // POST /user/recipedeleteconfirm/{id}
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public IActionResult RecipeDeleteConfirm(int id, int userId)
         {
@@ -406,8 +423,14 @@ namespace SMS.Web.Controllers
             _svc.DeleteRecipe(id);
             Alert($"Recipe deleted successfully", AlertType.success);
             
-            // redirect to the recipe index view
+            if (User.IsInRole("admin"))
+            {
+            // redirect to the user index view
             return RedirectToAction("Index", "User", new { Id = userId });
+            }
+            
+            else 
+            return RedirectToAction("Index", "Recipe", new { Id = userId });
         }
 
 
@@ -418,7 +441,7 @@ namespace SMS.Web.Controllers
         public IActionResult VerifyEmailAvailable(string email, int id)
         {
             // check if email is available, or owned by user with id 
-            if (!_svc.IsDuplicateUserEmail(email,id))
+            if (!_svc.IsDuplicateUserEmailEdit(email,id))
             {
                 return Json($"A user with this email address {email} already exists.");
             }

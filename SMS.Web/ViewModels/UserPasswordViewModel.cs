@@ -12,6 +12,7 @@ namespace SMS.Web.ViewModels
         public string OldPassword { get; set; }
         
         [Required]
+        [StringLength(50, ErrorMessage ="The {0} must be at least {2} characters long", MinimumLength =4)]
         public string Password { get; set; }
 
         [Compare("Password", ErrorMessage = "Confirm password doesn't match, Type again !")]

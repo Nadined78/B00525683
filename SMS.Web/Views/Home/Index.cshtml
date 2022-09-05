@@ -1,14 +1,20 @@
 ﻿@model AboutViewModel
 
-<partial name= "_LayoutsHome" />
+<!-- View for home index page-->
+
+<partial name= "_LayoutsHome" />                      
 
 <partial name="_Breadcrumbs" model=@(new [] { ("", "Home") })>
 
 <div class="image">
+
+  <!--Google Translate -->    
+    <partial name="_google" />
+
   <div class="navbar-title text-center">
      <h1>@Model.Title</h1> 
   </div>
-
+  
   <div class="weatherwidget">
     <partial name="_Weather"/> 
 </div>

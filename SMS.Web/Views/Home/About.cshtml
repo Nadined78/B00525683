@@ -1,16 +1,32 @@
 @model AboutViewModel
-        
- <div class="card text-center shadow">
-    <div class="card-header bg-warning">
+
+<!-- View for About us page -->
+
+<partial name="_LayoutsHome" /> 
+
+<partial name="_Breadcrumbs" model=@(new [] { ("", "About") })>
+
+ <!--Google Translate -->    
+    <partial name="_google" />  
+
+<div class="card text-center">
+  <div class="card-header navbar-title custom-body">
         <h2>@Model.Title</h2>
     </div>
     <div class="card-body">
         <div class="card-body">
             <h5 class="card-title">Mission Statement</h5>
-            <p><em>@Model.Message</em></p>
-        </div>
-        <div class="card-footer text-muted">
-            <div>Formed on @Model.FormedString <cite title="Source Title">(@Model.Days days ago)</cite></div>
+            <h6>@Model.Message</h6>
+
+            
+            <script charset="utf-8" type="text/javascript" src="//js-eu1.hsforms.net/forms/v2.js?pre=1"></script>
+                <script>
+                hbspt.forms.create({
+                    region: "eu1",
+                    portalId: "26176013",
+                    formId: "8a6b2434-a483-41c9-994f-c2901527e2e5"
+                });
+            </script>
         </div>
     </div>
 </div>

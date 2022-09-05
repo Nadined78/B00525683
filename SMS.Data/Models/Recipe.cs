@@ -6,19 +6,18 @@ namespace SMS.Data.Models
 {
     public enum MealType { Breakfast, Lunch, Dinner, Snack }
 
-    public enum Diet { Omnivorous, Vegetarian, Vegan }
-
     public enum Region { Africa, Asia, CentralAmerica, Europe, MiddleEast, NorthAmerica, Oceania, SouthAmerica, Caribbean }
 
-    // used in ingredient search feature
-    public enum AllRecipes { ALL, Vegetarian, Vegan, Omnivorous}
+    // used in recipe search feature
+    public enum Diet { ALL, Vegetarian, Vegan, Omnivorous}
 
     public class Recipe
     {
 
-        public int Id { get; set; }
+        public int Id { get; set; } // primary key 
 
-        [Required]
+        [StringLength(100)]
+        [Required(ErrorMessage = "Name Required")]
         public string Name { get; set; }
 
         [Required]
@@ -27,35 +26,38 @@ namespace SMS.Data.Models
         [Required]
         public MealType MealType {get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Ingredients are required")]
         public string RecipeIngredients {get; set;}
 
-        [Required]
+        [Required(ErrorMessage = "Method steps are required")]
         public string Method { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Preparation time is required")]
         [Range(0,1000)]
         public int PrepTime{ get; set; } 
 
-        [Required]
+        [Required(ErrorMessage = "Cooking Time is required")]
         [Range(0,1000)]
         public int CookTime{ get; set; } 
 
-        [Required]
+        [Required(ErrorMessage = "The recipes cuisine is required")]
         public string Cuisine { get; set; }
 
         [Required]
         public Region Region {get; set; }
 
-        public string Translator {get; set; }
+        [Required(ErrorMessage = "Please try an enter some translation of your recipe in the cuisines language")]
+        public string Translator {get; set; } 
 
-        public int Calories {get; set; }
+        public int Calories {get; set; } //not required 
 
-        public int Servings {get; set; }
+        public int Servings {get; set; } //not required
 
+        [Required(ErrorMessage = "Your recipe cost must be entered")]
         public double Price {get; set; }
 
         [UrlResource]
+        [Required(ErrorMessage = "You must enter a recipe photo")]
         public string PhotoUrl { get; set; }    
 
       

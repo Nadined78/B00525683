@@ -1,12 +1,16 @@
 @model User
 
-<partial name = "_ViewLayouts">
+<!-- Partial used for page layout -->
+<partial name="_ViewLayouts" /> 
 
 <partial name="_BreadCrumbs" model=@(new [] {
     ("/","Home"),
     ("",$"{Model.Name}"),
     ("","Details")
 }) /> 
+
+ <!--Google Translate -->    
+    <partial name="_google" />
 
 <h3 class="mt-4 mb-4 navbar-title">@Model.Name's Details</h3>
 <div class="row">

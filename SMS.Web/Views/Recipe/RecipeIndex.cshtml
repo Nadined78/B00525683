@@ -1,12 +1,16 @@
 @model RecipeSearchViewModel
 
-<partial name = "_ViewLayouts">
+<!-- Partials used for page layout -->
+<partial name="_ViewLayouts" /> 
 <partial name= "_RecipeLayout">  
 
 <partial name="_BreadCrumbs" model=@(new [] {
     ("/","Home"),
     ("","All Recipes")
 }) />
+
+<!--Google Translate -->    
+<partial name="_google" />
 
 <h2><b class="navbar-title mb-3">Recipe List</b></h2>
 
@@ -17,7 +21,8 @@
    <partial name="_AllSearch" />
 </div>
 
-<div class="card-deck tooltiptext">
+
+<div class="card-deck">
          @foreach (var r in Model.Recipes) 
          {
             <div class="row row-cols-1 row-cols-md-3">
@@ -44,7 +49,9 @@
                <a asp-condition=@(User.IsInRole("admin")) asp-controller="User" title="Delete a Recipe" asp-action="RecipeDelete" asp-route-id=@r.Id><i class="bi bi-trash"></i></a>
             </div>
       </div>
+      
    </div>
 }
+
 </div>
             

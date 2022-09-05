@@ -18,7 +18,7 @@
 
 <!-- Not Logged in -->
 <div class="navbar-nav" asp-condition="@(!User.Identity.IsAuthenticated)">
-    <a class="nav-link text-dark bi bi-box-arrow-in-right"  asp-controller="User" asp-action="Login">Login</a>
+    <a class="nav-link text-dark bi bi-box-arrow-in-right"  asp-controller="User" asp-action="Login"> Login</a>
     <a class="nav-link text-dark bi bi-person-plus"  asp-controller="User" asp-action="Register"> Register</a>
 </div>
 

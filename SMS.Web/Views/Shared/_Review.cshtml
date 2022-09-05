@@ -1,17 +1,18 @@
-@* @if (Model.Reviews.Count == 0)
+<!-- Review partial to reduce code in Recipe Details Page -->
+@if (Model.Reviews.Count == 0)
 {
     <h4>This Recipe has yet to recieve any reviews</h4>
     
 }
 else
-{ *@
+{
 
 <div>
-<h3>Recipe Reviews</h3>
-<a asp-controller="Recipe" asp-action="AddReview" asp-route-id="@Model.Id" class="btn btn-sm btn-dark mt-1 mb-2"></i>Add Review<i class="bi bi-pen ml-2"></i></a>
+    <h3 class="mt-4 navbar-title"> Recipe Reviews </h3>
+    <a asp-condition =@(User.IsInRole("member")) asp-controller="Recipe" asp-action="AddReview" asp-route-id="@Model.Id" class="btn btn-sm btn-danger mt-1 mb-2"> Add Review <i class="bi bi-pen ml-2"></i></a>
 </div>
 
-<div class="card rounded shadow">
+
 <table class="table table-sm table-striped table-bordered table-hover">
     <thead class="thead-dark">
         <tr>
@@ -36,6 +37,7 @@ else
         }
     </tbody>    
 </table>  
+}
 
 
 

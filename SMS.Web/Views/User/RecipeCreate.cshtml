@@ -1,18 +1,21 @@
 @model Recipe
 
+<!-- View Page for Recipe Create -->
+
+<!-- Partial used for page layout -->
 <partial name = "_ViewLayouts">
 
-<h3 class="mt-4 navbar-title mb-4">Create Recipe</h3>
-
-@* <partial name="_Breadcrumbs" model=@(new [] { ("/", "Home"), ("/recipe", "My Recipes"), ("","Create") })> *@
-
 <partial name="_BreadCrumbs" model=@(new [] {
-    ("/","Home"),
-    ("/user","Users"),
-    ($"/user/details/{Model.UserId}",$"{Model.UserId}"),
-    ("","Create Recipe")
+("/","Home"),
+("/user","Users"),
+($"/user/details/{Model.UserId}",$"{Model.UserId}"),
+("","Create Recipe")
 }) />
 
+<!--Google Translate -->    
+<partial name="_google" />
+
+<h3 class="mt-4 navbar-title mb-4">Create Recipe</h3>
 
 <div class="card rounded shadow-lg p-3">
     <form asp-action="RecipeCreate">

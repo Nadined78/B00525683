@@ -2,7 +2,6 @@ using System;
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
-
 using SMS.Data.Models;
 using SMS.Data.Repository;
 using SMS.Data.Security;
@@ -60,7 +59,6 @@ namespace SMS.Data.Services
         }
 
         // retrieve list of Users
-
         public IList<User> GetUsers()
         {
             return db.Users.ToList();
@@ -89,7 +87,7 @@ namespace SMS.Data.Services
             {            
                 Name = name,
                 Email = email,
-                Password = Hasher.CalculateHash(password), // can hash if required 
+                Password = Hasher.CalculateHash(password), 
                 Role = role,
                 Nationality = nationality,
                 CookingExperience = cookingExperience,
@@ -105,6 +103,7 @@ namespace SMS.Data.Services
         public bool DeleteUser(int id)
         {
             var u = GetUser(id);
+
             if (u == null)
             {
                 return false;
@@ -125,7 +124,7 @@ namespace SMS.Data.Services
             }
 
             // verify email address is registered or available to this user
-            if (!IsDuplicateUserEmail(updated.Email, updated.Id))
+            if (!IsDuplicateUserEmailEdit(updated.Email, updated.Id))
             {
                 return null;
             }
@@ -144,25 +143,37 @@ namespace SMS.Data.Services
             return User;
         }
 
-      
+        //Get user by email address
         public User GetUserByEmailAddress(string email)
         {
             return db.Users.FirstOrDefault(u => u.Email == email);
         }
-       
-        public bool IsDuplicateUserEmail(string email, int userId) 
+
+        //Check if email already exists creating a new user
+        public bool IsDuplicateUserEmailCreate(string email, int userId) 
         {
-              return db.Users.FirstOrDefault(u => u.Email == email && u.Id != userId) == null;
-                     
+            var existing = GetUserByEmailAddress(email); 
+            return existing != null && userId != existing.Id;
         }
 
+        //Check if email already exists for edit user
+        public bool IsDuplicateUserEmailEdit(string email, int userId) 
+        {
+
+            return db.Users.FirstOrDefault(u => u.Email == email && u.Id != userId) == null;
+            
+        }
+                   
+
+
+        //Perform a search of the usesrs based on a query and range 'ALL'
         public IList<User> SearchAllUsers(AllUsers range, string query) 
         {
             // ensure query is not null    
             query = query == null ? "" : query.ToLower();
 
             // search recipe - fix
-        var results =  db.Users
+            var results =  db.Users
                             .Where(t => (t.Name.ToLower().Contains(query) || t.Nationality.ToLower().Contains(query) || 
                             t.Email.ToLower().Contains(query)) && 
                             (range == AllUsers.ALL)).ToList();
@@ -173,11 +184,13 @@ namespace SMS.Data.Services
 
         // ===================== Recipe Management ==========================
 
+        //Retrieve a list of recipes
         public IList<Recipe> GetRecipes()
         {
             return db.Recipes.ToList();
         }     
 
+        //Create a new recipe for a user 
         public Recipe CreateRecipe(int userId, string name, Diet diet, MealType mealType, string recipeIngredients, string method, int prepTime, int cookTime, string cuisine, Region region, string translator, int calories, int servings, double price, string photoUrl)
         {
             var user = GetUser(userId);
@@ -208,16 +221,16 @@ namespace SMS.Data.Services
             return recipe;
         }
         
-
+        //Get recipe for related user or not if not found 
         public Recipe GetRecipeById(int id)
         {
-            // return recipe and related user or null if not found
             return db.Recipes
                      .Include(u => u.Reviews)
                      .FirstOrDefault(u => u.Id == id);
                      
         }
 
+        //Delete recipe
         public bool DeleteRecipe(int id)
         {
             // find recipe
@@ -240,6 +253,8 @@ namespace SMS.Data.Services
                      .ToList();
         }
 
+        
+        // Update an existing recipe
         public Recipe UpdateRecipe(Recipe updated)
         {
             // verify the recipe exists
@@ -270,9 +285,9 @@ namespace SMS.Data.Services
         }
 
 
-        // // // perform a search of the recipes based on a query and
+        // // // perform a search of the members recipes based on a query and
         // // // a range 'ALL', 'Omnivorous', 'Vegetarian', 'Vegan'
-        public IList<Recipe> SearchMyRecipes(AllRecipes range, int userId, string query)  //how do i include price 
+        public IList<Recipe> SearchMyRecipes(Diet range, int userId, string query)
         {
             // ensure query is not null    
             query = query == null ? "" : query.ToLower();
@@ -281,13 +296,15 @@ namespace SMS.Data.Services
             var results = db.Recipes
                             .Where(t => (t.Name.ToLower().Contains(query) || t.RecipeIngredients.ToLower().Contains(query) || 
                             t.Cuisine.ToLower().Contains(query) || t.Translator.ToLower().Contains(query)) && 
-                            (range == AllRecipes.ALL || range == AllRecipes.Vegetarian  || range == AllRecipes.Vegan || range ==AllRecipes.Omnivorous
+                            (range == Diet.ALL || range == Diet.Vegetarian  || range == Diet.Vegan || range == Diet.Omnivorous
                             ) && t.UserId == userId).ToList();
 
                             return results;
         }
 
-        public IList<Recipe> SearchAllRecipes(AllRecipes range, string query) 
+        // // // perform a search of all recipes based on a query and
+        // // // a range 'ALL', 'Omnivorous', 'Vegetarian', 'Vegan'
+        public IList<Recipe> SearchAllRecipes(Diet range, string query) 
         {
             // ensure query is not null    
             query = query == null ? "" : query.ToLower();
@@ -298,12 +315,14 @@ namespace SMS.Data.Services
 
                             .Where(t => (t.Name.ToLower().Contains(query) || t.RecipeIngredients.ToLower().Contains(query) || 
                             t.Cuisine.ToLower().Contains(query) || t.Translator.ToLower().Contains(query)) && 
-                            (range == AllRecipes.ALL || range == AllRecipes.Vegetarian || range == AllRecipes.Vegan || range ==AllRecipes.Omnivorous
+                            (range == Diet.ALL || range == Diet.Vegetarian || range == Diet.Vegan || range == Diet.Omnivorous
                             )).ToList();
 
                             return results;
         }
 
+        // ===================== Review Management ==========================
+        
         //Get a review by Id
         public Review GetReviewById(int id)
         {
@@ -312,7 +331,7 @@ namespace SMS.Data.Services
                      .FirstOrDefault(r => r.Id == id);      
         }
 
-        // Add a new Review to a movie 
+        // Add a new Review to a recipe
         public Review AddReview(Review r)
         {
             var recipe = GetRecipeById(r.RecipeId);        
@@ -333,6 +352,27 @@ namespace SMS.Data.Services
             recipe.Reviews.Add(review);  
             db.SaveChanges();           
             return review;              
+        }
+
+        // Update an existing review
+        public Review UpdateReview(Review updated)
+        {
+            // verify the recipe exists
+            var review = GetReviewById(updated.Id);
+            if (review == null)
+            {
+                return null;
+            }
+
+            // update the details of the recipe retrieved and save
+            review.Name = updated.Name;
+            review.ReviewedOn = updated.ReviewedOn;
+            review.Comment = updated.Comment;
+            review.Rating = updated.Rating;
+                       
+
+            db.SaveChanges();
+            return review;
         }
 
         

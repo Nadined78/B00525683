@@ -19,6 +19,35 @@ namespace SMS.Test
         }
 
         // ========================== User Tests =========================
+        
+        [Fact]
+        public void LoginWithValidCredentialsShouldWork()
+        {
+            // arrange
+            svc.AddUser("admin", "admin@mail.com", "admin", Role.admin, "irish", "", "");
+            
+            // act            
+            var user = svc.Authenticate("admin@mail.com","admin");
+
+            // assert
+            Assert.NotNull(user);
+           
+        }
+
+        [Fact]
+        public void LoginWithInvalidCredentialsShouldNotWork()
+        {
+            // arrange
+            svc.AddUser("admin", "admin@mail.com", "admin", Role.admin, "irish", "", "");
+
+            // act      
+            var user = svc.Authenticate("admin@mail.com","xxx");
+
+            // assert
+            Assert.Null(user);
+           
+        }
+
 
         [Fact] 
         public void User_AddUser_WhenDuplicateEmail_ShouldReturnNull()
@@ -437,7 +466,7 @@ namespace SMS.Test
             var recipes = svc.GetAllRecipes();    //retrieve list of recipes
 
             //assert
-            Assert.Equal(1, recipes.Count);  //after deleting one recipe make sure the movie count is now 1
+            Assert.Equal(1, recipes.Count);  //after deleting one recipe make sure the recipe count is now 1
 
         }
 

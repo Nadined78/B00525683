@@ -1,5 +1,8 @@
 @model Recipe
 
+<!-- View for recipe details page -->
+
+<!-- partial used for view layout -->
 <partial name = "_ViewLayouts">
 
 <partial name="_BreadCrumbs" model=@(new [] {
@@ -7,6 +10,9 @@
     ("/recipe","Recipes"),
     ("","Details")
 }) />
+
+ <!--Google Translate -->    
+    <partial name="_google" />
     
 <h3 class="mt-4 mb-4 navbar-title">Recipe: @Model.Name</h3>
 
@@ -73,11 +79,11 @@
                 <button asp-condition=@(User.IsInRole("member")) type="button" class="btn btn-sm btn-danger"><i class="bi bi-heart"></i></button>
  
                 <!-- navigation link to Details action, passing the correct route id parameter -->
-                <a asp-condition=@(User.HasOneOfRoles("admin")) title="Edit Recipe" asp-controller="Recipe" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-success"><i
+                <a asp-condition=@(User.IsInRole("admin")) title="Edit Recipe" asp-controller="Recipe" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-sm btn-success"><i
                         class="bi bi-pen"></i></a>
   
                 <!-- toggle display of Delete Modal -->
-                <button asp-condition=@(User.HasOneOfRoles("admin")) title="Delete Recipe" type="button" class="btn btn-sm btn-danger" 
+                <button asp-condition=@(User.IsInRole("admin")) title="Delete Recipe" type="button" class="btn btn-sm btn-danger" 
                         data-bs-toggle="modal" data-bs-target="#deleteRecipeModal">
                     <i class="bi bi-trash"></i>
                 </button>

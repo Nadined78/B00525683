@@ -1,12 +1,23 @@
 @model User
+
+<!-- View that displays user details -->
+
+<!-- Partial used for page layout -->
+<partial name="_ViewLayouts" /> 
+
 <partial name="_BreadCrumbs" model=@(new [] {
     ("/","Home"),
     ("/user","Users"),
     ($"/user/details/{Model.Id}",$"{Model.Id}"),
     ("","Details")
 }) />
+
+<!--Google Translate -->    
+<partial name="_google" />
+
 <h3 class="mt-4 navbar-title mb-4">User Details</h3>
 <div class="row">
+
     <!-- Details -->
     <div class="col-8 card rounded shadow p-3">
         <dl class="row">
@@ -41,8 +52,9 @@
             </div>
 
             <div>
-                <a asp-condition=@(User.IsInRole("member")) asp-controller="User" asp-action="UpdatePassword" type="button" class= "btn btn-success">
-                    Update Password</a>
+                <!-- navigation link to update users password -->
+                <a asp-condition=@(User.HasOneOfRoles("admin")) asp-controller="User" asp-action="Edit" asp-route-id="@Model.Id" type="button" class= "btn btn-success">
+                    Update this Users Password</a>
                     
 
                 <!-- navigation link to Details action, passing the correct route id parameter -->

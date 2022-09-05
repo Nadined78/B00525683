@@ -1,11 +1,17 @@
 @model User
 
+<!-- View Page for User Profile -->
+ 
+<!-- Partial used for page layout -->
+<partial name="_ViewLayouts" />   
+
  <partial name="_BreadCrumbs" model=@(new [] {
     ("/","Home"),
     ("","My Profile")
 }) />
 
-<partial name = "_ViewLayouts">
+<!--Google Translate -->    
+<partial name="_google" />
 
 
 <h3 class="mt-4 mb-4 navbar-title">My Details</h3>
@@ -28,21 +34,19 @@
             <dt class="col-5">Cooking Experience</dt>
             <dd class="col-7">@Model.CookingExperience</dd>
 
-
-
         </dl>
 
         <!-- use flex box to separate two divs containing primary actions on left and danger action on right -->
         <div class="mt-4 d-flex flex-row justify-content-between">
             <div>
 
-                <!-- navigation link to Details action, passing the correct route id parameter -->
+                <!-- navigation link to Update Profile action, passing the correct route id parameter -->
                 <a asp-condition=@(User.HasOneOfRoles("admin,member")) asp-controller="User" asp-action="EditProfile" asp-route-id="@Model.Id" class="btn btn-sm btn-danger"><i
                         class="bi bi-pen"></i> Update Profile</a>
 
-                        <!-- navigation link to Details action, passing the correct route id parameter -->
+                        <!-- navigation link to Change Password action, passing the correct route id parameter -->
                 <a asp-condition=@(User.HasOneOfRoles("admin,member")) asp-controller="User" asp-action="UpdatePassword" asp-route-id="@Model.Id" class="btn btn-sm btn-danger"><i
-                        class="bi bi-pen"></i> Change Password</a>
+                        class="bi bi-pen"></i> Update Password</a>
 
             </div>
 

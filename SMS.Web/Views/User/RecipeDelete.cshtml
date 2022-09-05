@@ -1,11 +1,19 @@
 @model Recipe
 
+<!-- View Page for Recipe Delete -->
+
+<!-- Partial used for page layout -->
+<partial name="_ViewLayouts" />   
+
 <partial name="_BreadCrumbs" model=@(new [] {
     ("/","Home"),
     ("/user","Users"),
     ($"/user/details/{Model.UserId}",$"{Model.UserId}"),
     ("","Delete Recipe")
-}) /> 
+}) />
+
+<!--Google Translate -->    
+<partial name="_google" />
 
 <h3 class="mt-4 navbar-title mb-4">Delete Recipe</h3>
 
@@ -30,10 +38,12 @@
         <form asp-action="RecipeDeleteConfirm" type="post">
             <input type="hidden" asp-for="Id"/>
             <input type="submit" value="Confirm" class="btn btn-danger" />
-            <a class="btn btn-secondary" asp-controller="User" asp-action="Index" >Cancel</a>
+            <a class="btn btn-secondary" asp-controller="Recipe" asp-action="Index" >Cancel</a>
         </form>
     </div>
     
 </div>
 
+
+<!-- Partial to display delete recipe modal -->
 <partial name="_DeleteRecipeModal"/>

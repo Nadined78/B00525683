@@ -13,7 +13,7 @@ public class HomeController : Controller
         _logger = logger;
     }
 
-    public IActionResult Index() //using an AboutViewModel 
+    public IActionResult Index() //using AboutViewModel 
     {
         var homeMessage = new AboutViewModel {      
                 Title = "Welcome to the Good Food Atlas",
@@ -25,9 +25,8 @@ public class HomeController : Controller
     public IActionResult About() //using AboutViewModel
     {
         var about = new AboutViewModel {
-            Title = "About  Management",
-            Message = "Our mission here at The Good Food Atlas is to provide a community platform for all things FOOD. Recipes, Flavours, Culture, Cuisine, Language or experiences",
-            Formed = new DateTime(2012,08,01)
+            Title = "About Us at The Good Food Atlas",
+            Message = "Our mission here at The Good Food Atlas is to provide a community platform for all things FOOD. Recipes, Flavours, Culture, Cuisine, Language or experiences. ",
         };
         return View(about);
     }
@@ -38,8 +37,7 @@ public class HomeController : Controller
         var privacyMessage = new PrivacyViewModel 
         {
             Title = " Our Privacy Statement",
-            Aim = "The Good Food Atlas Website is monitored by Admin. The pivacy of our users is very important to us",
-            Formed = new DateTime(2012,08,01),
+            Aim = "This web application is monitored by an Administrator at The Good Food Atlas. The privacy of our users is extremely important to us therefore, we encourage all users to read our privacy policy carefully",
         };
         return View(privacyMessage);   
     }
@@ -49,10 +47,7 @@ public class HomeController : Controller
         var contactMessage = new ContactViewModel
         {   
             Title = "Do You Need Assistance?",
-            Message = "To report any technical issues you can contact us in any of the following ways: ",
-            Email = "GFAManagement@mail.com",
-            Address = "124 Baronscourt Place, Derry City, BT48 9WQ",
-            Phone = 02871319386
+            Message = "Please use the form below for an queries",
         };
         return View(contactMessage);
     }

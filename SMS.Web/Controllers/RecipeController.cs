@@ -30,15 +30,11 @@ namespace SMS.Web.Controllers
         }
 
         // // GET /recipe/index - 
-        
-        public IActionResult RecipeIndex(RecipeSearchViewModel rm, string sortOrder) //recipe list - recipeindex - all users recipes 
+        public IActionResult RecipeIndex(RecipeSearchViewModel rm) //recipe list - recipeindex - all users recipes 
         {
                  
             rm.Recipes = svc.SearchAllRecipes(rm.Range, rm.Query);
             return View(rm);  
-
-            
-    
         }    
 
        
@@ -86,7 +82,7 @@ namespace SMS.Web.Controllers
             return View(rvm);
         }
 
-        
+        // GET /recipe/edit/{id}
         public IActionResult Edit(int id)
         {        
             // load the recipe using the service
@@ -155,6 +151,7 @@ namespace SMS.Web.Controllers
             
         }
 
+        // GET
         public IActionResult RecipeOwnerUserProfile(int id)
         {
             // retrieve the user with specifed id from the service
@@ -203,13 +200,18 @@ namespace SMS.Web.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-
-        
         // GET
         public IActionResult AddReview(int id)
         {
+            var check = User.GetSignedInUserId();
             var r = svc.GetRecipeById(id);  
-            if (r == null)                  
+            if (r.Id == check)   
+            {
+                Alert($"You can not review your own recipes");
+                return RedirectToAction(nameof(Index));
+            }
+                      
+            if (r == null)
             {
                 Alert($"Recipe not found", AlertType.warning);  
                 return RedirectToAction(nameof(Index));
@@ -220,8 +222,7 @@ namespace SMS.Web.Controllers
             {      
 
                 RecipeId = id,
-                Name = r.Name,
-                
+                                
             };
             //render form
             return View("AddReview", re);  
@@ -230,6 +231,8 @@ namespace SMS.Web.Controllers
 
         // POST 
         [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize]
         public IActionResult AddReview(Review r)
         {         
             var re = svc.GetRecipeById(r.RecipeId);        
@@ -245,12 +248,85 @@ namespace SMS.Web.Controllers
             Alert("Review added successfully", AlertType.success); 
             return RedirectToAction("Details", new { Id = r.RecipeId });
                      
-        }//AddReview
+        }
+
+        public IActionResult EditReview(int id)
+        {
+            var check = User.GetSignedInUserId();
+            var r = svc.GetReviewById(id);  
+            if (r.Id == check)   
+            {
+                Alert($"You can not edit your own recipe reviews");
+                return RedirectToAction(nameof(Index));
+            }
+                      
+            if(r == null)
+            {
+                Alert($"Review not found", AlertType.warning);  
+                return RedirectToAction(nameof(RecipeIndex));
+            }
+
+            //otherwise
+            return View(r);
+
+        }
+
+        // POST /recipe/edit/{id}
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Authorize(Roles="admin, member")]
+        public IActionResult EditReview(Review r)
+        {
+            var review = svc.GetReviewById(r.Id);
+            
+            // check if form is invalid and redisplay
+            if (!ModelState.IsValid || review == null)
+            {
+                return View(r);
+            } 
+
+            // update user details and call service
+            review.Name = r.Name;
+            review.ReviewedOn = r.ReviewedOn;
+            review.Comment = r.Comment;
+            review.Rating = r.Rating;
+            
+       
+            var updated = svc.UpdateReview(review);
+
+            // check if error updating service
+            if (updated == null) {
+                Alert("There was a problem Updating. Please try again", AlertType.warning);
+                return View(r);
+            }
+
+            
+            Alert("Successfully Updated Review Details", AlertType.info);
+            
+            if (User.IsInRole("admin"))
+                {
+                    return RedirectToAction("RecipeIndex");
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
+            
+        }
+
+
        
         // GET 
         public IActionResult DeleteReview(int id)
         {
-            var r = svc.GetReviewById(id);      
+
+            var check = User.GetSignedInUserId();
+            var r = svc.GetReviewById(id);  
+            if (r.Id == check)   
+            {
+                Alert($"You can not delete your own recipe reviews");
+                return RedirectToAction(nameof(Index));
+            }   
 
             if (r == null)     
             {  
@@ -269,11 +345,7 @@ namespace SMS.Web.Controllers
          
             Alert($"Review deleted successfully", AlertType.warning); 
   
-            return RedirectToAction("Index");
+            return RedirectToAction("RecipeIndex");
         }
-
-        
-
-
     }
 }

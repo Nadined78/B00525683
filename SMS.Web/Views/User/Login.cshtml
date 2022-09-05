@@ -1,6 +1,17 @@
 @model UserLoginViewModel
 
+<!--  View page for User Login-->
+
+<!-- Partial used for page layout -->
 <partial name='_ViewLayouts'>
+
+ <partial name="_BreadCrumbs" model=@(new [] {
+    ("/","Home"),
+    ("","Login")
+}) />
+
+<!--Google Translate -->    
+<partial name="_google" />
 
 <h3 class="mt-4 navbar-title mb-4">Login</h3>
 
@@ -29,12 +40,14 @@
     </form>
 </div>
 
+<!-- Navigation Link for registration -->
 <div class="mt-4">
     Want to join our Good Food Community? <a asp-controller="User" asp-action="Register"> Register here</a>
 </div>
 
+<!-- Navigation Link for Forgot Password -->
 <div class="mt-4">
-    Forgotten your password?  <a asp-controller="User" asp-action="ForgotPassword"> Forgot Password</a>
+    Forgotten your password?  <a asp-controller="Home" asp-action="Contact"> Forgot Password</a>
 </div>
 
 @section Scripts {

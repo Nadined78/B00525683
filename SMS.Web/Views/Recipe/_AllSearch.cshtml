@@ -3,19 +3,19 @@
 <!-- search form -->
 <form asp-controller="Recipe" asp-action="RecipeIndex" class="d-flex flex-row align-items-center">
     <div class="form-check me-3">
-        <input class="form-check-input" type="radio" asp-for="Range" value="@AllRecipes.ALL">
+        <input class="form-check-input" type="radio" asp-for="Range" value="@Diet.ALL">
         <label class="form-check-label" for="Range">All</label>
     </div>
      <div class="form-check me-3">
-        <input class="form-check-input" type="radio" asp-for="Range" value="@AllRecipes.Omnivorous">
+        <input class="form-check-input" type="radio" asp-for="Range" value="@Diet.Omnivorous">
         <label class="form-check-label" for="Range">Omnivorous</label>
     </div> 
      <div class="form-check me-3">
-        <input class="form-check-input" type="radio" asp-for="Range" value="@AllRecipes.Vegetarian" >
+        <input class="form-check-input" type="radio" asp-for="Range" value="@Diet.Vegetarian" >
         <label class="form-check-label" for="Range">Vegetarian</label>
     </div>
     <div class="form-check me-3">
-        <input class="form-check-input" type="radio" asp-for="Range" value="@AllRecipes.Vegan" >
+        <input class="form-check-input" type="radio" asp-for="Range" value="@Diet.Vegan" >
         <label class="form-check-label" for="Range">Vegan</label>
     </div>  
 

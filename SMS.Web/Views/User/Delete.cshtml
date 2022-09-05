@@ -1,10 +1,19 @@
 @model User
+
+<!-- View for deleting user -->
+
+<!-- Partial used for page layout -->
+<partial name="_ViewLayouts" /> 
+
 <partial name="_BreadCrumbs" model=@(new [] {
     ("/","Home"),
     ("/user","Users"),
     ($"/user/details/{Model.Id}",$"{Model.Id}"),
     ("","Delete")
 }) />
+
+<!--Google Translate -->    
+<partial name="_google" />
 
 <h3 class="mt-4 navbar-title mb-4">Delete User</h3>
 

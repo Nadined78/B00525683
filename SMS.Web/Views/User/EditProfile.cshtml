@@ -1,6 +1,18 @@
 @model UserProfileViewModel
 
+<!-- View for Edit User Profile -->
+
+<!-- Partial used for page layout -->
 <partial name="_ViewLayouts"/>
+
+<partial name="_BreadCrumbs" model=@(new [] {
+    ("/","Home"),
+    ($"/user/details/{Model.Id}",$"{Model.Id}"),
+    ("","Edit")
+}) />
+
+<!--Google Translate -->    
+<partial name="_google" />
 
 <div class="card shadow p-4 mt-4">
 
